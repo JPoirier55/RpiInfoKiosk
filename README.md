@@ -3,6 +3,8 @@
 ## Setup
 Get node
 
+`https://github.com/basdegroot/raspberry-pi-kiosk`
+
 `sudo apt-get install node`
 
 Install the tools we need to perfectly show the webpage. The next command will install chromium (browser), x11 server utils and unclutter (to hide the cursor from the screen)
