@@ -1,0 +1,24 @@
+{
+  "name": "RpiInfoKiosk",
+  "version": "1.0.0",
+  "description": "## Setup Get node",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.12.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/konecnyna/RpiInfoKiosk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/konecnyna/RpiInfoKiosk/issues"
+  },
+  "homepage": "https://github.com/konecnyna/RpiInfoKiosk"
+}
