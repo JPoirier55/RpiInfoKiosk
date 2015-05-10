@@ -15,12 +15,15 @@
 
   </head>
 
-  <body layout="column">
+  <body layout="column" ng-app="myApp">
 
-    <div ng-app="myApp" ng-controller="dataCtrl">
-      <div ng-include="'src/views/weather.html'"></div>          
+    <div  ng-controller="dataCtrl">
+      <div ng-include="'src/views/weather.html'"></div>             
     </div>
 
+    <div ng-app="myApp" ng-controller="mtaCtrl">
+      <div ng-include="'src/views/mta.html'"> </div>   
+    </div>
     
   </body>
 </html>
