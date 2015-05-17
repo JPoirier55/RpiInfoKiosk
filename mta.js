@@ -10,7 +10,7 @@ module.exports = {
 
 
 function getTrainStatus(callback){
-	var status = 'http://web.mta.info/status/serviceStatus.txt'
+	var status = 'http://web.mta.info/status/serviceStatus.txt';
 	utils.downloadFile(status, function(xmlStr){
 		parseString(xmlStr, function (err, result) {
 			for(var i=0; i<result.service.subway[0].line.length; i++){
@@ -22,6 +22,10 @@ function getTrainStatus(callback){
 				}else{
 					temp = ["sir"];
 					result.service.subway[0].line[i].name = temp;
+				}
+
+				if(result.service.subway[0].line[i].status[0] !== "DELAYS"){
+					result.service.subway[0].line[i].text[0] = "";
 				}
 			}
 

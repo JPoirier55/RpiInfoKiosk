@@ -1,10 +1,9 @@
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['ngSanitize']);
 
 
 app.controller('dataCtrl', function($scope, $timeout, $http){
     $scope.data = [];
-
-
+    
     (function tick() {
         $http.get('api/v1/weather').
           success(function(data, status, headers, config) {
@@ -25,7 +24,7 @@ app.controller('dataCtrl', function($scope, $timeout, $http){
 
 app.controller('mtaCtrl', function($scope, $timeout, $http){
     $scope.mtaData = [];
-
+    
     (function tick() {
         $http.get('api/v1/mta').
           success(function(data, status, headers, config) {
