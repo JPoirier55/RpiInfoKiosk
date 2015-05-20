@@ -4,8 +4,11 @@ var mta = require('./mta.js');
 var kodi = require('./kodi.js');
 var app = express();
 var express = require('express');
-var chromeKiosk = '/usr/bin/chromium --kiosk --ignore-certificate-errors --disable-restore-session-state "http://localh
- 
+var exec = require('child_process').exec;
+
+var chromeKiosk = '/usr/bin/chromium --kiosk --ignore-certificate-errors --disable-restore-session-state "http://localhost:8080"';
+
+
 app.get('/api/v1/weather', function(req, res) {    
  weather.getToolbarWeather(function(callback){
       res.json(callback);
