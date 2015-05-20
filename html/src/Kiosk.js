@@ -10,7 +10,8 @@ app.controller('dataCtrl', function($scope, $timeout, $http){
             // this callback will be called asynchronously
             // when the response is available
             $scope.data = data;
-            $timeout(tick, 1000*60);
+            //30 Mins
+            $timeout(tick, 1000*60*30);
 
           }).
           error(function(data, status, headers, config) {
@@ -31,7 +32,9 @@ app.controller('mtaCtrl', function($scope, $timeout, $http){
             // this callback will be called asynchronously
             // when the response is available
             $scope.mtaData = data;
-            $timeout(tick, 1000*60);
+            
+            //5mins
+            $timeout(tick, 1000*60*5);
 
           }).
           error(function(data, status, headers, config) {
