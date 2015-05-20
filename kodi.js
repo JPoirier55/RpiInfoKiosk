@@ -1,6 +1,8 @@
 var utils = require('./utils.js');
-var http = require("http");
-var https = require("https")
+var async = require('async');
+var username = 'admin';
+var password = 'desm';
+var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 
 module.exports = {
   getRecentEpisodes: function (callback) {
@@ -11,11 +13,10 @@ module.exports = {
 
 
 function getRecentEpisodes(callback){
-	var recentEpsURL = "http://konecny.ddns.net:8082/jsonrpc?request={%22jsonrpc%22:%222.0%22,%22id%22:1,%22method%22:%22VideoLibrary.GetRecentlyAddedEpisodes%22}";
-
-	// utils.downloadFile(recentEpsURL, function(json){
-	// 	console.log("CALLBACK!!!!!!!!" + json);		
-	// 	callback(json);
+	// episodeDetails(2713, function(data){
+	// 	console.log("\n\n\n\n\n\n\n\n\n");
+	// 	console.log(data);
+	// 	callback(JSON.parse(data));
 	// });
 
 	var options = {
@@ -24,40 +25,58 @@ function getRecentEpisodes(callback){
 	    path: '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetRecentlyAddedEpisodes"}',
 	    method: 'GET',
 	    headers: {
-	        'Content-Type': 'application/json'
+	        'Content-Type': 'application/json',
+	        'Authorization': auth
 	    }
 	};
 
-	getUrl(options, function(statusCode, obj){
-		console.log(statusCode);
-		callback(obj);
+	utils.downloadFileWithOptions(options, function(data){
+		var getRecentEpisodesObj = JSON.parse(data);
+		getEpisodesMeta(getRecentEpisodesObj.result.episodes, function(data){
+			callback(data);
+		})	
 	});
 
 }
 
 
-function getUrl(options, callback){
- 	var prot = options.port == 443 ? https : http;
- 	console.log(options)
-    var req = prot.request(options, function(res)
-    {
-        var output = '';
-        console.log(options.host + ':' + res.statusCode);
-        res.setEncoding('utf8');
+function getEpisodesMeta(recentEpisodesObj, resCallback){
+	var episodes = []
+	var size = 5
 
-        res.on('data', function (chunk) {
-            output += chunk;
-        });
+	async.eachSeries(recentEpisodesObj, function(episode, callback) {
+		if(episodes.length <= size){				
+			episodeDetails(episode.episodeid, function(metaObj){
+				episodes.push(metaObj);									
+			 	callback();
+			});	
+		}else{
+			callback();
+		}
 
-        res.on('end', function() {
-            //var obj = JSON.parse(output);
-            callback(res.statusCode, output);
-        });
-    });
+	}, function(err){
+		resCallback(episodes);
+	});
 
-    req.on('error', function(err) {
-        //res.send('error: ' + err.message);
-    });
+}
 
-    req.end();
+function episodeDetails(episodeId, callback){
+	var path = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetEpisodeDetails","params":{"episodeid":'+episodeId+',"properties":["plot","rating","showtitle","season","episode"]}}"}'
+
+	console.log(path);
+	var options = {
+	    host: 'konecny.ddns.net',
+	    port: 8082,
+	    path: path,
+	    method: 'GET',
+	    headers: {
+	        'Content-Type': 'application/json',
+	        'Authorization': auth
+	    }
+	};
+
+	utils.downloadFileWithOptions(options, function(data){
+		episodeObj  = JSON.parse(data);
+		callback(episodeObj.result.episodedetails);
+	});
 }

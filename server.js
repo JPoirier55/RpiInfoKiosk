@@ -17,8 +17,8 @@ app.get('/api/v1/mta', function(req, res) {
 });
 
 app.get('/api/v1/kodi', function(req, res) {    
- kodi.getRecentEpisodes(function(callback){
-      res.json(callback);
+ kodi.getRecentEpisodes(function(callback){ 		
+      	res.json(callback);
    });
 });
 
