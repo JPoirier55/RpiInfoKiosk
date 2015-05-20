@@ -18,21 +18,21 @@
   </head>
 
   <body layout="column" ng-app="myApp">
-    <div class=".container-fluid">
+    <div class="container-fluid">
       
       <!-- Content -->  
       <div class="row">
-        <div  ng-controller="dataCtrl" class="col-md-4">
+        <div  ng-controller="dataCtrl" class="col-md-6">
           <div ng-include="'src/views/weather.html'"></div>             
         </div>
 
-        <div ng-controller="mtaCtrl" class="col-md-4">
-          <div ng-include="'src/views/mta.html'"> </div>   
+        <div ng-controller="mtaCtrl" class="col-md-6">
+          <div ng-include="'src/views/mta.html'" class="text-center"> </div>   
         </div>
       </div>
 
       <div class="row">
-        <div ng-controller="kodiCtrl" class="col-md-4 col-md-offset-1">
+        <div ng-controller="kodiCtrl" class="col-md-6">
           <div ng-include="'src/views/kodi.html'"></div>   
         </div>
       </div>

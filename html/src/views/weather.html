@@ -1,6 +1,8 @@
-<div ng-app="myApp" ng-controller="dataCtrl">
-  <h2>{{data.currentTemp}}° {{data.humidity}}%</h2>
-  <h2>{{data.location}}</h2>
-  <img src="{{data.img}}"/>
+<div ng-app="myApp" ng-controller="dataCtrl" class="text-center">
+  
   <img src="{{data.radar_imgs[0]}}" style="width:100%"/>
+  <h2>{{data.currentTemp}}° {{data.humidity}}%</h2>
+  <img src="{{data.img}}"/>
+  <h2>{{data.location}}</h2>
+
 </div>
