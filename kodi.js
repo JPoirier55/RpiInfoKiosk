@@ -13,12 +13,6 @@ module.exports = {
 
 
 function getRecentEpisodes(callback){
-	// episodeDetails(2713, function(data){
-	// 	console.log("\n\n\n\n\n\n\n\n\n");
-	// 	console.log(data);
-	// 	callback(JSON.parse(data));
-	// });
-
 	var options = {
 	    host: 'konecny.ddns.net',
 	    port: 8082,

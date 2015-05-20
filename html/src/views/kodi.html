@@ -1,0 +1,5 @@
+<h1>Recent Episodes </h1>
+<div ng-repeat="episode in episodes">
+  {{episode.showtitle}}: {{episode.label}} ({{episode.season}}x{{episode.episode}})
+  <marquee>{{episode.plot}}</marquee>
+</div>

@@ -42,3 +42,24 @@ app.controller('mtaCtrl', function($scope, $timeout, $http){
     })();
 
 });
+
+app.controller('kodiCtrl', function($scope, $timeout, $http){
+    $scope.episodes = [];
+    
+    (function tick() {
+        $http.get('api/v1/kodi').
+          success(function(data, status, headers, config) {
+            // this callback will be called asynchronously
+            // when the response is available
+            $scope.episodes = data;
+            $timeout(tick, 1000*60*60*4);
+
+          }).
+          error(function(data, status, headers, config) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+          });
+
+    })();
+
+});
