@@ -8,18 +8,19 @@ module.exports = {
 
 
 function downloadFile(url, callback){
-
+	console.log(url);
 	http.get(url, function(res) {
 	    var body = '';
-
 	    res.on('data', function(chunk) {
 	        body += chunk;
+
 	    });
 
 	    res.on('end', function() {
 	        callback(body);
 	    });
 	}).on('error', function(e) {
-	      console.log("Got error: ", e);
+		console.log("Got error: ", e);
+		callback(e);
 	});
 }
