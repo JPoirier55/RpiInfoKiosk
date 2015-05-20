@@ -42,7 +42,8 @@ function parseWeatherToolbarJson(json, callback){
 	var hum = resultsArr.atmosphere.humidity;
 	var rex = /http:.*.gif/g;
 	var imgHtml = rex.exec(desc);
-	var imgs = ["http://images.webcamgalore.com/5943-current-webcam-New-York-City-New-York.jpg","http://cdn.abclocal.go.com/three/wabc/weather/16_9/hd/wabc_a_1_1280.jpg"];
+	var date = new Date().toISOString();
+	var imgs = ["http://images.webcamgalore.com/5943-current-webcam-New-York-City-New-York.jpg","http://cdn.abclocal.go.com/three/wabc/weather/16_9/hd/wabc_a_1_1280.jpg?time="+date];
 	callback(new toolbarObject(imgHtml[0], currentConditionObj.temp, locationObj.city +', '+locationObj.region, imgs, hum));
 }
 
