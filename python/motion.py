@@ -19,7 +19,7 @@ def MOTION(PIR_PIN):
 def turnOn():
 	subprocess.check_call(['/home/pi/monitor_on.sh'])
 	now = datetime.now()
-    while 1 :
+	while 1:
         d = now - LAST_MOTION_DETECTED
         if(d.seconds > 30):
             break
