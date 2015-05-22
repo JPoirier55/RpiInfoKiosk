@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+from datetime import datetime
 import subprocess
 
 #Vars
@@ -7,15 +8,23 @@ GPIO.setmode(GPIO.BCM)
 PIR_PIN = 7
 GPIO.setup(PIR_PIN, GPIO.IN)
 
+#global
+LAST_MOTION_DETECTED = 0
+
 #Functions
 def MOTION(PIR_PIN):
-	print "Motion Detected!"
-	turnOn()
+    print "Motion Detected!"
+    LAST_MOTION_DETECTED = datetime.now()
 
 def turnOn():
 	subprocess.check_call(['/home/pi/monitor_on.sh'])
-	time.sleep(20)
-	subprocess.call(['tvservice','-o'])
+	now = datetime.now()
+    while 1 :
+        d = now - LAST_MOTION_DETECTED
+        if(d.seconds > 30):
+            break
+
+    subprocess.call(['tvservice','-o'])
 
 
 #Main
@@ -24,9 +33,13 @@ time.sleep(2)
 print "Ready"
 
 try:
-	GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=MOTION, bouncetime=20000)
+    
+	GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=MOTION, bouncetime=500)
 	while 1:
-		time.sleep(100)
+        turnOn()
+		time.sleep(1000)
+
+
 except KeyboardInterrupt:
 	print "Quit"
 	subprocess.check_call(['/home/pi/monitor_on.sh'])
