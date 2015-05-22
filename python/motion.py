@@ -20,10 +20,9 @@ def turnOn():
 	subprocess.check_call(['/home/pi/monitor_on.sh'])
 	now = datetime.now()
 	while 1:
-        d = now - LAST_MOTION_DETECTED
-        if(d.seconds > 30):
-            break
-
+		d = now - LAST_MOTION_DETECTED
+		if(d.seconds > 30):
+			break
     subprocess.call(['tvservice','-o'])
 
 
