@@ -9,7 +9,7 @@ PIR_PIN = 7
 GPIO.setup(PIR_PIN, GPIO.IN)
 
 #global
-LAST_MOTION_DETECTED = 0
+LAST_MOTION_DETECTED = datetime.now()
 
 #Functions
 def MOTION(PIR_PIN):
@@ -18,11 +18,12 @@ def MOTION(PIR_PIN):
 
 def turnOn():
 	subprocess.check_call(['/home/pi/monitor_on.sh'])
-	now = datetime.now()
+	
 	while 1:
-		d = now - LAST_MOTION_DETECTED
+		d = datetime.now() - LAST_MOTION_DETECTED
 		if(d.seconds > 30):
 			break
+		sleep(1000)
 	
 	subprocess.call(['tvservice','-o'])
 
@@ -42,7 +43,7 @@ try:
 
 except KeyboardInterrupt:
 	print "Quit"
-	subprocess.check_call(['/home/pi/monitor_on.sh'])
+	subprocess.check_call(['monitor_on.sh'])
 	GPIO.cleanup()
 
 
