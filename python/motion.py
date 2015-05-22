@@ -23,7 +23,8 @@ def turnOn():
 		d = now - LAST_MOTION_DETECTED
 		if(d.seconds > 30):
 			break
-    subprocess.call(['tvservice','-o'])
+	
+	subprocess.call(['tvservice','-o'])
 
 
 #Main
