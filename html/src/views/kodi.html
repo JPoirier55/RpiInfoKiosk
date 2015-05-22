@@ -1,16 +1,34 @@
+<hr>
 <h1>Recent Episodes </h1>
-<div ng-repeat="episode in episodes">
+<div>
 	<!-- 11/16 poster ratio -->
-	<div>
-		
-		
+	<div class="col-md-4">
   		<div style="height: 100%; text-align: left; padding: 10px;">		
-		<img class="img-responsive" src="{{episode.art['tvshow.poster']}}" style="margin:10px" width="88" height="128" align="left"/>
-		<span>
-			<h3><strong>{{episode.showtitle}}: {{episode.label}} ({{episode.season}}x{{episode.episode}})</strong></h3>
-  			<p>{{episode.plot}}</p>
-		</span>		
-		</div>
-  		
+			<img class="img-responsive" src="{{episodes[0].art['tvshow.poster']}}" style="margin:10px" width="88" height="128" align="left"/>
+			<span>
+				<h3><strong>{{episodes[0].showtitle}}: {{episodes[0].label}} ({{episodes[0].season}}x{{episodes[0].episode}})</strong></h3>
+	  			<!-- <p>{{episodes[0].plot}}</p> -->
+			</span>		
+		</div>  		
+  	</div>
+
+	<div class="col-md-4">
+  		<div style="height: 100%; text-align: left; padding: 10px;">		
+			<img class="img-responsive" src="{{episodes[1].art['tvshow.poster']}}" style="margin:10px" width="88" height="128" align="left"/>
+			<span>
+				<h3><strong>{{episodes[1].showtitle}}: {{episodes[1].label}} ({{episodes[1].season}}x{{episodes[1].episode}})</strong></h3>
+	  			<!-- <p>{{episodes[0].plot}}</p> -->
+			</span>		
+		</div>  		
+  	</div>
+
+	<div class="col-md-4">
+  		<div style="height: 100%; text-align: left; padding: 10px;">		
+			<img class="img-responsive" src="{{episodes[2].art['tvshow.poster']}}" style="margin:10px" width="88" height="128" align="left"/>
+			<span>
+				<h3><strong>{{episodes[2].showtitle}}: {{episodes[2].label}} ({{episodes[2].season}}x{{episodes[2].episode}})</strong></h3>
+	  			<!-- <p>{{episodes[0].plot}}</p> -->
+			</span>		
+		</div>  		
   	</div>
 </div>

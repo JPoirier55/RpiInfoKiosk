@@ -3,6 +3,7 @@ var async = require('async');
 var username = 'admin';
 var password = 'desm';
 var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
+var baseUrl = '192.168.1.2';
 
 module.exports = {
   getRecentEpisodes: function (callback) {
@@ -14,7 +15,7 @@ module.exports = {
 
 function getRecentEpisodes(callback){
 	var options = {
-	    host: 'konecny.ddns.net',
+	    host: baseUrl,
 	    port: 8082,
 	    path: '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetRecentlyAddedEpisodes"}',
 	    method: 'GET',
@@ -59,7 +60,7 @@ function episodeDetails(episodeId, callback){
 
 	console.log(path);
 	var options = {
-	    host: 'konecny.ddns.net',
+	    host: baseUrl,
 	    port: 8082,
 	    path: path,
 	    method: 'GET',
