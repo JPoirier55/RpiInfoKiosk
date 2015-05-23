@@ -7,9 +7,13 @@
         		</li>      		
             : {{ line.status[0] }}
 
-            <div ng-bind-html="line.text">                 
+            <marquee direction="up" ng-if="line.text != ''">
+              
               <!-- Line status if exists.-->
-            </div>                          
+                <div ng-bind-html="line.text" style="height:100px"></div>  
+              
+            </marquee>
+                             
     		</ul>      	       
   	  </h4>
 </div>
