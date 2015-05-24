@@ -24,14 +24,13 @@ def MOTION(PIR_PIN):
 def checkMotion():
 	global checking_motion
 	checking_motion = 1
-	while 1:
+	while not checking_motion==0:
 		d = datetime.now() - LAST_MOTION_DETECTED
 		print "Seconds: " + str(d.seconds)
 		if(d.seconds > 30):
 			print "turning monitor off"
 			#subprocess.call(['tvservice','-o'])
 			checking_motion = 0
-			break
 		time.sleep(1)
 
 #Main
