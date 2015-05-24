@@ -7,4 +7,7 @@ if [ $status -eq 1 ]
 then
 	tvservice -p
 	xset dpms force on
+	xset -dpms
+	xset s off
+	xset s noblank
 fi
