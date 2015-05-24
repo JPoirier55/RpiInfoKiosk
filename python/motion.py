@@ -17,10 +17,8 @@ checking_motion = 0
 def MOTION(PIR_PIN):
     print "Motion Detected! setting time."
     LAST_MOTION_DETECTED = datetime.now()
-    if(checking_motion == 0):
-	turnOn()
 
-def turnOn():
+def checkMotion():
 	global checking_motion
 	checking_motion = 1
 	subprocess.check_call(['./monitor_on.sh'])	
@@ -30,27 +28,27 @@ def turnOn():
 		d = datetime.now() - LAST_MOTION_DETECTED
 		if(d.seconds > 30):
 			print "turning monitor off"
-			subprocess.call(['tvservice','-o'])
+			#subprocess.call(['tvservice','-o'])
 			checking_motion = 0
 			break
-
+		time.sleep(1)
 
 #Main
 print "PIR Module Test (CTRL+C to exit)"
-time.sleep(2)
 print "Ready"
 
-try:
-    
+try:    
 	GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=MOTION, bouncetime=5000)
 	while 1:
 		print "in main while"
-		time.sleep(1000)
+		if(checking_motion == 0):
+			checkMotion()
+		time.sleep(1)
 
 
 except KeyboardInterrupt:
 	print "Quit"
-	subprocess.check_call(['./monitor_on.sh'])
+	#subprocess.check_call(['./monitor_on.sh'])
 	GPIO.cleanup()
 
 
