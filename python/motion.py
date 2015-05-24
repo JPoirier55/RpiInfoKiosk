@@ -17,15 +17,16 @@ checking_motion = 0
 def MOTION(PIR_PIN):
     print "Motion Detected! setting time."
     LAST_MOTION_DETECTED = datetime.now()
+    print "Monitor on"
+	#subprocess.check_call(['./monitor_on.sh'])	
+	
 
 def checkMotion():
 	global checking_motion
 	checking_motion = 1
-	subprocess.check_call(['./monitor_on.sh'])	
-	print "Monitor on"
-	print "in turn on"
 	while 1:
 		d = datetime.now() - LAST_MOTION_DETECTED
+		print "Seconds: " + str(d.seconds)
 		if(d.seconds > 30):
 			print "turning monitor off"
 			#subprocess.call(['tvservice','-o'])
