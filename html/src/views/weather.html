@@ -1,8 +1,18 @@
 <div ng-app="myApp" ng-controller="dataCtrl" class="text-center">
   
-  <img src="{{data.radar_imgs[0]}}" style="width:100%"/>
-  <h2>{{data.currentTemp}}° {{data.humidity}}%</h2>
-  <img src="{{data.img}}"/>
-  <h2>{{data.location}}</h2>
+	<img src="{{data.radar_imgs[0]}}" style="width:100%"/>
+	<h2>{{data.currentTemp}}° {{data.humidity}}%</h2>
+	<img src="{{data.img}}"/>
+	<h2>{{data.location}}</h2>
 
+	<li style="display:inline-block;margin: 0;padding: 0;" ng-repeat="day in data.forecast">
+		
+		<ul style="display:block;margin: 0;padding: 0;">
+			{{day.day}}
+		</ul>
+		<ul style="display:block;margin: 0;padding: 0;">
+			{{day.high}}° {{day.low}}°
+		</ul>      
+    	<img src="{{day.code}}"/>		    
+	</li>
 </div>
