@@ -1,5 +1,7 @@
 # Raspberry Pi Info Kiosk
 
+![Alt text](/screenshots/screenshot.png?raw=true "Screen")
+
 ## Setup
 Get node
 
