@@ -5,9 +5,9 @@
 
 		<li style="padding:15px; list-style-type: none;">
 			<h5>
-			<ul style="display:inline-block;">{{data.location}}</ul>
-			<ul style="display:inline-block;"><img src="{{data.img}}"/></ul>
-			<ul style="display:inline-block;">{{data.currentTemp}}°</ul>
+			<ul style="display:inline-block;">{{data.condition.text}}</ul>		
+			<ul style="display:inline-block;"><img src="{{data.condition.code}}"/></ul>
+			<ul style="display:inline-block;">{{data.condition.temp}}°</ul>
 			<ul style="display:inline-block;">(Humidity:{{data.humidity}}%)</ul>			
 			</h5>
 		</li>
@@ -15,16 +15,20 @@
 	
 
 	<div >
-		<li style="display:inline-block;margin:15px;" ng-repeat="day in data.forecast" class="card-panel">
-			<h5>
+		<li style="display:inline-block;margin:10px;" ng-repeat="day in data.forecast" class="card-panel">
+			
 			<ul style="display:block;">
-				{{day.day}}
+				<h5>{{day.day}}</h5>
 			</ul>
+			
 			<hr/>
+			
 			<ul style="display:block;">
-				<strong>{{day.high}}°</strong> <font color="#3F51B5">{{day.low}}°</font>
+				<h6>			
+					<strong>{{day.high}}°</strong> <font color="#3F51B5">{{day.low}}°</font>
+				</h6>			
 			</ul>
-			</h5>
+
 			<ul>      
 	    		<img src="{{day.code}}"/>		    
 	    	</ul>

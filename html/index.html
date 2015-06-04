@@ -27,17 +27,17 @@
     <div class="container-fluid">
       
       <!-- Content -->  
-      <div class="row">
+      <div class="row" style="margin:0px">
         <div  ng-controller="dataCtrl" class="col-md-6">
           <div ng-include="'src/views/weather.html'"></div>             
         </div>
 
-        <div ng-controller="mtaCtrl" class="col-md-6">
+        <div ng-controller="mtaCtrl" class="col-md-6" >
           <div ng-include="'src/views/mta.html'" class="text-center"> </div>   
         </div>
       </div>
 
-      <div class="row">
+      <div class="row" style="margin:0px">
         <div ng-controller="kodiCtrl" class="col-md-12">
           <div ng-include="'src/views/kodi.html'"></div>   
         </div>

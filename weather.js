@@ -26,8 +26,8 @@ function getYahooWeather(zipcode, callback){
 
 }
 
-function weatherObject(imgSrc, currentTemp, location, radarImgs, hum, forecast){
-	this.img = imgSrc;
+function weatherObject(condition, currentTemp, location, radarImgs, hum, forecast){
+	this.condition = condition;
 	this.currentTemp = currentTemp;
 	this.humidity = hum;
 	this.location = location;
@@ -43,13 +43,13 @@ function parseWeatherToolbarJson(json, callback){
 	var locationObj = resultsArr.location;
 	var desc = resultsArr.item.description;
 	var hum = resultsArr.atmosphere.humidity;
-	var rex = /http:.*.gif/g;
-	var imgHtml = rex.exec(desc);
+	currentConditionObj.code = util.format(imgBaseUrl, currentConditionObj.code)
+
 	var date = new Date().toISOString();
 	var imgs = ["http://images.webcamgalore.com/5943-current-webcam-New-York-City-New-York.jpg?time="+date,"http://cdn.abclocal.go.com/three/wabc/weather/16_9/hd/wabc_a_1_1280.jpg?time="+date];
 	var forecast = getForecast(resultsArr.item.forecast);
 
-	callback(new weatherObject(imgHtml[0], currentConditionObj.temp, locationObj.city +', '+locationObj.region, imgs, hum, forecast));
+	callback(new weatherObject(currentConditionObj, currentConditionObj.temp, locationObj.city +', '+locationObj.region, imgs, hum, forecast));
 }
 
 function getForecast(forecastObj){
