@@ -22,7 +22,7 @@ def MOTION(PIR_PIN):
 	print "Monitor on"
 	global MONITOR_STATE
 	MONITOR_STATE = 1
-	subprocess.check_call(['./monitor_on.sh'])	
+	subprocess.check_call(['/home/pi/Github/RpiInfoKiosk/python/monitor_on.sh'])	
 	
 
 def checkMotion():
@@ -49,7 +49,7 @@ try:
 
 except KeyboardInterrupt:
 	print "Quit"
-	subprocess.check_call(['./monitor_on.sh'])
+	subprocess.check_call(['/home/pi/Github/RpiInfoKiosk/python/monitor_on.sh'])
 	GPIO.cleanup()
 
 
