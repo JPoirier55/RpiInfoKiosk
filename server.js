@@ -32,6 +32,3 @@ app.listen(8080);
 
 //Start chrome!
 exec(chromeKiosk, function(error,stdout,stderr){});
-
-//Run python script.
-exec('/usr/bin/python ./python/motion.py &', function(error,stdout,stderr){});
