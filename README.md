@@ -16,3 +16,9 @@ Upstart commands:
 
 Upstart Logs:
 `sudo cat /var/log/upstart/your_service.log` 
+
+Run cmds on local display.
+`ssh -X pi@host`
+
+Once logged in
+`export DISPLAY=:0`
