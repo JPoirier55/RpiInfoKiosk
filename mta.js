@@ -2,12 +2,9 @@ var parseString = require('xml2js').parseString;
 var utils = require('./utils.js');
 var iconUrl = "http://www.mta.info/sites/all/themes/mta/images/subway_bullets/";
 
-var redLight = "assets/redlight.jpg";
+var redLight = "assets/redlight.png";
 var yellowLight = "assets/yellowlight.jpg";
 var greenLight = "assets/greenlight.jpg";
-
-//pics.
-var redLight = 'http://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Red_Light_Icon.svg/120px-Red_Light_Icon.svg.png';
 
 module.exports = {
   getTrainStatus: function (callback) {
