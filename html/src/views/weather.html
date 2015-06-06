@@ -1,16 +1,20 @@
 <div ng-app="myApp" ng-controller="dataCtrl" class="text-center">
   
-	<div class="card-panel">
-		<img src="{{data.radar_imgs[0]}}" style="width:100%"/>
+	<div class="card">
+		<div class="card-image">
+			<img src="{{data.radar_imgs[0]}}" style="width:100%"/>
+		</div>
 
-		<li style="padding:15px; list-style-type: none;">
-			<h5>
-			<ul style="display:inline-block;">{{data.condition.text}}</ul>		
-			<ul style="display:inline-block;"><img src="{{data.condition.code}}"/></ul>
-			<ul style="display:inline-block;">{{data.condition.temp}}°</ul>
-			<ul style="display:inline-block;">(Humidity:{{data.humidity}}%)</ul>			
-			</h5>
-		</li>
+		<div class="card-content">
+			<li style="padding:15px; list-style-type: none;">
+				<h5>
+				<ul style="display:inline-block;">{{data.condition.text}}</ul>		
+				<ul style="display:inline-block;"><img src="{{data.condition.code}}"/></ul>
+				<ul style="display:inline-block;">{{data.condition.temp}}°</ul>
+				<ul style="display:inline-block;">(Humidity:{{data.humidity}}%)</ul>			
+				</h5>
+			</li>
+		</div>
 	</div>
 	
 
@@ -19,7 +23,8 @@
 			
 			<ul style="display:block;">
 				<h5>{{day.day}}</h5>
-			</ul>			
+			</ul>
+			
 			<hr/>
 			
 			<ul style="display:block;">
