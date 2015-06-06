@@ -21,14 +21,18 @@ function getTrainStatus(callback){
 	utils.downloadFile(status, function(xmlStr){
 		parseString(xmlStr, function (err, result) {
 			for(var i=0; i<result.service.subway[0].line.length; i++){
-				var name = result.service.subway[0].line[i].name[0];
-				if(name != 'SIR'){
+				var subwayLineObj = result.service.subway[0].line[i];
+				var name = subwayLineObj.name[0];
+				console.log('----------------------->on: '+ name);
+				if(name === 'S' || name === 'SIR'){
+					//skip stupid subways
+					//fix the 2...
+					result.service.subway[0].line.splice(i,2);	
+					continue;
+				}else{
 					name = name.toLowerCase();
 					//Make array for icons
-					result.service.subway[0].line[i].name = name.split('');	
-				}else{
-					temp = ["sir"];
-					result.service.subway[0].line[i].name = temp;
+					result.service.subway[0].line[i].name = name.split('');						
 				}
 
 				var status = result.service.subway[0].line[i].status[0];
@@ -57,7 +61,7 @@ function getTrainStatus(callback){
 
 
 function getSubwayColor(subwayName, subwayObj){
-	console.log(subwayName);
+	
 	if(subwayName == "1"){
 		subwayObj.color = "#F44336";	
 	}else if(subwayName == "4"){
