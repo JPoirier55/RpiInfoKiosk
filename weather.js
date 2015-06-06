@@ -18,6 +18,7 @@ function getToolbarWeather(zipcode, callback){
 	});
 }
 
+
 function getYahooWeather(zipcode, callback){
 	var forecast = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22'+zipcode+'%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
 	downloadFile(forecast, function(jsonStr){
@@ -43,7 +44,7 @@ function parseWeatherToolbarJson(json, callback){
 	var locationObj = resultsArr.location;
 	var desc = resultsArr.item.description;
 	var hum = resultsArr.atmosphere.humidity;
-	currentConditionObj.code = util.format(imgBaseUrl, currentConditionObj.code)
+	currentConditionObj.code = util.format(imgBaseUrl, currentConditionObj.code);
 
 	var date = new Date().toISOString();
 	var imgs = ["http://images.webcamgalore.com/5943-current-webcam-New-York-City-New-York.jpg?time="+date,"http://cdn.abclocal.go.com/three/wabc/weather/16_9/hd/wabc_a_1_1280.jpg?time="+date];
