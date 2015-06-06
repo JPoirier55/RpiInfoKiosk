@@ -7,7 +7,6 @@ module.exports = {
 
 
 function downloadFile(url, callback){
-	console.log(url);
 	http.get(url, function(res) {
 	    var body = '';
 	    res.on('data', function(chunk) {

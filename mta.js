@@ -20,14 +20,13 @@ function getTrainStatus(callback){
 			for(var i=0; i<result.service.subway[0].line.length; i++){
 				var subwayLineObj = result.service.subway[0].line[i];
 				var name = subwayLineObj.name[0];
-				console.log('----------------------->on: '+ name);
 				if(name === 'S' || name === 'SIR'){
 					//skip stupid subways
 					//fix the 2...
 					result.service.subway[0].line.splice(i,2);	
 					continue;
 				}else{
-					name = name.toLowerCase();
+					//name = name.toLowerCase();
 					//Make array for icons
 					result.service.subway[0].line[i].name = name.split('');						
 				}
@@ -48,7 +47,7 @@ function getTrainStatus(callback){
 				}
 
 				
-				getSubwayColor(name[0], result.service.subway[0].line[i])
+				getSubwayColor(name[0], result.service.subway[0].line[i]);
 				
 			}
 		    callback(result.service.subway);
@@ -65,19 +64,19 @@ function getSubwayColor(subwayName, subwayObj){
 		subwayObj.color = "#4CAF50";
 	}else if(subwayName == "7"){
 		subwayObj.color = "#9C27B0";
-	}else if(subwayName == "a"){
+	}else if(subwayName == "A"){
 		subwayObj.color = "#3F51B5";
-	}else if(subwayName == "b"){
+	}else if(subwayName == "B"){
 		subwayObj.color = "#FF9800";
-	}else if(subwayName == "j"){
+	}else if(subwayName == "J"){
 		subwayObj.color = "#795548";
-	}else if(subwayName == "g"){
+	}else if(subwayName == "G"){
 		subwayObj.color = "#69F0AE";
-	}else if(subwayName == "l"){
+	}else if(subwayName == "L"){
 		subwayObj.color = "#607D8B";
-	}else if(subwayName == "n"){
+	}else if(subwayName == "N"){
 		subwayObj.color = "#FFC107";
-	}else if(subwayName == "s"){
+	}else if(subwayName == "S"){
 		subwayObj.color = "#9E9E9E";
 	}else if(subwayName == "S"){
 		subwayObj.color = "#0D47A1";

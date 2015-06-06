@@ -1,6 +1,6 @@
-  <div ng-repeat="line in mtaData[0].line" style="display:inline-block;margin: 5px; width:130px" class="card">
+  <div ng-repeat="line in mtaData[0].line" style="display:inline-block;margin: 5px; width:140px;" class="card">
         
-              <div style="background-color:{{line.color}}; padding:20px;" class="card-image">
+              <div style="background-color:{{line.color}}; padding:10px;" class="card-image">
           			<li style="display:inline-block;margin:1px;" ng-repeat="subway in line.name">  
                   <b><font color="white" size="6">{{subway}}</font></b>
             		</li>
@@ -9,5 +9,5 @@
               <div class="card-content">
                 <img src="{{line.icon}}" height="75" width="75">
               </div>
-              
+
   </div>
