@@ -3,10 +3,14 @@
 	<div class="card">
 		<div class="card-image">
 			<img src="{{data.radar_imgs[0]}}" width="200" style="width:100%"/>
+			<div ng-controller="ExampleController">
+				<h5><span my-current-time="format" class="card-title"></span></h5>
+			</div>
+			
 		</div>
 
-		<div class="card-content">
-			<li style="padding:15px; list-style-type: none;">
+		<div class="card-content" style="padding:0px;">			
+			<li style="list-style-type: none; padding:0px">
 				<h5>
 				<ul style="display:inline-block;">{{data.condition.text}}</ul>		
 				<ul style="display:inline-block;"><img src="{{data.condition.code}}"/></ul>
@@ -16,8 +20,7 @@
 			</li>
 		</div>
 	</div>
-	
-
+	 
 	<div >
 		<li style="display:inline-block;margin:5px;" ng-repeat="day in data.forecast" class="card-panel">
 			
