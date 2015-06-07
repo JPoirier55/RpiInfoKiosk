@@ -27,7 +27,7 @@ function getYahooWeather(zipcode, callback){
 
 }
 
-function weatherObject(condition, currentTemp, location, radarImgs, hum, forecast){
+function weatherObject(condition, currentTemp, location, radarImgs, hum, forecast,astronomy){
 	this.condition = condition;
 	this.currentTemp = currentTemp;
 	this.humidity = hum;
@@ -35,6 +35,7 @@ function weatherObject(condition, currentTemp, location, radarImgs, hum, forecas
 	this.radar_imgs = radarImgs;
 	this.date = new Date();
 	this.forecast = forecast;
+	this.astronomy = astronomy;
 }
 
 function parseWeatherToolbarJson(json, callback){
@@ -50,7 +51,7 @@ function parseWeatherToolbarJson(json, callback){
 	var imgs = ["http://images.webcamgalore.com/5943-current-webcam-New-York-City-New-York.jpg?time="+date,"http://cdn.abclocal.go.com/three/wabc/weather/16_9/hd/wabc_a_1_1280.jpg?time="+date];
 	var forecast = getForecast(resultsArr.item.forecast);
 
-	callback(new weatherObject(currentConditionObj, currentConditionObj.temp, locationObj.city +', '+locationObj.region, imgs, hum, forecast));
+	callback(new weatherObject(currentConditionObj, currentConditionObj.temp, locationObj.city +', '+locationObj.region, imgs, hum, forecast, resultsArr.astronomy));
 }
 
 function getForecast(forecastObj){
