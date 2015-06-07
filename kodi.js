@@ -4,6 +4,7 @@ var username = 'admin';
 var password = 'desm';
 var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 var baseUrl = '192.168.1.2';
+//var baseUrl = 'konecny.ddns.net';
 
 module.exports = {
   getRecentEpisodes: function (callback) {
@@ -58,7 +59,6 @@ function getEpisodesMeta(recentEpisodesObj, resCallback){
 function episodeDetails(episodeId, callback){
 	var path = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetEpisodeDetails","params":{"episodeid":'+episodeId+',"properties":["plot","rating","showtitle","season","episode","art"]}}"}';
 
-	console.log(path);
 	var options = {
 	    host: baseUrl,
 	    port: 8082,
@@ -73,7 +73,10 @@ function episodeDetails(episodeId, callback){
 	utils.downloadFileWithOptions(options, function(data){
 		episodeObj  = JSON.parse(data);
 		var pattern = /\/\/(.*.)\//;
-		episodeObj.result.episodedetails.art['tvshow.poster'] = decodeURIComponent(episodeObj.result.episodedetails.art['tvshow.poster'].match(pattern)[1]);
+		var deets = episodeObj.result.episodedetails;
+		deets.art['tvshow.poster'] = decodeURIComponent(deets.art['tvshow.poster'].match(pattern)[1]);
+		deets.art['tvshow.fanart'] = decodeURIComponent(deets.art['tvshow.fanart'].match(pattern)[1]);
+		deets.art['tvshow.banner'] = decodeURIComponent(deets.art['tvshow.banner'].match(pattern)[1]);
 		
 		callback(episodeObj.result.episodedetails);
 	});
