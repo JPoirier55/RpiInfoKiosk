@@ -11,3 +11,11 @@
               </div>
 
   </div>
+
+  <div class="card" ng-if="mtaData[0].status_text != ''" style="height:75px;">
+          <!-- Line status if exists.-->
+      <marquee direction="up">  
+        <div ng-bind-html="mtaData[0].status_text" style="overflow: hidden;"></div> 
+      </marquee>          
+     
+  </div>
