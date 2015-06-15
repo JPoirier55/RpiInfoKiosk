@@ -57,7 +57,7 @@ function getEpisodesMeta(recentEpisodesObj, resCallback){
 }
 
 function episodeDetails(episodeId, callback){
-	var path = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetEpisodeDetails","params":{"episodeid":'+episodeId+',"properties":["plot","rating","showtitle","season","episode","art"]}}"}';
+	var path = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetEpisodeDetails","params":{"episodeid":'+episodeId+',"properties":["plot","rating","showtitle","season","episode","art","firstaired"]}}"}';
 
 	var options = {
 	    host: baseUrl,
