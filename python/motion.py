@@ -19,6 +19,7 @@ def MOTION(PIR_PIN):
 	print "Motion Detected! setting time."
     	global LAST_MOTION_DETECTED
 	LAST_MOTION_DETECTED = datetime.now()
+	monitorOn()
 	
 
 def monitorOff():
@@ -34,7 +35,7 @@ def monitorOn():
 	#subprocess.check_call(['/home/pi/Github/RpiInfoKiosk/python/monitor_on.sh'])	
 	status = subprocess.check_output(['tvservice', '-s'])
 	if "HDMI" in status:
-		subprocess.check_output(['tvservice', '--explicit="DMT 87"'])
+	    subprocess.check_output(['tvservice', '--explicit="DMT 87"'])
 	    subprocess.check_output(['fbset', '-depth 8'])
 	    subprocess.check_output(['fbset', '-depth 16'])
 	    subprocess.check_output(['xrefresh'])
