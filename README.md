@@ -3,16 +3,16 @@
 ![Alt text](/screenshots/screenshot.png?raw=true "Screen")
 
 ## Setup
-Get node
+1. Get node
 
-`https://github.com/basdegroot/raspberry-pi-kiosk`
+  i. `sudo apt-get install node`
 
-`sudo apt-get install node`
+2. Once node/npm is installed run to install all dependecies. 
 
-Once node/npm is installed run
+  i. `npm install`
 
-`npm install`
+3. Link the `autostart/autostart` file to `~/.config/lxsession/LXDE-pi/autostart` to have the server automagically start when the pi boots.
 
-to install all dependecies. 
 
-Link the `autostart/autostart` file to `~/.config/lxsession/LXDE-pi/autostart` to have the server automagically start when the pi boots.
+
+
