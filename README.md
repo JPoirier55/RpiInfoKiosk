@@ -9,16 +9,10 @@ Get node
 
 `sudo apt-get install node`
 
-## Useful CMDS:
+Once node/npm is installed run
 
-Upstart commands:
-`sudo start|stop|status node`
+`npm install`
 
-Upstart Logs:
-`sudo cat /var/log/upstart/your_service.log` 
+to install all dependecies. 
 
-Run cmds on local display.
-`ssh -X pi@host`
-
-Once logged in
-`export DISPLAY=:0`
+Link the `autostart/autostart` file to `~/.config/lxsession/LXDE-pi/autostart` to have the server automagically start when the pi boots.
