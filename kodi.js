@@ -89,7 +89,7 @@ function episodeDetails(episodeId, callback){
 		var deets = episodeObj.result.episodedetails;
 
 		if(deets.plot){
-			deets.plot = deets.plot.substring(0,240) + "...";			
+			deets.plot = deets.plot.substring(0,175) + "...";			
 		}else{
 			deets.plot = "No description available...";
 		}
