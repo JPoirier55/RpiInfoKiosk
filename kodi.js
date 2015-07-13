@@ -52,9 +52,9 @@ function getEpisodesMeta(recentEpisodesObj, resCallback){
 		}
 
 	}, function(err){
-		calendar.getHolidays(function(json){
-			if(json.length > 0){
-				episodes[episodes.length - 1] = json[0];	
+		calendar.getHolidays(function(calendarEvent){
+			if(calendarEvent !== undefined){
+				episodes[episodes.length - 1] = calendarEvent;	
 			}			
 			resCallback(episodes);
 		});
