@@ -1,4 +1,5 @@
 var utils = require('./utils.js');
+var calendar = require('./calendar.js');
 var async = require('async');
 var username = 'admin';
 var password = 'desm';
@@ -51,8 +52,18 @@ function getEpisodesMeta(recentEpisodesObj, resCallback){
 		}
 
 	}, function(err){
-		resCallback(episodes);
+		calendar.getHolidays(function(json){
+			if(json.length > 0){
+				episodes[episodes.length - 1] = json[0];	
+			}			
+			resCallback(episodes);
+		});
+
+		
+			
 	});
+		
+	
 
 }
 

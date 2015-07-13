@@ -1,38 +1,32 @@
-<div>
-	<!-- 11/16 poster ratio -->
-	<div class="col-md-4">
+<div ng-repeat="episode in episodes" >
 
-  		<div style="height: 220px; overflow:hidden; text-align: left; padding: 10px;" class="card-panel">		
-			<img class="img-responsive" src="{{episodes[0].art['tvshow.poster']}}" style="margin:10px" width="88" height="128" align="left"/>
-			<span>
-				<h5>
-				<strong>{{episodes[0].label}} - S{{episodes[0].season}}E{{episodes[0].episode}}</strong>
-				</h5>
-				<span>Aired: {{episodes[0].firstaired}}</span>
-	  			<p>{{episodes[0].plot}}</p>
-			</span>		
-		</div>  		
+  	<div ng-switch on="episode.kind">
+		<div ng-switch-when="calendar#event">
+	        <div class="col-md-4">
+		  		<div style="height: 220px;color:{{episode.textColor}}; overflow:hidden;text-align: left; padding: 10px; background:{{episode.background}};" class="card-panel">	
+		  		<img class="img-responsive" src="{{episode.icon}}" style="margin:10px" width="75" height="75" align="left"/>	
+					<span>			
+						<h3><strong>{{episode.summary}} is on {{episode.start.date}}</strong></h3>	
+					</span>		
+				</div>  		
+		  	</div>
+	    </div>
+	    <div ng-switch-default>
+	        
+			<!-- code to render the regular card -->
+	        <div class="col-md-4">
+		  		<div style="height: 220px; overflow:hidden;text-align: left; padding: 10px;" class="card-panel">		
+					<img class="img-responsive" src="{{episode.art['tvshow.poster']}}" style="margin:10px" width="88" height="128" align="left"/>
+					<span>
+						<h5><strong>{{episode.label}} - S{{episode.season}}E{{episode.episode}}</strong></h5>
+						<span>Aired: {{episode.firstaired}}</span>
+			  			<p>{{episode.plot}}</p>
+					</span>		
+				</div>  		
+		  	</div>
+	        
+	    </div>
   	</div>
 
-	<div class="col-md-4">
-  		<div style="height: 220px; overflow:hidden; text-align: left; padding: 10px;" class="card-panel">		
-			<img class="img-responsive" src="{{episodes[1].art['tvshow.poster']}}" style="margin:10px" width="88" height="128" align="left"/>
-			<span>
-				<h5><strong>{{episodes[1].label}} - S{{episodes[1].season}}E{{episodes[1].episode}}</strong></h5>
-	  			<span>Aired: {{episodes[1].firstaired}}</span>
-	  			<p>{{episodes[1].plot}}</p>
-			</span>		
-		</div>  		
-  	</div>
-
-	<div class="col-md-4">
-  		<div style="height: 220px; overflow:hidden;text-align: left; padding: 10px;" class="card-panel">		
-			<img class="img-responsive" src="{{episodes[2].art['tvshow.poster']}}" style="margin:10px" width="88" height="128" align="left"/>
-			<span>
-				<h5><strong>{{episodes[2].label}} - S{{episodes[2].season}}E{{episodes[2].episode}}</strong></h5>
-				<span>Aired: {{episodes[2].firstaired}}</span>
-	  			<p>{{episodes[2].plot}}</p>
-			</span>		
-		</div>  		
-  	</div>
+	
 </div>

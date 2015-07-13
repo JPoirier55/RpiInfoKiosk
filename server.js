@@ -2,6 +2,7 @@ var express = require('express');
 var weather = require('./weather.js');
 var mta = require('./mta.js');
 var kodi = require('./kodi.js');
+var calendar = require('./calendar.js');
 var app = express();
 var express = require('express');
 var exec = require('child_process').exec;
@@ -27,6 +28,11 @@ app.get('/api/v1/kodi', function(req, res) {
    });
 });
 
+app.get('/api/v1/calendar', function(req, res) {    
+ calendar.getHolidays(function(callback){ 		
+      	res.json(callback);
+   });
+});
 app.use(express.static(__dirname + '/html'));
 app.listen(8080);
 
