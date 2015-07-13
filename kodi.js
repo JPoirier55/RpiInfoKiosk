@@ -38,7 +38,7 @@ function getRecentEpisodes(callback){
 
 function getEpisodesMeta(recentEpisodesObj, resCallback){
 	var episodes = [];
-	var size = 5;
+	var size = 2;
 
 	async.eachSeries(recentEpisodesObj, function(episode, callback) {
 		if(episodes.length <= size){				
@@ -55,6 +55,8 @@ function getEpisodesMeta(recentEpisodesObj, resCallback){
 	});
 
 }
+
+
 
 function episodeDetails(episodeId, callback){
 	var path = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetEpisodeDetails","params":{"episodeid":'+episodeId+',"properties":["plot","rating","showtitle","season","episode","art","firstaired"]}}"}';
@@ -74,6 +76,12 @@ function episodeDetails(episodeId, callback){
 		episodeObj  = JSON.parse(data);
 		var pattern = /\/\/(.*.)\//;
 		var deets = episodeObj.result.episodedetails;
+
+		if(deets.plot){
+			deets.plot = deets.plot.substring(0,240) + "...";			
+		}else{
+			deets.plot = "No description availible...";
+		}
 		deets.art['tvshow.poster'] = decodeURIComponent(deets.art['tvshow.poster'].match(pattern)[1]);
 		deets.art['tvshow.fanart'] = decodeURIComponent(deets.art['tvshow.fanart'].match(pattern)[1]);
 		deets.art['tvshow.banner'] = decodeURIComponent(deets.art['tvshow.banner'].match(pattern)[1]);
