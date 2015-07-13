@@ -80,7 +80,7 @@ function episodeDetails(episodeId, callback){
 		if(deets.plot){
 			deets.plot = deets.plot.substring(0,240) + "...";			
 		}else{
-			deets.plot = "No description availible...";
+			deets.plot = "No description available...";
 		}
 		deets.art['tvshow.poster'] = decodeURIComponent(deets.art['tvshow.poster'].match(pattern)[1]);
 		deets.art['tvshow.fanart'] = decodeURIComponent(deets.art['tvshow.fanart'].match(pattern)[1]);
