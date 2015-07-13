@@ -68,22 +68,22 @@ function getClosestEvent(calendars){
 
 function addExtras(calendarEvent,callback){
 	if(calendarEvent !== undefined){
-		var splitArr = calendarEvent.start.date.split("-");
-		if(splitArr[1] === 10){
+		var eventDate = new Date(calendarEvent.start.date);
+		if(eventDate.getMonth() === 10){
 			calendarEvent.icon = "http://www.geekchamp.com/upload/symbolicons/fun/1f383-halloween.png";
 			calendarEvent.background = "#FF9800";
 			calendarEvent.backgroundImage ="";
 			calendarEvent.textColor = "#000";
-			calendarEvent.dateColor = "#000";	
+			calendarEvent.dateColor = "#FFEB3B";	
 
-		}else if(splitArr[1] === 11){
+		}else if(eventDate.getMonth() === 11){
 			calendarEvent.icon = "http://img.brothersoft.com/games/flash/icon/t/thanksgiving-pop-720p-92610-1325408900.png";
 			calendarEvent.background = "#795548";
 			calendarEvent.backgroundImage ="";
 			calendarEvent.textColor = "#FDD835";
-			calendarEvent.dateColor = "#FDD835";	
+			calendarEvent.dateColor = "#FF9800";	
 
-		}else if(splitArr[1] === 12){
+		}else if(eventDate.getMonth() === 12){
 			calendarEvent.icon = "http://png-5.findicons.com/files/icons/243/winter_holiday/128/xmas_tree.png";
 			calendarEvent.background = "#8BC34A";
 			calendarEvent.backgroundImage ="";
@@ -91,7 +91,7 @@ function addExtras(calendarEvent,callback){
 			calendarEvent.dateColor = "#F44336";		
 
 		}else{
-			calendarEvent.icon = "https://s3.amazonaws.com/media-p.slid.es/uploads/billymeinke/images/75494/icon_calendar_white.png";
+			calendarEvent.icon = "http://uwahockey.org.au/wp-content/uploads/2015/02/news-icon-100x100.png";
 			calendarEvent.background = "#4CAF50";
 			calendarEvent.backgroundImage ="";
 			calendarEvent.textColor = "#FFFF8D";

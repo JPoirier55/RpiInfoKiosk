@@ -4,12 +4,15 @@ var app = angular.module('myApp', ['ngSanitize']);
 app.controller('dataCtrl', function($scope, $timeout, $http){
     $scope.data = [];
     
+
+    var radarImages = [];
     (function tick() {
         $http.get('api/v1/weather').
           success(function(data, status, headers, config) {
             // this callback will be called asynchronously
             // when the response is available
             $scope.data = data;
+            radarImages = data.radar_imgs;
             //30 Mins
             $timeout(tick, 1000*60*30);
 
@@ -19,6 +22,15 @@ app.controller('dataCtrl', function($scope, $timeout, $http){
             // or server returns response with an error status.
           });
 
+    })();
+
+
+    var radarImageIndex = 0;
+    (function tick() {
+          $scope.radar_image = radarImages[radarImageIndex];
+          radarImageIndex = (radarImageIndex === 0) ? 1 : 0;
+          //30 Mins
+          $timeout(tick, 1000*10);
     })();
 
 });
