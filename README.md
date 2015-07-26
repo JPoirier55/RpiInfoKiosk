@@ -5,8 +5,8 @@
 ## Setup
 1. Get node
 
-  i. `sudo apt-get install node`
-  ii. `sudo apt-get install chromium-browser`
+  1. `sudo apt-get install node`
+  2. `sudo apt-get install chromium-browser`
 
 2. Once node/npm is installed run to install all dependecies. 
 
