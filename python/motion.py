@@ -39,8 +39,6 @@ def checkMotion():
 print "PIR Module Test (CTRL+C to exit)"
 print "Ready"
 
-MOTION(PIR_PIN)
-
 try:    
 	GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=MOTION, bouncetime=500)
 	while 1:
