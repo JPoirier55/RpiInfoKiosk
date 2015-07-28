@@ -49,7 +49,9 @@ function parseWeatherToolbarJson(json, callback){
 	currentConditionObj.code = util.format(imgBaseUrl, currentConditionObj.code);
 
 	var date = new Date().toISOString();
-	var imgs = ["http://images.webcamgalore.com/5943-current-webcam-New-York-City-New-York.jpg?time="+date,"http://cdn.abclocal.go.com/three/wabc/weather/16_9/hd/wabc_a_1_1280.jpg?time="+date];
+	//
+	//"http://cdn.abclocal.go.com/three/wabc/weather/16_9/hd/wabc_a_1_1280.jpg?time="+date
+	var imgs = ["http://images.webcamgalore.com/5943-current-webcam-New-York-City-New-York.jpg?time="+date,"http://images.intellicast.com/WxImages/RadarLoop/hfd_None_anim.gif"];
 	var forecast = getForecast(resultsArr.item.forecast);
 
 	callback(new weatherObject(currentConditionObj, currentConditionObj.temp, locationObj.city +', '+locationObj.region, imgs, hum, forecast, resultsArr.astronomy, resultsArr.wind));
