@@ -2,3 +2,7 @@ table, th, td {
    text-align: center;
    font-size: 25px;
 }
+
+body{
+	max-width: 2220px;
+}

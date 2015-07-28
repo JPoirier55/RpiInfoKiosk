@@ -1,6 +1,8 @@
 var utils = require('./utils.js');
 var util = require('util');
 var async = require('async');
+var moment = require('moment');
+
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
 ];
@@ -68,7 +70,7 @@ function getClosestEvent(calendars){
 
 function addExtras(calendarEvent,callback){
 	if(calendarEvent !== undefined){
-		var eventDate = new Date(calendarEvent.start.date);
+		var eventDate = new Date(calendarEvent.start.dateTime);
 		if(eventDate.getMonth() === 10){
 			calendarEvent.icon = "http://www.geekchamp.com/upload/symbolicons/fun/1f383-halloween.png";
 			calendarEvent.background = "#FF9800";
@@ -98,13 +100,13 @@ function addExtras(calendarEvent,callback){
 			calendarEvent.dateColor = "#FFEB3B";				
 		}
 
-		var now = new Date();
-		var date1 = new Date(calendarEvent.start.date);
+		var now = moment();
+		var date1 = new moment(calendarEvent.start.dateTime);
 		
-		if(date1.getDate() - now.getDate() < 6){
-			calendarEvent.start.date = "in " + (date1.getDate() - now.getDate()) + " days."
+		if(date1.diff(now, 'days')){
+			calendarEvent.start.date = "in " + (date1.diff(now, 'days')) + " days."			
 		}else{
-			calendarEvent.start.date = "on " + monthNames[date1.getMonth()] + " " + date1.getDate();
+			calendarEvent.start.date = "on " + monthNames[date1.getMonth()] + " " + date1.getDate();						
 		}
 
 		
