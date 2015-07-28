@@ -1,10 +1,9 @@
 <div ng-repeat="episode in episodes" >
 
   	<div ng-switch on="episode.kind">
-
 		<div ng-switch-when="calendar#event">
 	        <div class="col-md-3">
-		  		<div style="height: 220px;color:{{episode.textColor}}; overflow:hidden;text-align: left; padding: 15px; background:{{episode.background}};" class="card-panel">	
+		  		<div style="color:{{episode.textColor}}; padding: 15px; background:{{episode.background}};" class="card-panel kodi-card">	
 		  		<img class="img-responsive" src="{{episode.icon}}" style="margin-top:25px;margin-right:15px" width="75" height="75" align="left"/>	
 					<span>			
 						<h3>{{episode.summary}} is <strong style="color:{{episode.dateColor}}">{{episode.start.date}}</strong></h3>	
@@ -15,13 +14,20 @@
 
 	    <div ng-switch-default>	        
 			<div class="col-md-3">
-		  		<div style="height: 220px; overflow:hidden;text-align: left; padding: 10px;" class="card-panel">		
-					<img class="img-responsive" src="{{episode.art['tvshow.poster']}}" style="margin:10px" width="88" height="128" align="left"/>
-					<span>
-						<h5><strong>{{episode.label}} - S{{episode.season}}E{{episode.episode}}</strong></h5>
-						<span>Aired: {{episode.firstaired}}</span>
-			  			<p>{{episode.plot}}</p>
-					</span>		
+		  		<div class="card kodi-card">		
+					<!-- <img class="img-responsive" src="{{episode.art['tvshow.poster']}}" style="margin:10px" width="88" height="128" align="left"/> -->
+					<div class="card-image">
+						<img src="{{episode.art['tvshow.banner']}}" style="width:100%"/>
+						<div class="kodi-content">
+						<span>
+							<div class="kodi-title">{{episode.label}} - S{{episode.season}}E{{episode.episode}}</div>
+							<div class="kodi-ts">Aired: {{episode.firstaired}}</div>
+				  			<p>
+				  				<div class="kodi-plot">{{episode.plot}}</div>
+			  				</p>
+						</span>		
+						</div>
+					</div>
 				</div>  		
 		  	</div>	        
 	    </div>

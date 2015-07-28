@@ -6,16 +6,52 @@ table, th, td {
 ul{
 	font-size: 25px;
 }
+
 body{
 	width: 1920px;
+	height: 1080px;
+	background: rgb(238, 238, 238);
+	overflow: hidden;
 }
 
 
-
-.weather-card{	
+/* Kodi */
+.kodi-card{
+	height:335px;
+	overflow:hidden;
+	text-align: left; 
 }
+.kodi-content{
+	padding:15px;
+}
+.kodi-title{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-weight: bold;
+	font-size: 30px;
+}
+.kodi-ts{
+	font-size: 25px;
+	color: #777;
+}
+.kodi-plot{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size:25px;
+}
+
+
+/* Weather */
+.weather-card{		
+}
+.weather-icon{
+	height: 50px;
+}
+
+/* Forecast */
 .forecast-card{
-	width: 170px;
+	width: 170px;	
 }
 
 h5{

@@ -57,14 +57,8 @@ function getEpisodesMeta(recentEpisodesObj, resCallback){
 				episodes[episodes.length - 1] = calendarEvent;	
 			}			
 			resCallback(episodes);
-		});
-
-		
-			
-	});
-		
-	
-
+		});		
+	});		
 }
 
 
@@ -89,7 +83,7 @@ function episodeDetails(episodeId, callback){
 		var deets = episodeObj.result.episodedetails;
 
 		if(deets.plot){
-			deets.plot = deets.plot.substring(0,175) + "...";			
+			deets.plot = deets.plot.substring(0,125) + "...";			
 		}else{
 			deets.plot = "No description available...";
 		}
