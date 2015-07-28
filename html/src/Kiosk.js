@@ -30,7 +30,7 @@ app.controller('dataCtrl', function($scope, $timeout, $http){
           $scope.radar_image = radarImages[radarImageIndex];
           radarImageIndex = (radarImageIndex === 0) ? 1 : 0;
           //30 Mins
-          $timeout(tick, 1000*10);
+          $timeout(tick, 1000*15);
     })();
 
 });
