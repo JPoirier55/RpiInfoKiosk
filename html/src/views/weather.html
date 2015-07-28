@@ -1,7 +1,5 @@
-<div ng-app="myApp" ng-controller="dataCtrl" class="text-center">
-	<span>Last updated: {{data.condition.date}}</span>
-
-	<div class="card">
+<div ng-app="myApp" ng-controller="dataCtrl" class="">
+	<div class="card weather-card">
 		<div class="card-image">
 			<img src="{{radar_image}}" width="200" style="width:100%"/>
 			<div ng-controller="ExampleController">
@@ -25,26 +23,5 @@
 			</tr>
 		</table>					
 		</div>
-	</div>
-	 
-	<div >
-		<li style="display:inline-block;margin:5px;" ng-repeat="day in data.forecast" class="card-panel">
-			
-			<ul style="display:block;">
-				<h5>{{day.day}}</h5>
-			</ul>
-			
-			<hr/>
-			
-			<ul style="display:block;">
-				<h6>			
-					<strong>{{day.high}}°</strong> <font color="#3F51B5">{{day.low}}°</font>
-				</h6>			
-			</ul>
-
-			<ul>      
-	    		<img src="{{day.code}}"/>		    
-	    	</ul>
-		</li>
-	</div>
+	</div>	 
 </div>

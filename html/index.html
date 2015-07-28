@@ -32,8 +32,9 @@
           <div ng-include="'src/views/weather.html'"></div>             
         </div>
 
-        <div ng-controller="mtaCtrl" class="col-md-6" >
-          <div ng-include="'src/views/mta.html'" class="text-center"> </div>   
+        <div class="col-md-6" >
+          <div ng-include="'src/views/mta.html'" ng-controller="mtaCtrl" class="text-center"> </div> 
+          <div ng-include="'src/views/forecast.html'" ng-controller="dataCtrl" class="text-center"> </div>   
         </div>
       </div>
 

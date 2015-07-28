@@ -1,8 +1,25 @@
 table, th, td {
    text-align: center;
-   font-size: 25px;
+   font-size: 35px;
 }
 
+ul{
+	font-size: 25px;
+}
 body{
-	max-width: 2220px;
+	width: 2220px;
+}
+
+
+
+.weather-card{	
+}
+.forecast-card{
+	width: 200px;
+}
+
+h5{
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }

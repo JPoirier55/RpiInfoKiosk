@@ -39,7 +39,7 @@ function getRecentEpisodes(callback){
 
 function getEpisodesMeta(recentEpisodesObj, resCallback){
 	var episodes = [];
-	var size = 2;
+	var size = 3;
 
 	async.eachSeries(recentEpisodesObj, function(episode, callback) {
 		if(episodes.length <= size){				
