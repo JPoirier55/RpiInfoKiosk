@@ -102,11 +102,15 @@ function addExtras(calendarEvent,callback){
 
 		var now = moment();
 		var date1 = new moment(calendarEvent.start.dateTime);
-		
-		if(date1.diff(now, 'days')){
-			calendarEvent.start.date = "in " + (date1.diff(now, 'days')) + " days."			
+		console.log(date1.diff(now, 'days'));
+
+		var diff = date1.diff(now, 'days');
+		if( diff > 0){
+			calendarEvent.start.date = "in " + (date1.diff(now, 'days')) + " days.";		
+		}else if(diff === 0){
+			calendarEvent.start.date = "Tommorrow";		
 		}else{
-			calendarEvent.start.date = "on " + monthNames[date1.getMonth()] + " " + date1.getDate();						
+			calendarEvent.start.date = "on " + date1.format("MMM DD");						
 		}
 
 		
