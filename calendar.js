@@ -2,6 +2,10 @@ var utils = require('./utils.js');
 var util = require('util');
 var async = require('async');
 var moment = require('moment');
+var mapsApiKey = "AIzaSyCSEX5yOHaHY6-PqplgRG6SEp5tC8wUzko";
+var calApiKey = "AIzaSyBLGmX9Y1vVcFLtE48hA1tPg-4MMhRpcYU";
+
+var mapSrc = "https://www.google.com/maps/embed/v1/place?key=%s&q=%s"
 
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -19,7 +23,6 @@ function getHolidays(callback){
 }
 
 
-var apiKey = "AIzaSyBLGmX9Y1vVcFLtE48hA1tPg-4MMhRpcYU";
 function getCalendarJson(callback){
 	var dateISO = new Date().toISOString();
 	var endDateISO = new Date();
@@ -30,7 +33,7 @@ function getCalendarJson(callback){
 	var calendarsJSON = [];
 	var calendars = ["usa__en%40holiday.calendar.google.com","konecnyna@gmail.com"]
 	async.eachSeries(calendars, function(calendar, callback) {
-		var url = util.format("https://www.googleapis.com/calendar/v3/calendars/%s/events?key=%s&timeMin=%s&timeMax=%s&singleEvents=%s&orderBy=%s",calendar, apiKey,dateISO,endDateISO.toISOString(),"true","startTime");	
+		var url = util.format("https://www.googleapis.com/calendar/v3/calendars/%s/events?key=%s&timeMin=%s&timeMax=%s&singleEvents=%s&orderBy=%s",calendar, calApiKey,dateISO,endDateISO.toISOString(),"true","startTime");	
 		utils.downloadFileSSL(url, function(json){
 			json = JSON.parse(json);
 			calendarsJSON.push(json.items[0]);
@@ -102,18 +105,22 @@ function addExtras(calendarEvent,callback){
 
 		var now = moment();
 		var date1 = new moment(calendarEvent.start.dateTime);
-		console.log(date1.diff(now, 'days'));
-
+		
 		var diff = date1.diff(now, 'days');
 		if( diff > 0){
-			calendarEvent.start.date = "in " + (date1.diff(now, 'days')) + " days.";		
+			calendarEvent.start.date = "in " + (date1.diff(now, 'days') + 1) + " days.";		
 		}else if(diff === 0){
 			calendarEvent.start.date = "Tommorrow";		
 		}else{
 			calendarEvent.start.date = "on " + date1.format("MMM DD");						
 		}
 
-		
+		var loc = calendarEvent.location.replace(/, /g, '');
+		var loc = calendarEvent.location.replace(/ /g, '+');
+
+		calendarEvent.map_src = util.format(mapSrc, mapsApiKey, loc);
+		console.log(calendarEvent.map_src);
+		//calendarEvent.map_src = "https://www.google.com/maps/embed/v1/place?key=AIzaSyCSEX5yOHaHY6-PqplgRG6SEp5tC8wUzko&q=Space+Needle,Seattle+WA";
 	}
 	callback(calendarEvent);
 
