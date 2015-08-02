@@ -2,7 +2,10 @@
 	<div class="card weather-card">
 		<div class="card-image">
 			<img src="{{radar_image}}" width="200px" height="505px" style="width:100%"/>
-				<h5><span my-current-time="format" class="card-title"></span></h5>					
+			<div ng-controller="ClockController" class="clock">
+				<span my-current-time="format"></span>
+			</div>
+			
 		</div>
 
 		<div class="card-content" style="padding:0px;">

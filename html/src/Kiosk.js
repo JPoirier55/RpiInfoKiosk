@@ -35,6 +35,39 @@ app.controller('dataCtrl', function($scope, $timeout, $http){
 
 });
 
+app.controller('ClockController', ['$scope', '$interval',
+    function($scope, $interval) {
+        $scope.format = 'MMM dd, yyyy h:mm:ss a';
+    }])
+    // Register the 'myCurrentTime' directive factory method.
+    // We inject $interval and dateFilter service since the factory method is DI.
+    .directive('myCurrentTime', ['$interval', 'dateFilter',
+      function($interval, dateFilter) {
+        // return the directive link function. (compile function not needed)
+        return function(scope, element, attrs) {
+          var format,  // date format
+              stopTime; // so that we can cancel the time updates
+
+          // used to update the UI
+          function updateTime() {
+            element.text(dateFilter(new Date(), format));
+          }
+
+          // watch the expression, and update the UI on change.
+          scope.$watch(attrs.myCurrentTime, function(value) {
+            format = value;
+            updateTime();
+          });
+
+          stopTime = $interval(updateTime, 1000);
+
+          // listen on DOM destroy (removal) event, and cancel the next UI update
+          // to prevent updating time after the DOM element was removed.
+          element.on('$destroy', function() {
+            $interval.cancel(stopTime);
+          });
+        };
+}]);
 
 app.controller('mtaCtrl', function($scope, $timeout, $http){
     $scope.mtaData = [];
@@ -68,8 +101,9 @@ app.controller('kodiCtrl', function($scope, $timeout, $http, $sce){
             // this callback will be called asynchronously
             // when the response is available
             $scope.iframe_url = $sce.trustAsResourceUrl(data[data.length-1].map_src);
+            
             $scope.episodes = data;
-            $timeout(tick, 1000*60*60*3);
+            $timeout(tick, 1000*60*60*4);
 
           }).
           error(function(data, status, headers, config) {

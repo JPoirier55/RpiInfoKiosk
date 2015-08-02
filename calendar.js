@@ -119,8 +119,6 @@ function addExtras(calendarEvent,callback){
 		var loc = calendarEvent.location.replace(/ /g, '+');
 
 		calendarEvent.map_src = util.format(mapSrc, mapsApiKey, loc);
-		console.log(calendarEvent.map_src);
-		//calendarEvent.map_src = "https://www.google.com/maps/embed/v1/place?key=AIzaSyCSEX5yOHaHY6-PqplgRG6SEp5tC8wUzko&q=Space+Needle,Seattle+WA";
 	}
 	callback(calendarEvent);
 

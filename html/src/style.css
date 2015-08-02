@@ -41,6 +41,16 @@ body{
 	font-size:25px;
 }
 
+.clock{
+	position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 20px;
+    color:white;
+    font-size: 30px;
+	background: rgba(10,10,10,.6);
+}
+
 
 /* Weather */
 .weather-card{		
