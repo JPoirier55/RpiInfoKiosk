@@ -115,10 +115,12 @@ function addExtras(calendarEvent,callback){
 			calendarEvent.start.date = "on " + date1.format("MMM DD");						
 		}
 
-		var loc = calendarEvent.location.replace(/, /g, '');
-		var loc = calendarEvent.location.replace(/ /g, '+');
-
-		calendarEvent.map_src = util.format(mapSrc, mapsApiKey, loc);
+		if(calendarEvent.location){
+			var loc = calendarEvent.location.replace(/, /g, '');
+			var loc = calendarEvent.location.replace(/ /g, '+');
+			calendarEvent.map_src = util.format(mapSrc, mapsApiKey, loc);	
+		}
+		
 	}
 	callback(calendarEvent);
 
