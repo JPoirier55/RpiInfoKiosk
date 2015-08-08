@@ -147,7 +147,12 @@ function getGoolgeImageResult(calendarEvent, callback){
 	googleImgApiUrl = util.format(googleImgApiUrl, calendarEvent.summary, " holiday image");	
 	utils.downloadFileSSL(googleImgApiUrl, function(json){
 		json = JSON.parse(json);
-		calendarEvent.img_url = json.responseData.results[0].url;
+		var randomIndex = Math.floor((Math.random() * json.responseData.results.length));
+		if(randomIndex){
+			calendarEvent.img_url = json.responseData.results[randomIndex].url;			
+		}else{
+			calendarEvent.img_url = json.responseData.results[0].url;
+		}
 		callback();		
 	});
 }
