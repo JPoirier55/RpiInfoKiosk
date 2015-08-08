@@ -1,7 +1,7 @@
 var app = angular.module('myApp', ['ngSanitize']);
 
 
-app.controller('dataCtrl', function($scope, $timeout, $http){
+app.controller('weatherCtrl', function($scope, $timeout, $http){
     $scope.data = [];
     
 
@@ -9,17 +9,22 @@ app.controller('dataCtrl', function($scope, $timeout, $http){
     (function tick() {
         $http.get('api/v1/weather').
           success(function(data, status, headers, config) {
-            // this callback will be called asynchronously
-            // when the response is available
             $scope.data = data;
             radarImages = data.radar_imgs;
-            //30 Mins
-            $timeout(tick, 1000*60*30);
+            //15 Mins
+            $timeout(tick, 1000*60*15);
 
+
+            //This enables night mode!
+            var todayHour = new Date().getHours();
+            var sunsetHour = parseInt(data.astronomy.sunset.charAt(0)) + 12;
+            console.log(sunsetHour - todayHour);
+            if(sunsetHour - todayHour <= 0){
+              angular.element('head').append('<link href="./src/views/night_mode.css" rel="stylesheet">');  
+            }
+            
           }).
-          error(function(data, status, headers, config) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+          error(function(data, status, headers, config) {            
           });
 
     })();
@@ -32,6 +37,9 @@ app.controller('dataCtrl', function($scope, $timeout, $http){
           //30 Mins
           $timeout(tick, 1000*15);
     })();
+
+
+
 
 });
 
@@ -92,7 +100,7 @@ app.controller('mtaCtrl', function($scope, $timeout, $http){
 
 });
 
-app.controller('kodiCtrl', function($scope, $timeout, $http, $sce){
+app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
     $scope.cards = [];
     
     (function tick() {

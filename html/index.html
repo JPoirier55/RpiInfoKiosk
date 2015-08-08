@@ -28,18 +28,18 @@
       
       <!-- Content -->  
       <div class="row" style="margin:0px">
-        <div  ng-controller="dataCtrl" class="col-md-6">
+        <div class="col-md-6">
           <div ng-include="'src/views/weather.html'"></div>             
         </div>
 
         <div class="col-md-6" >
           <div ng-include="'src/views/mta.html'" ng-controller="mtaCtrl" class="text-center"> </div> 
-          <div ng-include="'src/views/forecast.html'" ng-controller="dataCtrl" class="text-center"> </div>   
+          <div ng-include="'src/views/forecast.html'" ng-controller="weatherCtrl" class="text-center"> </div>   
         </div>
       </div>
 
       <div class="row" style="margin:0px">
-        <div ng-controller="kodiCtrl" class="col-md-12">
+        <div ng-controller="cardsCtrl" class="col-md-12">
           <div ng-include="'src/views/cards.html'"></div>   
         </div>
       </div>
