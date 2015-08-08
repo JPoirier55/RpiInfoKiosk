@@ -31,7 +31,7 @@ function getCalendarJson(callback){
 
 
 	var calendarsJSON = [];
-	var calendars = ["usa__en%40holiday.calendar.google.com","konecnyna@gmail.com"]
+	var calendars = ["usa__en%40holiday.calendar.google.com","konecnyna@gmail.com"];
 	async.eachSeries(calendars, function(calendar, callback) {
 		var url = util.format("https://www.googleapis.com/calendar/v3/calendars/%s/events?key=%s&timeMin=%s&timeMax=%s&singleEvents=%s&orderBy=%s",calendar, calApiKey,dateISO,endDateISO.toISOString(),"true","startTime");	
 		utils.downloadFileSSL(url, function(json){
@@ -104,7 +104,13 @@ function addExtras(calendarEvent,callback){
 		}
 
 		var now = moment();
-		var date1 = new moment(calendarEvent.start.dateTime);
+		var date1;
+		if(calendarEvent.creator.email === "usa__en@holiday.calendar.google.com"){
+			date1 = new moment(calendarEvent.end.date);
+			
+		}else{
+ 			date1 = new moment(calendarEvent.start.dateTime);
+		}
 		
 		var diff = date1.diff(now, 'days');
 		if( diff > 0){
@@ -117,11 +123,31 @@ function addExtras(calendarEvent,callback){
 
 		if(calendarEvent.location){
 			var loc = calendarEvent.location.replace(/, /g, '');
-			var loc = calendarEvent.location.replace(/ /g, '+');
+			loc = loc.location.replace(/ /g, '+');
 			calendarEvent.map_src = util.format(mapSrc, mapsApiKey, loc);	
 		}
-		
-	}
-	callback(calendarEvent);
 
+		if(calendarEvent.creator.email === "usa__en@holiday.calendar.google.com"){
+			getGoolgeImageResult(calendarEvent, function(){
+				callback(calendarEvent);
+			});
+		}else{
+			callback(calendarEvent);
+		}
+		
+	}else{
+		callback(calendarEvent);
+	}
+	
+
+}
+
+function getGoolgeImageResult(calendarEvent, callback){
+	var googleImgApiUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s%s";
+	googleImgApiUrl = util.format(googleImgApiUrl, calendarEvent.summary, " holiday image");	
+	utils.downloadFileSSL(googleImgApiUrl, function(json){
+		json = JSON.parse(json);
+		calendarEvent.img_url = json.responseData.results[0].url;
+		callback();		
+	});
 }

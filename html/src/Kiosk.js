@@ -93,7 +93,7 @@ app.controller('mtaCtrl', function($scope, $timeout, $http){
 });
 
 app.controller('kodiCtrl', function($scope, $timeout, $http, $sce){
-    $scope.episodes = [];
+    $scope.cards = [];
     
     (function tick() {
         $http.get('api/v1/kodi').
@@ -102,7 +102,7 @@ app.controller('kodiCtrl', function($scope, $timeout, $http, $sce){
             // when the response is available
             $scope.iframe_url = $sce.trustAsResourceUrl(data[data.length-1].map_src);
             
-            $scope.episodes = data;
+            $scope.cards = data;
             $timeout(tick, 1000*60*60*4);
 
           }).
