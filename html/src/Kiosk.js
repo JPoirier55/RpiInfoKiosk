@@ -3,8 +3,8 @@ var app = angular.module('myApp', ['ngSanitize']);
 
 app.controller('weatherCtrl', function($scope, $timeout, $http){
     $scope.data = [];
+    $scope.nightMode = "";
     
-
     var radarImages = [];
     (function tick() {
         $http.get('api/v1/weather').
@@ -16,12 +16,16 @@ app.controller('weatherCtrl', function($scope, $timeout, $http){
 
 
             //This enables night mode!
+            var stylesheet = '<link href="./src/views/night_mode.css" rel="stylesheet">';
             var todayHour = new Date().getHours();
-            var sunsetHour = parseInt(data.astronomy.sunset.charAt(0)) + 12;
-            console.log(sunsetHour - todayHour);
-            if(sunsetHour - todayHour <= 0){
-              angular.element('head').append('<link href="./src/views/night_mode.css" rel="stylesheet">');  
+            var sunsetHour = parseInt(data.astronomy.sunset.charAt(0)) + 12;            
+            
+            if(sunsetHour - todayHour <= 0 || todayHour < 7) {
+              $scope.nightMode = "./src/views/night_mode.css";
+            } else {
+              $scope.nightMode = "";              
             }
+            
             
           }).
           error(function(data, status, headers, config) {            
@@ -29,7 +33,7 @@ app.controller('weatherCtrl', function($scope, $timeout, $http){
 
     })();
 
-
+            
     var radarImageIndex = 0;
     (function tick() {
           $scope.radar_image = radarImages[radarImageIndex];

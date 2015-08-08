@@ -5,7 +5,7 @@ var moment = require('moment');
 var mapsApiKey = "AIzaSyCSEX5yOHaHY6-PqplgRG6SEp5tC8wUzko";
 var calApiKey = "AIzaSyBLGmX9Y1vVcFLtE48hA1tPg-4MMhRpcYU";
 
-var mapSrc = "https://www.google.com/maps/embed/v1/place?key=%s&q=%s"
+var mapSrc = "https://www.google.com/maps/embed/v1/place?key=%s&q=%s";
 
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
