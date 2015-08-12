@@ -106,11 +106,13 @@ function addExtras(calendarEvent,callback){
 		var now = moment();
 		var date1 = new moment(calendarEvent.start.dateTime);
 		
-		var diff = date1.diff(now, 'days');
-		if( diff > 0){
+		var diff = date1.diff(now, 'days');	
+		if( diff > 2){
 			calendarEvent.start.date = "in " + (date1.diff(now, 'days') + 1) + " days.";		
+		}else if(diff === 1){
+			calendarEvent.start.date = "Tommorrow";
 		}else if(diff === 0){
-			calendarEvent.start.date = "Tommorrow";		
+			calendarEvent.start.date = "Today! at: " + date1.format('hh:mm a');		
 		}else{
 			calendarEvent.start.date = "on " + date1.format("MMM DD");						
 		}
