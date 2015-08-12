@@ -125,7 +125,7 @@ function addExtras(calendarEvent,callback){
 
 		if(calendarEvent.location){
 			var loc = calendarEvent.location.replace(/, /g, '');
-			loc = loc.location.replace(/ /g, '+');
+			loc = loc.replace(/ /g, '+');
 			calendarEvent.map_src = util.format(mapSrc, mapsApiKey, loc);	
 		}
 
