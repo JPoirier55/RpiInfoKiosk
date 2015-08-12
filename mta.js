@@ -77,7 +77,7 @@ function getSubwayColor(subwayName, subwayObj){
 	}else if(subwayName == "G"){
 		subwayObj.color = "#69F0AE";
 	}else if(subwayName == "L"){
-		subwayObj.color = "#607D8B";
+		subwayObj.color = "grey";
 	}else if(subwayName == "N"){
 		subwayObj.color = "#FFC107";
 	}else if(subwayName == "S"){
