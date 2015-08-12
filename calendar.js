@@ -5,7 +5,7 @@ var moment = require('moment');
 var mapsApiKey = "AIzaSyCSEX5yOHaHY6-PqplgRG6SEp5tC8wUzko";
 var calApiKey = "AIzaSyBLGmX9Y1vVcFLtE48hA1tPg-4MMhRpcYU";
 
-var mapSrc = "https://www.google.com/maps/embed/v1/place?key=%s&q=%s"
+var mapSrc = "https://www.google.com/maps/embed/v1/place?key=%s&q=%s";
 
 var monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -26,12 +26,12 @@ function getHolidays(callback){
 function getCalendarJson(callback){
 	var dateISO = new Date().toISOString();
 	var endDateISO = new Date();
-	endDateISO.setDate(endDateISO.getDate() + 30);
+	endDateISO.setDate(endDateISO.getDate() + 21);
 
 
 
 	var calendarsJSON = [];
-	var calendars = ["usa__en%40holiday.calendar.google.com","konecnyna@gmail.com"]
+	var calendars = ["usa__en%40holiday.calendar.google.com","konecnyna@gmail.com"];
 	async.eachSeries(calendars, function(calendar, callback) {
 		var url = util.format("https://www.googleapis.com/calendar/v3/calendars/%s/events?key=%s&timeMin=%s&timeMax=%s&singleEvents=%s&orderBy=%s",calendar, calApiKey,dateISO,endDateISO.toISOString(),"true","startTime");	
 		utils.downloadFileSSL(url, function(json){
@@ -104,7 +104,13 @@ function addExtras(calendarEvent,callback){
 		}
 
 		var now = moment();
-		var date1 = new moment(calendarEvent.start.dateTime);
+		var date1;
+		if(calendarEvent.creator.email === "usa__en@holiday.calendar.google.com"){
+			date1 = new moment(calendarEvent.end.date);
+			
+		}else{
+ 			date1 = new moment(calendarEvent.start.dateTime);
+		}
 		
 		var diff = date1.diff(now, 'days');	
 		if( diff > 2){
@@ -117,11 +123,38 @@ function addExtras(calendarEvent,callback){
 			calendarEvent.start.date = "on " + date1.format("MMM DD");						
 		}
 
-		var loc = calendarEvent.location.replace(/, /g, '');
-		var loc = calendarEvent.location.replace(/ /g, '+');
+		if(calendarEvent.location){
+			var loc = calendarEvent.location.replace(/, /g, '');
+			loc = loc.location.replace(/ /g, '+');
+			calendarEvent.map_src = util.format(mapSrc, mapsApiKey, loc);	
+		}
 
-		calendarEvent.map_src = util.format(mapSrc, mapsApiKey, loc);
+		if(calendarEvent.creator.email === "usa__en@holiday.calendar.google.com"){
+			getGoolgeImageResult(calendarEvent, function(){
+				callback(calendarEvent);
+			});
+		}else{
+			callback(calendarEvent);
+		}
+		
+	}else{
+		callback(calendarEvent);
 	}
-	callback(calendarEvent);
+	
 
+}
+
+function getGoolgeImageResult(calendarEvent, callback){
+	var googleImgApiUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s%s";
+	googleImgApiUrl = util.format(googleImgApiUrl, calendarEvent.summary, " holiday image");	
+	utils.downloadFileSSL(googleImgApiUrl, function(json){
+		json = JSON.parse(json);
+		var randomIndex = Math.floor((Math.random() * json.responseData.results.length));
+		if(randomIndex){
+			calendarEvent.img_url = json.responseData.results[randomIndex].url;			
+		}else{
+			calendarEvent.img_url = json.responseData.results[0].url;
+		}
+		callback();		
+	});
 }

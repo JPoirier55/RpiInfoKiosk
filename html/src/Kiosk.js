@@ -1,30 +1,39 @@
 var app = angular.module('myApp', ['ngSanitize']);
 
 
-app.controller('dataCtrl', function($scope, $timeout, $http){
+app.controller('weatherCtrl', function($scope, $timeout, $http){
     $scope.data = [];
+    $scope.nightMode = "";
     
-
     var radarImages = [];
     (function tick() {
         $http.get('api/v1/weather').
           success(function(data, status, headers, config) {
-            // this callback will be called asynchronously
-            // when the response is available
             $scope.data = data;
             radarImages = data.radar_imgs;
-            //30 Mins
-            $timeout(tick, 1000*60*30);
+            //15 Mins
+            $timeout(tick, 1000*60*15);
 
+
+            //This enables night mode!
+            var stylesheet = '<link href="./src/views/night_mode.css" rel="stylesheet">';
+            var todayHour = new Date().getHours();
+            var sunsetHour = parseInt(data.astronomy.sunset.charAt(0)) + 12;            
+            
+            if(sunsetHour - todayHour <= 0 || todayHour < 7) {
+              $scope.nightMode = "./src/views/night_mode.css";
+            } else {
+              $scope.nightMode = "";              
+            }
+            
+            
           }).
-          error(function(data, status, headers, config) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
+          error(function(data, status, headers, config) {            
           });
 
     })();
 
-
+            
     var radarImageIndex = 0;
     (function tick() {
           $scope.radar_image = radarImages[radarImageIndex];
@@ -32,6 +41,9 @@ app.controller('dataCtrl', function($scope, $timeout, $http){
           //30 Mins
           $timeout(tick, 1000*15);
     })();
+
+
+
 
 });
 
@@ -92,8 +104,8 @@ app.controller('mtaCtrl', function($scope, $timeout, $http){
 
 });
 
-app.controller('kodiCtrl', function($scope, $timeout, $http, $sce){
-    $scope.episodes = [];
+app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
+    $scope.cards = [];
     
     (function tick() {
         $http.get('api/v1/kodi').
@@ -102,7 +114,7 @@ app.controller('kodiCtrl', function($scope, $timeout, $http, $sce){
             // when the response is available
             $scope.iframe_url = $sce.trustAsResourceUrl(data[data.length-1].map_src);
             
-            $scope.episodes = data;
+            $scope.cards = data;
             $timeout(tick, 1000*60*60*4);
 
           }).

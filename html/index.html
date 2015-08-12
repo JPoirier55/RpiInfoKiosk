@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" ng-app="myApp" ng-controller="weatherCtrl">
   <head>
     <title>Home Automation</title>
 
@@ -20,30 +20,29 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
     <link rel="stylesheet" href="./src/style.css">
-
+    <link rel="stylesheet" ng-href="{{nightMode}}">
+    
   </head>
 
-  <body layout="column" ng-app="myApp">
+  <body layout="column">
     
       
       <!-- Content -->  
       <div class="row" style="margin:0px">
-        <div  ng-controller="dataCtrl" class="col-md-6">
+        <div class="col-md-6">
           <div ng-include="'src/views/weather.html'"></div>             
         </div>
 
         <div class="col-md-6" >
           <div ng-include="'src/views/mta.html'" ng-controller="mtaCtrl" class="text-center"> </div> 
-          <div ng-include="'src/views/forecast.html'" ng-controller="dataCtrl" class="text-center"> </div>   
+          <div ng-include="'src/views/forecast.html'" ng-controller="weatherCtrl" class="text-center"></div>   
         </div>
       </div>
 
       <div class="row" style="margin:0px">
-        <div ng-controller="kodiCtrl" class="col-md-12">
-          <div ng-include="'src/views/kodi.html'"></div>   
+        <div ng-controller="cardsCtrl" class="col-md-12">
+          <div ng-include="'src/views/cards.html'"></div>   
         </div>
-      </div>
-    
-    
+      </div>    
   </body>
 </html>
