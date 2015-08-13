@@ -113,12 +113,19 @@ function addExtras(calendarEvent,callback){
 		}
 		
 		var diff = date1.diff(now, 'days');	
+		var diffHours = date1.diff(now, 'hours');
+
 		if( diff > 2){
 			calendarEvent.start.date = "in " + (date1.diff(now, 'days') + 1) + " days.";		
 		}else if(diff === 1){
 			calendarEvent.start.date = "Tommorrow";
 		}else if(diff === 0){
-			calendarEvent.start.date = "Today! at: " + date1.format('hh:mm a');		
+			if(diffHours <= 12){
+				calendarEvent.start.date = "Today! at: " + date1.format('hh:mm a');			
+			}else{
+				calendarEvent.start.date = "Tommorrow";
+			}
+			
 		}else{
 			calendarEvent.start.date = "on " + date1.format("MMM DD");						
 		}
