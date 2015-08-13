@@ -115,7 +115,7 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
             $scope.iframe_url = $sce.trustAsResourceUrl(data[data.length-1].map_src);
             
             $scope.cards = data;
-            $timeout(tick, 1000*60*60*4);
+            $timeout(tick, 1000*60*60*1);
 
           }).
           error(function(data, status, headers, config) {
