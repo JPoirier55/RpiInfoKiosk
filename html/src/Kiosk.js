@@ -108,7 +108,7 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
     $scope.cards = [];
     
     (function tick() {
-        $http.get('api/v1/kodi').
+        $http.get('api/v1/cards').
           success(function(data, status, headers, config) {
             // this callback will be called asynchronously
             // when the response is available

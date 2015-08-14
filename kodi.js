@@ -4,18 +4,16 @@ var async = require('async');
 var username = 'admin';
 var password = 'desm';
 var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
-var baseUrl = '192.168.1.2';
-//var baseUrl = 'konecny.ddns.net';
+//var baseUrl = '192.168.1.2';
+var baseUrl = 'konecny.ddns.net';
 
 module.exports = {
-  getRecentEpisodes: function (callback) {
-  	getRecentEpisodes(callback);
+  getEpisodeCards: function (numOfEpisodes, callback){
+  	getEpisodeCards(numOfEpisodes, callback);
   }
 };
 
-
-
-function getRecentEpisodes(callback){
+function getEpisodeCards(numOfEpisodes, callback){
 	var options = {
 	    host: baseUrl,
 	    port: 8082,
@@ -29,17 +27,16 @@ function getRecentEpisodes(callback){
 
 	utils.downloadFileWithOptions(options, function(data){
 		var getRecentEpisodesObj = JSON.parse(data);
-		getEpisodesMeta(getRecentEpisodesObj.result.episodes, function(data){
+		getEpisodesMeta(numOfEpisodes , getRecentEpisodesObj.result.episodes, function(data){
 			callback(data);
 		});
 	});
 
 }
 
-
-function getEpisodesMeta(recentEpisodesObj, resCallback){
+function getEpisodesMeta(numOfEpisodes, recentEpisodesObj, resCallback){
 	var episodes = [];
-	var size = 3;
+	var size = numOfEpisodes-1;
 
 	async.eachSeries(recentEpisodesObj, function(episode, callback) {
 		if(episodes.length <= size){				
@@ -52,12 +49,7 @@ function getEpisodesMeta(recentEpisodesObj, resCallback){
 		}
 
 	}, function(err){
-		calendar.getHolidays(function(calendarEvent){
-			if(calendarEvent !== undefined){
-				episodes[episodes.length - 1] = calendarEvent;	
-			}			
-			resCallback(episodes);
-		});		
+		resCallback(episodes);	
 	});		
 }
 
