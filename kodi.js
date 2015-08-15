@@ -4,8 +4,8 @@ var async = require('async');
 var username = 'admin';
 var password = 'desm';
 var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
-//var baseUrl = '192.168.1.2';
-var baseUrl = 'konecny.ddns.net';
+var baseUrl = '192.168.1.2';
+//var baseUrl = 'konecny.ddns.net';
 
 module.exports = {
   getEpisodeCards: function (numOfEpisodes, callback){
