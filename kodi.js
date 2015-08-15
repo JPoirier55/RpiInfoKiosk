@@ -1,6 +1,7 @@
 var utils = require('./utils.js');
 var calendar = require('./calendar.js');
 var async = require('async');
+var moment = require('moment');
 var username = 'admin';
 var password = 'desm';
 var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
@@ -79,6 +80,10 @@ function episodeDetails(episodeId, callback){
 		}else{
 			deets.plot = "No description available...";
 		}
+
+		deets.firstaired = new moment(deets.firstaired).format("ddd, MMM Do");
+
+
 		deets.art['tvshow.poster'] = decodeURIComponent(deets.art['tvshow.poster'].match(pattern)[1]);
 		deets.art['tvshow.fanart'] = decodeURIComponent(deets.art['tvshow.fanart'].match(pattern)[1]);
 		deets.art['tvshow.banner'] = decodeURIComponent(deets.art['tvshow.banner'].match(pattern)[1]);
