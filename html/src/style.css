@@ -68,6 +68,21 @@ body{
 	width: 170px;	
 }
 
+.football-card{
+
+}
+
+.football-card-header {
+	background: #364C88;
+	color: white;
+	height: 82px;
+	text-align: center;
+	font-size: 3.5em;
+}
+.football-card-footer {
+	margin-top: 50px;
+}
+
 h5{
 	white-space: nowrap;
 	text-overflow: ellipsis;

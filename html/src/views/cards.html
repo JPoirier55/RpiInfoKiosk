@@ -22,6 +22,28 @@
 		  	</div>
 	    </div>
 
+		<div ng-switch-when="football">
+	        <div class="col-md-3">
+		  		<div class="card kodi-card">
+		  			<div class="football-card-header">	
+		  				<img src="https://upload.wikimedia.org/wikipedia/en/1/12/National_Football_League_2008.svg" height="100%"/>
+		  				{{card.gameDate}}
+		  			</div>
+		  			<div class="col-md-12">
+		  				<h3>		  				
+		  				<div class="col-md-5 center-card">{{card.homeTeam}}</div>
+		  				<div class="col-md-2 center-card">@</div>
+		  				<div class="col-md-5 center-card">{{card.awayTeam}}</div>
+		  				</h3>
+	  				</div>
+	  				<div class="football-card-footer">
+						<h3 class="center-card">{{card.gameTimeET}} on {{card.tvStation}}</h3>		  			
+					</div>
+				</div>  
+		  	</div>
+	    </div>
+
+
 	    <div ng-switch-default>	        
 			<div class="col-md-3">
 		  		<div class="card kodi-card">		

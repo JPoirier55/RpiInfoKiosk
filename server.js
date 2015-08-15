@@ -4,6 +4,7 @@ var mta = require('./mta.js');
 var kodi = require('./kodi.js');
 var calendar = require('./calendar.js');
 var cards = require('./cards.js');
+var football = require('./football.js');
 var app = express();
 var express = require('express');
 var exec = require('child_process').exec;
@@ -34,6 +35,14 @@ app.get('/api/v1/cards', function(req, res) {
       	res.json(callback);
    	});
 });
+
+
+app.get('/api/v1/football', function(req, res) {    
+	football.getNextPatsGame(function(callback){ 		
+      	res.json(callback);
+   	});
+});
+
 
 
 
