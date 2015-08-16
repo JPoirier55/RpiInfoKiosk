@@ -146,8 +146,7 @@ module.exports = {
 
 
 function getNextPatsGame(callback){
-   callback();
-	// fs.readFile('./nfl_2015_schedule.json', 'utf8', function (err,data) {
+ //   fs.readFile('./nfl_2015_schedule.json', 'utf8', function (err,data) {
 	//   if (err) {
 	//     return console.log(err);
 	//   }
@@ -156,10 +155,10 @@ function getNextPatsGame(callback){
 	// });
 	
 
-	// utils.downloadFile(baseUrl, function(data){
-	// 	var footballSchedule = JSON.parse(data);	
-	// 	callback(findPatsGame(footballSchedule.Schedule));
-	// });
+	utils.downloadFile(baseUrl, function(data){
+		var footballSchedule = JSON.parse(data);	
+		callback(findPatsGame(footballSchedule.Schedule));
+	});
 }
 
 
@@ -183,7 +182,7 @@ function findPatsGame(schedule, callback){
 	}
 
    //Nuttin
-   callback();
+   //callback();
 }
 
 
