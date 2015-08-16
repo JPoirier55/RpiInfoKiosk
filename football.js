@@ -146,13 +146,14 @@ module.exports = {
 
 
 function getNextPatsGame(callback){
-	fs.readFile('./nfl_2015_schedule.json', 'utf8', function (err,data) {
-	  if (err) {
-	    return console.log(err);
-	  }
-	  var footballSchedule = JSON.parse(data);
-	  findPatsGame(footballSchedule.Schedule, callback);
-	});
+   callback();
+	// fs.readFile('./nfl_2015_schedule.json', 'utf8', function (err,data) {
+	//   if (err) {
+	//     return console.log(err);
+	//   }
+	//   var footballSchedule = JSON.parse(data);
+	//   findPatsGame(footballSchedule.Schedule, callback);
+	// });
 	
 
 	// utils.downloadFile(baseUrl, function(data){
