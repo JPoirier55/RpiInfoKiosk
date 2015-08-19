@@ -26,7 +26,9 @@ function getHolidays(callback){
 function getCalendarJson(callback){
 	var dateISO = new Date().toISOString();
 	var endDateISO = new Date();
-	endDateISO.setDate(endDateISO.getDate() + 21);
+	var daysOut = 14;
+
+	endDateISO.setDate(endDateISO.getDate() + daysOut);
 
 
 
