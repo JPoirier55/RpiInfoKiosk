@@ -40,7 +40,8 @@ print "PIR Module Test (CTRL+C to exit)"
 print "Ready"
 
 try:    
-	subprocess.call(['tvservice','-o'])
+	checkMotion()
+	
 	GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=MOTION, bouncetime=500)
 	while 1:
 		if(MONITOR_STATE == 1):
