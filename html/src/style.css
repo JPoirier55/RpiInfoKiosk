@@ -7,11 +7,13 @@ ul{
 	font-size: 25px;
 }
 
-body{
-	width: 1920px;
-	height: 1080px;
-	background: rgb(238, 238, 238);
-	overflow: hidden;
+@media (min-width: @screen-lg-min) {
+	body{
+		width: 1920px;
+		height: 1080px;
+		background: rgb(238, 238, 238);
+		overflow: hidden;
+	}	
 }
 
 
