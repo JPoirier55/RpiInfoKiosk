@@ -3,7 +3,7 @@
   	<div ng-switch on="card.kind">
 		<div ng-switch-when="calendar#event">
 	        <div class="col-md-3">
-		  		<div style="color:{{card.textColor}}; padding: 15px; background:{{card.background}};" class="card-panel kodi-card">	
+		  		<div style="color:{{card.textColor}}; padding: 15px; background:{{card.background}};" class="card-panel general-card">	
 		  			<img class="img-responsive" src="{{card.icon}}" style="margin-top:25px;margin-right:15px" width="75" height="75" align="left"/>			
 					<span>			
 						<h3>{{card.summary}} is <strong style="color:{{card.dateColor}}">{{card.start.date}}</strong></h3>						
@@ -24,21 +24,21 @@
 
 		<div ng-switch-when="football">
 	        <div class="col-md-3">
-		  		<div class="card kodi-card">
-		  			<div class="football-card-header">	
-		  				<img src="https://upload.wikimedia.org/wikipedia/en/1/12/National_Football_League_2008.svg" height="100%"/>
-		  				{{card.gameDate}}
-		  			</div>
-		  			<div class="col-md-12">
-		  				<h3>		  				
-		  				<div class="col-md-5 center-card">{{card.homeTeam}}</div>
-		  				<div class="col-md-2 center-card">@</div>
-		  				<div class="col-md-5 center-card">{{card.awayTeam}}</div>
-		  				</h3>
-	  				</div>
-	  				<div class="football-card-footer">
-						<h3 class="center-card">{{card.gameTimeET}} on {{card.tvStation}}</h3>		  			
-					</div>
+		  		<div class="card general-card">
+		  				<div class="football-card-header">	
+			  				<img src="https://upload.wikimedia.org/wikipedia/en/1/12/National_Football_League_2008.svg" height="100%"/>
+			  				{{card.gameDate}}
+			  			</div>
+			  			<div class="col-md-12" style="padding-top:30px">
+			  				<div class="col-md-5 center-card football-card-image"><img src="{{card.homeTeamIcon}}"/></div>
+			  				<div class="col-md-2 center-card"><h3>@</h3></div>
+			  				<div class="col-md-5 center-card football-card-image"><img src="{{card.awayTeamIcon}}"/></div>		  				
+		  				
+		  				</div>
+		  				<div class="football-card-footer">
+							{{card.gameTimeET}} on {{card.tvStation}}		  			
+						</div>
+					
 				</div>  
 		  	</div>
 	    </div>
@@ -46,7 +46,7 @@
 
 	    <div ng-switch-default>	        
 			<div class="col-md-3">
-		  		<div class="card kodi-card">		
+		  		<div class="card general-card">		
 					<div class="card-image">
 						<img src="{{card.art['tvshow.banner']}}" style="width:100%"/>
 						<div class="kodi-content">

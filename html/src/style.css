@@ -24,11 +24,12 @@ body{
 
 
 /* Kodi */
-.kodi-card{
+.general-card {
 	height:375px;
 	overflow:hidden;
 	text-align: left; 
 }
+
 .kodi-content{
 	padding:15px;
 }
@@ -73,11 +74,16 @@ body{
 
 /* Forecast */
 .forecast-card{
-	width: 170px;	
+	width: 170px;
+
 }
 
 .football-card{
+	align-items: center;
+}
 
+.football-card-image{
+	height:100%;
 }
 
 .football-card-header {
@@ -87,8 +93,10 @@ body{
 	text-align: center;
 	font-size: 3.5em;
 }
+
 .football-card-footer {
-	margin-top: 50px;
+	text-align: center;
+	font-size: 4em;	
 }
 
 h5{

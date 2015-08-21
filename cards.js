@@ -22,7 +22,7 @@ function getCards(serverCallback){
     	function(callback) {
     		//Any cal events?
 			calendar.getHolidays(function(calEvent){
-				if(typeof calEvent !== 'undefined'){
+				if(typeof calEvent !== 'undefined' && patsGame.length > 0){
 					cards.push(calEvent);
 				}
 				callback();
@@ -30,7 +30,7 @@ function getCards(serverCallback){
     	},
     	function(callback) { 
 			football.getNextPatsGame(function(patsGame){
-				if(typeof patsGame !== 'undefined'){
+				if(typeof patsGame !== 'undefined' && patsGame.length > 0){
 					cards.push(patsGame);
 				}
 				callback();

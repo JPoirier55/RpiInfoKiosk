@@ -3,6 +3,12 @@ var util = require('util');
 var moment = require('moment');
 var apiKey = "ejwqdwezs7xi";
 var baseUrl = "http://www.fantasyfootballnerd.com/service/schedule/json/ejwqdwezs7xi";
+var path = require('path');
+
+
+var MIN_DAYS_FOR_GAME = 5;
+var ICON_URL = "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/scoreboard/%s.png&h=100"
+
 fs = require('fs');
 teamsDictionary = {  
       "ARI" : {          
@@ -146,23 +152,28 @@ module.exports = {
 
 
 function getNextPatsGame(callback){
- //   fs.readFile('./nfl_2015_schedule.json', 'utf8', function (err,data) {
-	//   if (err) {
-	//     return console.log(err);
-	//   }
-	//   var footballSchedule = JSON.parse(data);
-	//   findPatsGame(footballSchedule.Schedule, callback);
-	// });
-	
 
-	utils.downloadFile(baseUrl, function(data){
-		var footballSchedule = JSON.parse(data);	
-		callback(findPatsGame(footballSchedule.Schedule));
-	});
+   var filePath = path.join(__dirname, 'nfl_2015_schedule.json');
+
+   fs.readFile(filePath, {encoding: 'utf-8'}, function(err,data){
+       if (!err){
+         var footballSchedule = JSON.parse(data);
+         callback(findPatsGame(footballSchedule.Schedule));
+       }else{
+           console.log(err);
+           callback();
+       }
+
+   });
+
+	// utils.downloadFile(baseUrl, function(data){
+	// 	var footballSchedule = JSON.parse(data);	
+	// 	callback(findPatsGame(footballSchedule.Schedule));
+	// });
 }
 
 
-function findPatsGame(schedule, callback){
+function findPatsGame(schedule){
 	var today = new moment();
 	for(var i=0; i<schedule.length; i++){
 		var homeTeam = schedule[i].homeTeam;
@@ -170,29 +181,14 @@ function findPatsGame(schedule, callback){
 
 		var gameDate = new moment(schedule[i].gameDate);		
       var daysDiff = gameDate.diff(today, 'days');
-      if(daysDiff > 0 && daysDiff < 5 && (homeTeam === "NE" || awayTeam === "NE")){
+      if(daysDiff > 0 && daysDiff < MIN_DAYS_FOR_GAME && (homeTeam === "NE" || awayTeam === "NE")){
 			schedule[i].kind = "football";
-			getGoolgeImageResult(teamsDictionary[schedule[i].homeTeam].fullName, function (url){
-				schedule[i].awayTeamLogo = url;
-            schedule[i].gameDate = gameDate.format("ddd, MMM Do");
-				callback(schedule[i]);	
-			});
+			schedule[i].awayTeamIcon = util.format(ICON_URL, schedule[i].awayTeam);          
+         schedule[i].homeTeamIcon = util.format(ICON_URL, schedule[i].homeTeam);          
+
 			return schedule[i];	
 		}			
 	}
 
-   //Nuttin
-   //callback();
-}
-
-
-function getGoolgeImageResult(team, callback){
-	var googleImgApiUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s%s";
-	googleImgApiUrl = util.format(googleImgApiUrl, team, " wikipedia nfl logo svg 200px");	
-	utils.downloadFileSSL(googleImgApiUrl, function(json){
-		json = JSON.parse(json);		
-		//console.log(team + " " + json.responseData.results[0].url);
-		callback(json.responseData.results[0].url);	
-
-	});
+   return [];   
 }
