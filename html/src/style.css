@@ -7,6 +7,12 @@ ul{
 	font-size: 25px;
 }
 
+body{
+	background: rgb(238, 238, 238);
+}	
+
+
+
 @media (min-width: @screen-lg-min) {
 	body{
 		width: 1920px;
