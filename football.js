@@ -7,7 +7,7 @@ var path = require('path');
 
 
 var MIN_DAYS_FOR_GAME = 5;
-var ICON_URL = "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/scoreboard/%s.png&h=100"
+var ICON_URL = "http://a.espncdn.com/combiner/i?img=/i/teamlogos/nfl/500/scoreboard/%s.png&h=100";
 
 fs = require('fs');
 teamsDictionary = {  
@@ -174,7 +174,7 @@ function getNextPatsGame(callback){
 
 
 function findPatsGame(schedule){
-	var today = new moment();
+	var today = new moment();   
 	for(var i=0; i<schedule.length; i++){
 		var homeTeam = schedule[i].homeTeam;
 		var awayTeam = schedule[i].awayTeam;
@@ -183,12 +183,11 @@ function findPatsGame(schedule){
       var daysDiff = gameDate.diff(today, 'days');
       if(daysDiff > 0 && daysDiff < MIN_DAYS_FOR_GAME && (homeTeam === "NE" || awayTeam === "NE")){
 			schedule[i].kind = "football";
-			schedule[i].awayTeamIcon = util.format(ICON_URL, schedule[i].awayTeam);          
-         schedule[i].homeTeamIcon = util.format(ICON_URL, schedule[i].homeTeam);          
+			schedule[i].awayTeamIcon = util.format(ICON_URL, awayTeam);          
+         schedule[i].homeTeamIcon = util.format(ICON_URL, homeTeam);          
 
 			return schedule[i];	
 		}			
 	}
-
-   return [];   
+   return undefined;   
 }
