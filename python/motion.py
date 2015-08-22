@@ -28,22 +28,25 @@ def MOTION(PIR_PIN):
 def monitorOn():
 	subprocess.call("tvservice -p | xset dpms force on | xset -dpms | xset s off | xset s noblank", shell=True)
 
+def monitorOff():
+	print "turning monitor off"
+	global MONITOR_STATE 
+	MONITOR_STATE = 0
+	subprocess.call(['tvservice','-o'])
+
 def checkMotion():
 	global LAST_MOTION_DECTECTED
 	d = datetime.now() - LAST_MOTION_DETECTED
 	print "Seconds: " + str(d.seconds)
 	if(d.seconds > 30):
-		print "turning monitor off"
-		global MONITOR_STATE 
-		MONITOR_STATE = 0
-		subprocess.call(['tvservice','-o'])
+		monitorOff()
+		
 
 #Main
 print "PIR Module Test (CTRL+C to exit)"
 print "Ready"
 
-try:    
-	checkMotion()
+try:    	
 	
 	GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=MOTION, bouncetime=500)
 	while 1:
