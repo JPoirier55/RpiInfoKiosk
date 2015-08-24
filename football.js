@@ -185,7 +185,7 @@ function findPatsGame(schedule){
 			schedule[i].kind = "football";
 			schedule[i].awayTeamIcon = util.format(ICON_URL, awayTeam);          
          schedule[i].homeTeamIcon = util.format(ICON_URL, homeTeam);          
-
+         schedule[i].gameDate = gameDate.format("ddd, MMM DD");
 			return schedule[i];	
 		}			
 	}
