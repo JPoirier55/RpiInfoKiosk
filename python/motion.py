@@ -48,12 +48,12 @@ def checkMotion():
 		
 
 def firstRun():
-	offCmds = [, "xset dpms force on", "xset -dpms", "xset s off", "xset s noblank"]
+	offCmds = ["xset dpms force on", "xset -dpms", "xset s off", "xset s noblank"]
 	for monitorCmd in offCmds:
 		subprocess.call(monitorCmd, shell=True)
 	monitorOff()
 
-	
+
 #Main
 print "PIR Module Test (CTRL+C to exit)"
 print "Ready"
