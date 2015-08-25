@@ -117,7 +117,7 @@ function addExtras(calendarEvent,callback){
 		var diff = date1.diff(now, 'days');	
 		var diffHours = date1.diff(now, 'hours');
 
-		if( diff > 2){
+		if(diff > 2 && diff <= 7){
 			calendarEvent.start.date = "in " + (date1.diff(now, 'days') + 1) + " days.";		
 		}else if(diff === 1){
 			calendarEvent.start.date = "Tommorrow";
@@ -126,10 +126,9 @@ function addExtras(calendarEvent,callback){
 				calendarEvent.start.date = "Today! at: " + date1.format('hh:mm a');			
 			}else{
 				calendarEvent.start.date = "Tommorrow";
-			}
-			
+			}			
 		}else{
-			calendarEvent.start.date = "on " + date1.format("MMM DD");						
+			calendarEvent.start.date = "on " + date1.format("ddd, MMM DD") + ".";						
 		}
 
 		if(calendarEvent.location){
