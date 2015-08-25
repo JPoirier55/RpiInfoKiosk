@@ -17,10 +17,14 @@ app.controller('weatherCtrl', function($scope, $timeout, $http){
 
             //This enables night mode!
             var stylesheet = '<link href="./src/views/night_mode.css" rel="stylesheet">';
-            var todayHour = new Date().getHours();
-            var sunsetHour = parseInt(data.astronomy.sunset.charAt(0)) + 12;            
+            var today = new Date();
             
-            if(sunsetHour - todayHour <= 0 || todayHour < 7) {
+            var minsRegex = /:(\d+)\s/;           
+            var sunset = new Date();
+            sunset.setHours(parseInt(data.astronomy.sunset.charAt(0)) + 12);                        
+            sunset.setMinutes(data.astronomy.sunset.match(minsRegex)[1]);            
+            
+            if(sunset < today) {
               $scope.nightMode = "./src/views/night_mode.css";
             } else {
               $scope.nightMode = "";              
