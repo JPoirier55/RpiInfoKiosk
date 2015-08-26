@@ -47,8 +47,8 @@ def checkMotion():
 		
 
 def firstRun():
-	monitorOn()
-	time.sleep(3)
+	#monitorOn()
+	#time.sleep(3)
 	monitorOff()
 
 
