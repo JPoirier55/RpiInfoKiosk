@@ -16,10 +16,9 @@ checking_motion = 0
 
 # Functions
 def MOTION(pin):
-    print "Motion Detected! setting time"
     global LAST_MOTION_DETECTED
     LAST_MOTION_DETECTED = datetime.now()
-    print "Monitor on"
+    print "Motion Detected! Monitor on setting time: " + LAST_MOTION_DETECTED
     monitorOn()
 
 def monitorOn():
@@ -43,7 +42,6 @@ def monitorOff():
 def checkMotion():
     global LAST_MOTION_DECTECTED
     d = datetime.now() - LAST_MOTION_DETECTED
-    print "Seconds: " + str(d.seconds)
     if(d.seconds > 30):
         monitorOff()
         
