@@ -10,7 +10,7 @@ GPIO.setup(PIR_PIN, GPIO.IN)
 
 #global
 LAST_MOTION_DETECTED = datetime.now()
-MONITOR_STATE = 0
+MONITOR_STATE = 1
 #0 = false 1=true
 checking_motion = 0
 
@@ -33,9 +33,10 @@ def monitorOn():
 
 		global MONITOR_STATE
 		MONITOR_STATE = 1
+		print "Monitor is on"
 
 def monitorOff():
-	print "turning monitor off"
+	print "Monitor is off"
 	global MONITOR_STATE 
 	MONITOR_STATE = 0
 	subprocess.call(['tvservice','-o'])
@@ -47,7 +48,6 @@ def checkMotion():
 	if(d.seconds > 30):
 		monitorOff()
 		
-
 #Main
 print "PIR Module Test (CTRL+C to exit)"
 print "Ready"
