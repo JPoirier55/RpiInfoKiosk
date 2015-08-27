@@ -29,7 +29,7 @@ def monitorOn():
 	if "off" in monitorStatus:
 		onCmds = ["tvservice -p", "xset dpms force on", "xset -dpms", "xset s off", "xset s noblank"]
 		for monitorCmd in onCmds:
-			subprocess.call(monitorCmd, shell=True)
+			print subprocess.check_output(monitorCmd, shell=True)
 
 		global MONITOR_STATE
 		MONITOR_STATE = 1
