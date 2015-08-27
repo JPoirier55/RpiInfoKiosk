@@ -26,10 +26,9 @@ def MOTION(PIR_PIN):
 def monitorOn():
 	monitorStatus = subprocess.check_output("tvservice -s", shell=True)
 	print monitorStatus
-	if "off" in monitorStatus:
-		#onCmds = ["tvservice -p", "xset dpms force on", "xset -dpms", "xset s off", "xset s noblank"]
-		#for monitorCmd in onCmds:
+	if "off" in monitorStatus:		
 		print subprocess.check_output("tvservice -p", shell=True)
+		print subprocess.check_output("xset -dpms", shell=True)
 
 		global MONITOR_STATE
 		MONITOR_STATE = 1
