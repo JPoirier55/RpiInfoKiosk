@@ -18,19 +18,21 @@ checking_motion = 0
 def MOTION(PIR_PIN):
 	global LAST_MOTION_DETECTED
 	LAST_MOTION_DETECTED = datetime.now()
-	print "Motion Detected! setting time." + LAST_MOTION_DETECTED	
-	global MONITOR_STATE
-	MONITOR_STATE = 1
+	print "Motion Detected! setting time."
+	print LAST_MOTION_DETECTED	
 	monitorOn()	
 	
 
 def monitorOn():
-	onCmds = ["tvservice -p", "xset dpms force on", "xset -dpms", "xset s off", "xset s noblank"]
 	monitorStatus = subprocess.check_output("tvservice -s", shell=True)
 	print monitorStatus
 	if "off" in monitorStatus:
+		onCmds = ["tvservice -p", "xset dpms force on", "xset -dpms", "xset s off", "xset s noblank"]
 		for monitorCmd in onCmds:
 			subprocess.call(monitorCmd, shell=True)
+
+		global MONITOR_STATE
+		MONITOR_STATE = 1
 
 def monitorOff():
 	print "turning monitor off"
@@ -46,18 +48,11 @@ def checkMotion():
 		monitorOff()
 		
 
-def firstRun():
-	#monitorOn()
-	#time.sleep(3)
-	monitorOff()
-
-
 #Main
 print "PIR Module Test (CTRL+C to exit)"
 print "Ready"
 
-try:    	
-	firstRun()
+try:    		
 	
 	GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=MOTION, bouncetime=500)
 	while 1:
