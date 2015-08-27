@@ -108,7 +108,7 @@ function addExtras(calendarEvent,callback){
 		var now = moment();
 		var date1;
 		if(calendarEvent.creator.email === "usa__en@holiday.calendar.google.com"){
-			date1 = new moment(calendarEvent.end.date);
+			date1 = new moment(calendarEvent.start.date);
 			
 		}else{
  			date1 = new moment(calendarEvent.start.dateTime);
