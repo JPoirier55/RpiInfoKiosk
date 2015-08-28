@@ -94,9 +94,13 @@ body{
 	font-size: 3em;
 }
 
+.football-card-header-icon {
+	padding:10px;
+}
 .football-card-footer {
 	text-align: center;
-	font-size: 4em;	
+	font-size: 4em;
+	padding:30px;	
 }
 
 h5{

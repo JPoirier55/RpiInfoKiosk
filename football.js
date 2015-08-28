@@ -138,7 +138,8 @@ teamsDictionary = {
       },
       "WAS" : {           
          fullName:"Washington Redskins",
-         shortName:"Washington"
+         shortName:"Washington",
+         correctName : "wsh"
       }  
 };
 
@@ -175,18 +176,28 @@ function getNextPatsGame(callback){
 
 function findPatsGame(schedule){
 	var today = new moment();   
+      
 	for(var i=0; i<schedule.length; i++){
 		var homeTeam = schedule[i].homeTeam;
 		var awayTeam = schedule[i].awayTeam;
 
 		var gameDate = new moment(schedule[i].gameDate);		
       var daysDiff = gameDate.diff(today, 'days');
+
       if(daysDiff > 0 && daysDiff < MIN_DAYS_FOR_GAME && (homeTeam === "NE" || awayTeam === "NE")){
 			schedule[i].kind = "football";
+         if(teamsDictionary[homeTeam].correctName){
+            homeTeam = teamsDictionary[homeTeam].correctName
+         }
+
+         if(teamsDictionary[awayTeam].correctName){
+            awayTeam = teamsDictionary[awayTeam].correctName
+         }
+
 			schedule[i].awayTeamIcon = util.format(ICON_URL, awayTeam);          
          schedule[i].homeTeamIcon = util.format(ICON_URL, homeTeam);          
          schedule[i].gameDate = gameDate.format("ddd, MMM DD");
-			return schedule[i];	
+         return schedule[i];  
 		}			
 	}
    return undefined;   
