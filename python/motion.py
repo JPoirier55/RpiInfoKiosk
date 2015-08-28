@@ -54,6 +54,9 @@ print("Ready")
 
 try:
     GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=MOTION, bouncetime=500)
+    monitorOff()
+    
+    
     while 1:
         if(MONITOR_STATE == 1):
             checkMotion()
