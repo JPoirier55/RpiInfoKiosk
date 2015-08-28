@@ -28,6 +28,7 @@ def monitorOn():
     print(monitorStatus)
     if "off" in monitorStatus:
         print(subprocess.check_output("tvservice -p", shell=True))# turn on montior
+        print(subprocess.check_output("xset dpms force on", shell=True))# turn on montior         
         print(subprocess.check_output("xset -dpms", shell=True))# disable engergy saving
         print(subprocess.check_output("xset s noblank", shell=True))# disable screensaver        
 
