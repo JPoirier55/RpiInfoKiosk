@@ -24,11 +24,12 @@ app.controller('weatherCtrl', function($scope, $timeout, $http){
             sunset.setHours(parseInt(data.astronomy.sunset.charAt(0)) + 12);                        
             sunset.setMinutes(data.astronomy.sunset.match(minsRegex)[1]);            
             
-            if(sunset < today) {
+            if(sunset < today || today.getHours() < 7) {
               $scope.nightMode = "./src/views/night_mode.css";
             } else {
               $scope.nightMode = "";              
             }
+
             
             
           }).
