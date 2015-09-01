@@ -28,6 +28,10 @@ function getEpisodeCards(numOfEpisodes, callback){
 	};
 
 	utils.downloadFileWithOptions(options, function(data){
+		if(!data){
+			callback([]);
+			return;
+		}
 		var getRecentEpisodesObj = JSON.parse(data);
 		getEpisodesMeta(numOfEpisodes , getRecentEpisodesObj.result.episodes, function(data){
 			callback(data);

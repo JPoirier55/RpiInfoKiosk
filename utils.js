@@ -20,7 +20,7 @@ function downloadFile(url, callback){
 	    });
 	}).on('error', function(e) {
 		console.log("Got error: ", e);
-		callback(e);
+		callback("");
 	});
 }
 
@@ -29,14 +29,13 @@ function downloadFileSSL(url, callback){
         var body = '';
         res.on('data', function(chunk) {
             body += chunk;
-
         });
         res.on('end', function() {
             callback(body);
         });
     }).on('error', function(e) {
         console.log("Got error: ", e);
-        callback(e);
+        callback("");
     });
 }
 
@@ -58,7 +57,7 @@ function downloadFileWithOptions(options, callback){
 
     req.on('error', function(err) {
         res.send('error: ' + err.message);
-        callback(err.message);
+        callback("");
     });
 
     req.end();
