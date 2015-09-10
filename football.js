@@ -181,10 +181,12 @@ function findPatsGame(schedule){
 		var homeTeam = schedule[i].homeTeam;
 		var awayTeam = schedule[i].awayTeam;
 
-		var gameDate = new moment(schedule[i].gameDate);		
+		//var gameDate = new moment(schedule[i].gameDate);
+      var gameDate = new moment(schedule[i].gameDate + " " + schedule[i].gameTimeET ,'MM-DD-YYYY h:mm a')
+      
+      console.log(gameDate.toDate());
       var daysDiff = gameDate.diff(today, 'days');
-
-      if(daysDiff > 0 && daysDiff < MIN_DAYS_FOR_GAME && (homeTeam === "NE" || awayTeam === "NE")){
+      if(daysDiff < MIN_DAYS_FOR_GAME && (homeTeam === "NE" || awayTeam === "NE")){
 			schedule[i].kind = "football";
          if(teamsDictionary[homeTeam].correctName){
             homeTeam = teamsDictionary[homeTeam].correctName
@@ -195,8 +197,13 @@ function findPatsGame(schedule){
          }
 
 			schedule[i].awayTeamIcon = util.format(ICON_URL, awayTeam);          
-         schedule[i].homeTeamIcon = util.format(ICON_URL, homeTeam);          
-         schedule[i].gameDate = gameDate.format("ddd, MMM DD");
+         schedule[i].homeTeamIcon = util.format(ICON_URL, homeTeam);
+         console.log(daysDiff);
+         if(daysDiff == 0){
+            schedule[i].gameDate = "Today";
+         }else{
+            schedule[i].gameDate = gameDate.format("ddd, MMM DD");            
+         }
          return schedule[i];  
 		}			
 	}
