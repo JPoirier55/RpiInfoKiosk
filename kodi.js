@@ -2,11 +2,11 @@ var utils = require('./utils.js');
 var calendar = require('./calendar.js');
 var async = require('async');
 var moment = require('moment');
+var util = require('util');
 var username = 'admin';
 var password = 'desm';
 var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 var baseUrl = '192.168.1.2';
-
 //var baseUrl = 'konecny.ddns.net';
 
 module.exports = {
@@ -62,7 +62,8 @@ function getEpisodesMeta(numOfEpisodes, recentEpisodesObj, resCallback){
 
 
 function episodeDetails(episodeId, callback){
-	var path = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetEpisodeDetails","params":{"episodeid":'+episodeId+',"properties":["plot","rating","showtitle","season","episode","art","firstaired"]}}"}';
+	var path = '/jsonrpc?request={"jsonrpc":"2.0","id":1,"method":"VideoLibrary.GetEpisodeDetails","params":{"episodeid":%s,"properties":["plot","rating","showtitle","season","episode","art","firstaired"]}}"}';
+	path = util.format(path, episodeId);
 
 	var options = {
 	    host: baseUrl,
