@@ -183,9 +183,12 @@ function findPatsGame(schedule){
 
 		var gameDate = new moment(schedule[i].gameDate);
 
-      console.log(gameDate.toDate());
       var daysDiff = gameDate.diff(today, 'days');
       if(daysDiff < MIN_DAYS_FOR_GAME && (homeTeam === "NE" || awayTeam === "NE")){
+         if(daysDiff < 0){
+            continue;
+         }
+
 			schedule[i].kind = "football";
          if(teamsDictionary[homeTeam].correctName){
             homeTeam = teamsDictionary[homeTeam].correctName;
@@ -202,7 +205,7 @@ function findPatsGame(schedule){
          if(daysDiff === 0){
             schedule[i].gameDate = "Today";
          }else{
-            schedule[i].gameDate = gameDate;
+            schedule[i].gameDate = gameDate.format("ddd, MMM DD");
          }
 
          return schedule[i];  
