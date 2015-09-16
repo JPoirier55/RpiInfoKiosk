@@ -5,7 +5,9 @@
 ## Setup
 1. Get node
 
-  1. `sudo apt-get install node`
+  1. install node
+    1. wget http://node-arm.herokuapp.com/node_latest_armhf.deb 
+    2. sudo dpkg -i node_latest_armhf.deb
   2. `sudo apt-get install chromium-browser`
 
 2. Once node/npm is installed run to install all dependecies. 
