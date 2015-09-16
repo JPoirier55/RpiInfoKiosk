@@ -9,6 +9,7 @@
     1. wget http://node-arm.herokuapp.com/node_latest_armhf.deb 
     2. sudo dpkg -i node_latest_armhf.deb
   2. `sudo apt-get install chromium-browser`
+  3. `sudo apt-get install x11-xserver-utils`
 
 2. Once node/npm is installed run to install all dependecies. 
 
