@@ -25,17 +25,21 @@ function getHolidays(callback){
 
 function getCalendarJson(callback){
 	var dateISO = new Date().toISOString();
-	var endDateISO = new Date();
 	var daysOut = 14;
 
-	endDateISO.setDate(endDateISO.getDate() + daysOut);
-
+	
 
 
 	var calendarsJSON = [];
 	var calendars = ["usa__en%40holiday.calendar.google.com","konecnyna@gmail.com"];
 	async.eachSeries(calendars, function(calendar, callback) {
+		var endDateISO = new Date();
+		var days = calendar.indexOf("konecny") ? daysOut : 3;
+		endDateISO.setDate(endDateISO.getDate() + days);
+
 		var url = util.format("https://www.googleapis.com/calendar/v3/calendars/%s/events?key=%s&timeMin=%s&timeMax=%s&singleEvents=%s&orderBy=%s",calendar, calApiKey,dateISO,endDateISO.toISOString(),"true","startTime");	
+		
+		console.log(days + "|||||" +url);
 		utils.downloadFileSSL(url, function(json){
 			json = JSON.parse(json);
 			calendarsJSON.push(json.items[0]);
