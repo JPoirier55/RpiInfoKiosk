@@ -13,7 +13,7 @@
 2. Once node/npm is installed run to install all dependecies. 
 
   1. `npm install`
-  2. npm install forever -g
+  2. `npm install forever -g`
 
 3. Link the `autostart/autostart` file to `~/.config/lxsession/LXDE-pi/autostart` to have the server automagically start when the pi boots.
 
