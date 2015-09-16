@@ -5,7 +5,7 @@
 ## Setup
 1. Get node
 
-  1. `sudo apt-get install node`
+  1. [install node](http://joshondesign.com/2013/10/23/noderpi)
   2. `sudo apt-get install chromium-browser`
 
 2. Once node/npm is installed run to install all dependecies. 
