@@ -3,10 +3,10 @@ var calendar = require('./calendar.js');
 var async = require('async');
 var moment = require('moment');
 var util = require('util');
-var username = 'admin';
+var username = 'kodi';
 var password = 'desm';
 var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
-var baseUrl = '192.168.1.2';
+var baseUrl = '192.168.1.95';
 //var baseUrl = 'konecny.ddns.net';
 
 module.exports = {
@@ -67,7 +67,7 @@ function episodeDetails(episodeId, callback){
 
 	var options = {
 	    host: baseUrl,
-	    port: 8082,
+	    port: 8080,
 	    path: path,
 	    method: 'GET',
 	    headers: {

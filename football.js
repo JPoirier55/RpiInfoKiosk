@@ -202,7 +202,7 @@ function findPatsGame(schedule){
          schedule[i].homeTeamIcon = util.format(ICON_URL, homeTeam);
          
 
-         if(daysDiff === 0){
+         if(daysDiff < 0){
             schedule[i].gameDate = "Today";
          }else{
             schedule[i].gameDate = gameDate.format("ddd, MMM DD");
