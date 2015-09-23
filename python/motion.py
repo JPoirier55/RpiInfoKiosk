@@ -32,7 +32,6 @@ def monitorOn():
         #print(subprocess.check_output("xset s noblank", shell=True))# disable screensaver
         #print(subprocess.check_output("xset s off", shell=True))# disable screensaver                
         #print(subprocess.check_output("xset -dpms", shell=True))# disable engergy saving
-        xset dpms force on
 
         global MONITOR_STATE
         MONITOR_STATE = 1
