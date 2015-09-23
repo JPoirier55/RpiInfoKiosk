@@ -3,7 +3,7 @@ var calendar = require('./calendar.js');
 var async = require('async');
 var moment = require('moment');
 var util = require('util');
-var username = 'kodi';
+var username = 'admin';
 var password = 'desm';
 var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 var baseUrl = '192.168.1.2';
@@ -67,7 +67,7 @@ function episodeDetails(episodeId, callback){
 
 	var options = {
 	    host: baseUrl,
-	    port: 8080,
+	    port: 8082,
 	    path: path,
 	    method: 'GET',
 	    headers: {

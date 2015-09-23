@@ -38,7 +38,6 @@ function getCalendarJson(callback){
 		endDateISO.setDate(endDateISO.getDate() + days);
 
 		var url = util.format("https://www.googleapis.com/calendar/v3/calendars/%s/events?key=%s&timeMin=%s&timeMax=%s&singleEvents=%s&orderBy=%s",calendar, calApiKey,dateISO,endDateISO.toISOString(),"true","startTime");	
-		console.log(url);
 		utils.downloadFileSSL(url, function(json){
 			json = JSON.parse(json);
 			calendarsJSON.push(json.items[0]);
