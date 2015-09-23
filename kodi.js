@@ -6,7 +6,7 @@ var util = require('util');
 var username = 'kodi';
 var password = 'desm';
 var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
-var baseUrl = '192.168.1.95';
+var baseUrl = '192.168.1.2';
 //var baseUrl = 'konecny.ddns.net';
 
 module.exports = {
