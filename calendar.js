@@ -110,14 +110,14 @@ function addExtras(calendarEvent,callback){
 		var now = moment();
 		var date1;
 		if(calendarEvent.creator.email === "usa__en@holiday.calendar.google.com"){
-			date1 = new moment(calendarEvent.start.date);
-			
+			date1 = new moment(calendarEvent.start.date);			
 		}else{
  			date1 = new moment(calendarEvent.start.dateTime);
 		}
 		
 		var diff = date1.diff(now, 'days');	
 		var diffHours = date1.diff(now, 'hours');
+		var isHolidayCal = calendarEvent.creator.email === "usa__en@holiday.calendar.google.com";
 
 		if(diff > 2 && diff <= 7){
 			calendarEvent.start.date = "in " + (date1.diff(now, 'days') + 1) + " days.";		
@@ -125,7 +125,12 @@ function addExtras(calendarEvent,callback){
 			calendarEvent.start.date = "Tommorrow";
 		}else if(diff === 0){
 			if(diffHours <= 12){
-				calendarEvent.start.date = "Today! at: " + date1.format('hh:mm a');			
+				if(isHolidayCal){
+					calendarEvent.summary = calendarEvent.summary.replace('(regional holiday)','');
+					calendarEvent.start.date = "Today!";
+				}else{
+					calendarEvent.start.date = "Today! at: " + date1.format('hh:mm a');			
+				}
 			}else{
 				calendarEvent.start.date = "Tommorrow";
 			}			
@@ -139,7 +144,7 @@ function addExtras(calendarEvent,callback){
 			calendarEvent.map_src = util.format(mapSrc, mapsApiKey, loc);	
 		}
 
-		if(calendarEvent.creator.email === "usa__en@holiday.calendar.google.com"){
+		if(isHolidayCal){
 			getGoolgeImageResult(calendarEvent, function(){
 				callback(calendarEvent);
 			});
