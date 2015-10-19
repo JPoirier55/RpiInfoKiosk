@@ -44,7 +44,11 @@ app.get('/api/v1/football', function(req, res) {
 });
 
 
-
+app.get('/api/v1/kodi', function(req, res) {    
+   kodi.getEpisodeCards(8, function(callback){       
+      res.json(callback);
+   });
+});
 
 app.use(express.static(__dirname + '/html'));
 app.listen(8080);

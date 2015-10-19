@@ -12,6 +12,9 @@ var baseUrl = '192.168.1.2';
 module.exports = {
   getEpisodeCards: function (numOfEpisodes, callback){
   	getEpisodeCards(numOfEpisodes, callback);
+  },
+  getEpisodeCards: function (numOfEpisodes, callback){
+  	getEpisodeCards(numOfEpisodes,callback);
   }
 };
 
