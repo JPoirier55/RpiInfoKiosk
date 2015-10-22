@@ -3,4 +3,4 @@
 @xset -dpms
 @xset dmps force on
 
-@sh /home/pi/Github/RpiInfoKiosk/autostart/start.sh
+@sh sudo start kiosk
