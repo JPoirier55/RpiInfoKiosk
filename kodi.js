@@ -93,7 +93,8 @@ function episodeDetails(episodeId, callback){
 		deets.firstaired = new moment(deets.firstaired).format("ddd, MMM Do");
 		deets.kind = "kodi";
 
-		if(deets.art.length > 0){
+
+		if( (Object.keys(deets.art).length) > 0){
 			deets.art['tvshow.poster'] = decodeURIComponent(deets.art['tvshow.poster'].match(pattern)[1]);
 			deets.art['tvshow.fanart'] = decodeURIComponent(deets.art['tvshow.fanart'].match(pattern)[1]);
 			deets.art['tvshow.banner'] = decodeURIComponent(deets.art['tvshow.banner'].match(pattern)[1]);
