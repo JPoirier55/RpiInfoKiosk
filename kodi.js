@@ -3,22 +3,28 @@ var calendar = require('./calendar.js');
 var async = require('async');
 var moment = require('moment');
 var util = require('util');
+var ping = require('ping');
+
 var username = 'kodi';
 var password = 'desm';
 var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 var baseUrl = '192.168.1.2';
-//var baseUrl = 'konecny.ddns.net';
+var externalUrl = 'konecny.ddns.net';
 
 module.exports = {
-  getEpisodeCards: function (numOfEpisodes, callback){
-  	getEpisodeCards(numOfEpisodes, callback);
-  },
-  getEpisodeCards: function (numOfEpisodes, callback){
-  	getEpisodeCards(numOfEpisodes,callback);
+  getEpisodeCards: function (numOfEpisodes, callback){  	
+  	ping.sys.probe(baseUrl, function(isAlive){
+        if(!isAlive){
+        	baseUrl = externalUrl;
+        }
+        getEpisodeCards(numOfEpisodes, callback);
+    });
+  	
   }
 };
 
 function getEpisodeCards(numOfEpisodes, callback){
+
 	var options = {
 	    host: baseUrl,
 	    port: 8082,
