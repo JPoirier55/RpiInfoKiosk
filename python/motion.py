@@ -27,15 +27,14 @@ def monitorOn():
     monitorStatus = subprocess.check_output("tvservice -s", shell=True)
     print(monitorStatus)
     if "off" in monitorStatus:
-        print(subprocess.check_output("tvservice -p", shell=True))# turn on montior
-        print(subprocess.check_output("xset s noblank", shell=True))# disable screensaver
-        print(subprocess.check_output("xset s off", shell=True))# disable screensaver                
-        print(subprocess.check_output("xset -dpms", shell=True))# disable engergy saving
-        print(subprocess.check_output("xset dmps force on", shell=True))# disable screensaver
-
+        subprocess.check_output("tvservice -p", shell=True)# turn on montior
+        subprocess.check_output("xdotool key x", shell=True)# disable screensaver        
+        #print(subprocess.check_output("xset s noblank", shell=True))# disable screensaver
+        #print(subprocess.check_output("xset s off", shell=True))# disable screensaver                
+        #print(subprocess.check_output("xset -dpms", shell=True))# disable engergy saving
+        #print(subprocess.check_output("xset dmps force on", shell=True))# disable screensaver
         global MONITOR_STATE
         MONITOR_STATE = 1
-        print("Monitor is on")
 
 def monitorOff():
     global MONITOR_STATE
@@ -45,7 +44,7 @@ def monitorOff():
 def checkMotion():
     global LAST_MOTION_DECTECTED
     d = datetime.now() - LAST_MOTION_DETECTED
-    print("Seconds: " + str(d.seconds))
+    #print("Seconds: " + str(d.seconds))
     if(d.seconds > 30):
         monitorOff()
 
