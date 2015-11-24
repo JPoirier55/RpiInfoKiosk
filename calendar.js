@@ -4,12 +4,8 @@ var async = require('async');
 var moment = require('moment');
 var mapsApiKey = "AIzaSyCSEX5yOHaHY6-PqplgRG6SEp5tC8wUzko";
 var calApiKey = "AIzaSyBLGmX9Y1vVcFLtE48hA1tPg-4MMhRpcYU";
-
 var mapSrc = "https://www.google.com/maps/embed/v1/place?key=%s&q=%s";
 
-var monthNames = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
-];
 
 module.exports = {
   getHolidays: function (callback) {
@@ -27,11 +23,9 @@ function getCalendarJson(callback){
 	var dateISO = new Date().toISOString();
 	var daysOut = 14;
 
-	
-
-
 	var calendarsJSON = [];
 	var calendars = ["usa__en%40holiday.calendar.google.com","konecnyna@gmail.com"];
+
 	async.eachSeries(calendars, function(calendar, callback) {
 		var endDateISO = new Date();
 		var days = calendar.indexOf("konecny") ? daysOut : 3;
@@ -77,9 +71,6 @@ function getClosestEvent(calendars){
 
 function addExtras(calendarEvent,callback){
 	if(calendarEvent !== undefined){
-		// var eventDate = new Date(calendarEvent.start.dateTime);
-		// console.log(calendarEvent.start.dateTime);
-		// var currentMonth = (new Date().getMonth()) + 1;
 		var now = moment();
 		var date1;
 		if(calendarEvent.creator.email === "usa__en@holiday.calendar.google.com"){
@@ -124,8 +115,6 @@ function addExtras(calendarEvent,callback){
 
 		if(diff > 2 && diff <= 7){
 			calendarEvent.start.date = "in " + (date1.diff(now, 'days') + 1) + " days.";		
-		}else if(diff === 1){
-			calendarEvent.start.date = "Tommorrow";
 		}else if(diff === 0){
 			if(diffHours <= 12){
 				if(isHolidayCal){
