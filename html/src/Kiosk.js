@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngSanitize']);
+var app = angular.module('myApp', ['ngSanitize','angular-skycons']);
 
 var nightMode = document.createElement('link');
 nightMode.rel = "stylesheet";
@@ -9,24 +9,29 @@ app.controller('weatherCtrl', function($scope, $timeout, $http){
     $scope.data = [];
     $scope.nightMode = "";
     
+    $scope.CurrentWeather = {
+        forecast: {
+            icon: "snow",            
+        }
+    };
+    
     var radarImages = [];
     (function tick() {
         $http.get('api/v1/weather').
           success(function(data, status, headers, config) {
-            $scope.data = data;
-            radarImages = data.radar_imgs;
+            $scope.data = data;            
+            radarImages = data.currently.imgs;
             //15 Mins
             $timeout(tick, 1000*60*15);
 
 
             //This enables night mode!
-            var stylesheet = '<link href="./src/views/night_mode.css" rel="stylesheet">';
             var today = new Date();
             
             var minsRegex = /:(\d+)\s/;           
             var sunset = new Date();
-            sunset.setHours(parseInt(data.astronomy.sunset.charAt(0)) + 12);                        
-            sunset.setMinutes(data.astronomy.sunset.match(minsRegex)[1]);            
+            sunset.setHours(parseInt(data.currently.sunsetTime.charAt(0)) + 12);                        
+            sunset.setMinutes(data.currently.sunsetTime.match(minsRegex)[1]);            
             
             if(sunset < today || today.getHours() < 7) {            
               var head = angular.element(document.querySelector('head'));

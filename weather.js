@@ -1,22 +1,59 @@
 var http = require('http');
 var util = require('util');
+var moment = require('moment');
+var utils = require('./utils.js');
 //Use util.format
 var imgBaseUrl = 'http://l.yimg.com/a/i/us/we/52/%s.gif';
 module.exports = {
-  getWeather: function (callback) {
+  getYahooWeather: function (callback) {
   	getYahooWeather(10014, callback);
   },
-  getToolbarWeather: function (callback) {
-    getToolbarWeather(10014, callback);
+  getForecastIOWeather: function (callback) {
+    getForecastIOWeather(callback);
   }
 };
 
-function getToolbarWeather(zipcode, callback){
-	var forecast = 'http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22'+zipcode+'%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys';
-	downloadFile(forecast, function(jsonStr){
-		parseWeatherToolbarJson(jsonStr, callback);
+
+
+function getForecastIOWeather(callback){
+	var forecast = 'https://api.forecast.io/forecast/ab4397914a446e55d16d43db59026d56/40.733860,-74.004998';
+	utils.downloadFileSSL(forecast, function(jsonStr){
+		callback(formatForecastIOData(JSON.parse(jsonStr)));
 	});
 }
+
+
+function formatForecastIOData(data){
+	data.currently.humidity = data.currently.humidity * 100;
+	data.currently.imgs = ["http://images.webcamgalore.com/5943-current-webcam-New-York-City-New-York.jpg?time=" + new Date(),"http://images.intellicast.com/WxImages/RadarLoop/hfd_None_anim.gif"];
+	
+
+	for(var i=0; i<data.daily.data.length; i++){
+		var currentItem = data.daily.data[i];
+		currentItem.time = moment(currentItem.time*1000).format('ddd');
+		currentItem.temperatureMax = Math.round(currentItem.temperatureMax);
+		currentItem.temperatureMin = Math.round(currentItem.temperatureMin);
+
+		if(i === 0){
+			data.currently.sunriseTime = moment(currentItem.sunriseTime*1000).format('hh:mm a');
+			data.currently.sunsetTime = moment(currentItem.sunsetTime*1000).format('hh:mm a');
+		}
+	}
+	return data;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//YAHOO.
 
 
 function getYahooWeather(zipcode, callback){
@@ -24,7 +61,6 @@ function getYahooWeather(zipcode, callback){
 	downloadFile(forecast, function(jsonStr){
 		parseWeatherToolbarJson(jsonStr, callback);
 	});
-
 }
 
 function weatherObject(condition, currentTemp, location, radarImgs, hum, forecast,astronomy, wind){

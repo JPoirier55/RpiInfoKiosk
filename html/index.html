@@ -9,7 +9,8 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
     <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-sanitize.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-sanitize.js"></script>    
+    <script src="./src/angular-skycons.min.js"></script>
   
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <script src="./src/Kiosk.js"></script>
@@ -24,8 +25,7 @@
   </head>
 
   <body layout="column">
-    
-      
+
       <!-- Content -->  
       <div class="row" style="margin:0px">
         <div class="col-md-6">
@@ -34,7 +34,7 @@
 
         <div class="col-md-6" >
           <div ng-include="'src/views/mta.html'" ng-controller="mtaCtrl" class="text-center"> </div> 
-          <div ng-include="'src/views/forecast.html'" ng-controller="weatherCtrl" class="text-center"></div>   
+          <div ng-include="'src/views/forecastio.html'" ng-controller="weatherCtrl" class="text-center"></div>   
         </div>
       </div>
 
@@ -42,6 +42,7 @@
         <div ng-controller="cardsCtrl" class="col-md-12">
           <div ng-include="'src/views/cards.html'"></div>   
         </div>
-      </div>    
+      </div>
+
   </body>
 </html>

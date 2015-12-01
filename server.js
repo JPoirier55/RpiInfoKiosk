@@ -13,7 +13,12 @@ var chromeKiosk = '/usr/bin/chromium --kiosk --ignore-certificate-errors --disab
 
 
 app.get('/api/v1/weather', function(req, res) {    
- weather.getToolbarWeather(function(callback){
+ weather.getForecastIOWeather(function(callback){
+      res.json(callback);
+   });
+});
+app.get('/api/v1/forecast', function(req, res) {    
+ weather.getForecastIOWeather(function(callback){
       res.json(callback);
    });
 });

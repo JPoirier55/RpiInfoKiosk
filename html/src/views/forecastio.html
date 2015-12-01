@@ -1,0 +1,34 @@
+<li ng-repeat="day in data.daily.data" style="display:inline-block;margin:5px;" class="card-panel forecast-card">
+	<ul style="display:block;">
+		<h2>{{day.time}}</h2>
+	</ul>
+	
+	<hr/>
+	
+	<ul style="display:block;">
+		<h4>			
+			<strong>{{day.temperatureMax}}°</strong> <font color="#3F51B5">{{day.temperatureMin}}°</font>
+		</h4>			
+	</ul>
+
+	<ul> 
+        <skycon icon="day.icon" size="64"></skycon>   		    
+	</ul>
+
+	<ul>
+		<h5>{{day.summary}}</h5>
+	</ul>
+</li>
+
+<script>
+	var icons = new Skycons(),
+	  list  = [
+	    "clear-day", "clear-night", "partly-cloudy-day",
+	    "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+	    "fog"
+	  ],
+	  i;
+	for(i = list.length; i--; )
+	icons.set(list[i], list[i]);
+	icons.play();
+</script>
