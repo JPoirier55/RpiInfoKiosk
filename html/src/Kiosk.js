@@ -1,6 +1,10 @@
 var app = angular.module('myApp', ['ngSanitize']);
 
-
+var nightMode = document.createElement('link');
+nightMode.rel = "stylesheet";
+nightMode.type = "text/css";
+nightMode.href = "./src/views/night_mode.css";
+              
 app.controller('weatherCtrl', function($scope, $timeout, $http){
     $scope.data = [];
     $scope.nightMode = "";
@@ -24,10 +28,12 @@ app.controller('weatherCtrl', function($scope, $timeout, $http){
             sunset.setHours(parseInt(data.astronomy.sunset.charAt(0)) + 12);                        
             sunset.setMinutes(data.astronomy.sunset.match(minsRegex)[1]);            
             
-            if(sunset < today || today.getHours() < 7) {
-              $scope.nightMode = "./src/views/night_mode.css";
+            if(sunset < today || today.getHours() < 7) {            
+              var head = angular.element(document.querySelector('head'));
+              head.append(nightMode);  
             } else {
-              $scope.nightMode = "";              
+              var head = angular.element(document.querySelector('head'));              
+              $('link[rel=stylesheet][href~="./src/views/night_mode.css"]').remove();
             }
 
             
@@ -43,7 +49,6 @@ app.controller('weatherCtrl', function($scope, $timeout, $http){
     (function tick() {
           $scope.radar_image = radarImages[radarImageIndex];
           radarImageIndex = (radarImageIndex === 0) ? 1 : 0;
-          //30 Mins
           $timeout(tick, 1000*15);
     })();
 
@@ -86,24 +91,27 @@ app.controller('ClockController', ['$scope', '$interval',
         };
 }]);
 
-app.controller('mtaCtrl', function($scope, $timeout, $http){
+app.controller('mtaCtrl', function($scope, $timeout, $http, $compile){
     $scope.mtaData = [];
-    
     (function tick() {
         $http.get('api/v1/mta').
           success(function(data, status, headers, config) {
             // this callback will be called asynchronously
             // when the response is available
             $scope.mtaData = data;
+          
+            if(data[0].delays){
+              angular.element('body').css('background', '#F44336');
+            }else{
+              angular.element('body').css('background', '');  
+            }
+            
             
             //5mins
             $timeout(tick, 1000*60*5);
 
           }).
-          error(function(data, status, headers, config) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-          });
+          error(function(data, status, headers, config) {});
 
     })();
 

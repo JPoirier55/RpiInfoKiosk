@@ -6,6 +6,8 @@ var redLight = "assets/redlight.png";
 var yellowLight = "assets/yellowlight.jpg";
 var greenLight = "assets/greenlight.jpg";
 
+var delays = false;
+
 module.exports = {
   getTrainStatus: function (callback) {
   	getTrainStatus(callback);
@@ -38,6 +40,9 @@ function getTrainStatus(callback){
 				var status = result.service.subway[0].line[i].status[0];
 				if(status !== "DELAYS"){
 					result.service.subway[0].line[i].text[0] = "";
+					if(name === "B" || name === "A"){
+						delays = true;
+					}
 				}else{
 					delayText = delayText + " " + subwayLineObj.text[0];
 				}
@@ -57,6 +62,7 @@ function getTrainStatus(callback){
 				
 			}
 			result.service.subway[0].status_text = delayText;
+			result.service.subway[0].delays = delays;
 		    callback(result.service.subway);
 		});
 	});
