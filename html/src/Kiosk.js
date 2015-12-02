@@ -30,8 +30,9 @@ app.controller('weatherCtrl', function($scope, $timeout, $http){
             
             var minsRegex = /:(\d+)\s/;           
             var sunset = new Date();
-            sunset.setHours(parseInt(data.currently.sunsetTime.charAt(0)) + 12);                        
+            sunset.setHours(parseInt(data.currently.sunsetTime.charAt(1)) + 12);                        
             sunset.setMinutes(data.currently.sunsetTime.match(minsRegex)[1]);            
+            
             
             if(sunset < today || today.getHours() < 7) {            
               var head = angular.element(document.querySelector('head'));

@@ -38,13 +38,14 @@ function getTrainStatus(callback){
 				}
 
 				var status = result.service.subway[0].line[i].status[0];
+				console.log(status + "--" + name);
 				if(status !== "DELAYS"){
-					result.service.subway[0].line[i].text[0] = "";
-					if(name === "B" || name === "A"){
-						delays = true;
-					}
+					result.service.subway[0].line[i].text[0] = "";					
 				}else{
 					delayText = delayText + " " + subwayLineObj.text[0];
+					if(name === "ACE" || name === "BDFM"){
+						//delays = true;
+					}
 				}
 
 				if(status == "DELAYS"){
