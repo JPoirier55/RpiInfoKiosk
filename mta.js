@@ -38,7 +38,6 @@ function getTrainStatus(callback){
 				}
 
 				var status = result.service.subway[0].line[i].status[0];
-				console.log(status + "--" + name);
 				if(status !== "DELAYS"){
 					result.service.subway[0].line[i].text[0] = "";					
 				}else{
