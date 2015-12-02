@@ -44,7 +44,7 @@ function getTrainStatus(callback){
 				}else{
 					delayText = delayText + " " + subwayLineObj.text[0];
 					if(name === "ACE" || name === "BDFM"){
-						//delays = true;
+						delays = true;
 					}
 				}
 
