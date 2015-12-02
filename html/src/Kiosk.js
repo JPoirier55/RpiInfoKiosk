@@ -40,16 +40,11 @@ app.controller('weatherCtrl', function($scope, $timeout, $http){
             } else {
               var head = angular.element(document.querySelector('head'));              
               $('link[rel=stylesheet][href~="./src/views/night_mode.css"]').remove();
-            }
-
-            
-            
+            }                      
           }).
-          error(function(data, status, headers, config) {            
-          });
+          error(function(data, status, headers, config) {});
 
     })();
-
             
     var radarImageIndex = 0;
     (function tick() {
@@ -57,10 +52,6 @@ app.controller('weatherCtrl', function($scope, $timeout, $http){
           radarImageIndex = (radarImageIndex === 0) ? 1 : 0;
           $timeout(tick, 1000*15);
     })();
-
-
-
-
 });
 
 app.controller('ClockController', ['$scope', '$interval',
@@ -111,16 +102,13 @@ app.controller('mtaCtrl', function($scope, $timeout, $http, $compile){
             }else{
               angular.element('body').css('background', '');  
             }
-            
-            
+                        
             //5mins
             $timeout(tick, 1000*60*5);
 
           }).
           error(function(data, status, headers, config) {});
-
     })();
-
 });
 
 app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
@@ -137,10 +125,7 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
             $timeout(tick, 1000*60*60*1);
 
           }).
-          error(function(data, status, headers, config) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-          });
+          error(function(data, status, headers, config) {});
 
     })();
 
