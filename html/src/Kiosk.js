@@ -97,7 +97,7 @@ app.controller('mtaCtrl', function($scope, $timeout, $http, $compile){
             // when the response is available
             $scope.mtaData = data;
           
-            if(data[0].delays){
+            if(data[0].delays.length === true){
               angular.element('body').css('background', '#F44336');
             }else{
               angular.element('body').css('background', '');  
@@ -105,6 +105,7 @@ app.controller('mtaCtrl', function($scope, $timeout, $http, $compile){
                         
             //5mins
             $timeout(tick, 1000*60*5);
+            
 
           }).
           error(function(data, status, headers, config) {});
