@@ -30,7 +30,7 @@ def monitorOn():
         subprocess.check_output("xset s noblank", shell=True)# disable screensaver
         subprocess.check_output("xset s off", shell=True)# disable screensaver                
         subprocess.check_output("xset -dpms", shell=True)# disable engergy saving
-        subprocess.check_output("xset dmps force on", shell=True)# disable screensaver
+        subprocess.check_output("xset dpms force on", shell=True)# disable screensaver
         subprocess.check_output("xdotool key x", shell=True)# disable screensaver        
         
         global MONITOR_STATE
@@ -39,7 +39,7 @@ def monitorOn():
 def monitorOff():
     global MONITOR_STATE
     MONITOR_STATE = 0
-    print(subprocess.check_output("tvservice -o", shell=True))
+    subprocess.check_output("tvservice -o", shell=True)
 
 def checkMotion():
     global LAST_MOTION_DECTECTED
