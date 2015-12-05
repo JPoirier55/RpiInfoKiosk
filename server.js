@@ -7,6 +7,7 @@ var cards = require('./cards.js');
 var football = require('./football.js');
 var app = express();
 var express = require('express');
+var fs = require('fs');
 var exec = require('child_process').exec;
 
 var chromeKiosk = '/usr/bin/chromium --kiosk --ignore-certificate-errors --disable-restore-session-state "http://localhost:9001"';
@@ -54,6 +55,13 @@ app.get('/api/v1/kodi', function(req, res) {
       res.json(callback);
    });
 });
+
+app.get('/api/v1/log', function(req, res) {    
+   fs.readFile('/home/pi/logs/motion.og', 'utf8', function(err, contents) {
+       res.json(contents);
+   });
+});
+
 
 app.use(express.static(__dirname + '/html'));
 app.listen(9001);
