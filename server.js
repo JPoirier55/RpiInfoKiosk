@@ -9,7 +9,7 @@ var app = express();
 var express = require('express');
 var exec = require('child_process').exec;
 
-var chromeKiosk = '/usr/bin/chromium --kiosk --ignore-certificate-errors --disable-restore-session-state "http://localhost:8080"';
+var chromeKiosk = '/usr/bin/chromium --kiosk --ignore-certificate-errors --disable-restore-session-state "http://localhost:9001"';
 
 
 app.get('/api/v1/weather', function(req, res) {    
@@ -56,7 +56,7 @@ app.get('/api/v1/kodi', function(req, res) {
 });
 
 app.use(express.static(__dirname + '/html'));
-app.listen(8080);
+app.listen(9001);
 
 //Start chrome!
 exec(chromeKiosk, function(error,stdout,stderr){});

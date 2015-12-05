@@ -24,7 +24,7 @@ function getForecastIOWeather(callback){
 
 
 function formatForecastIOData(data){
-	data.currently.humidity = data.currently.humidity * 100;
+	data.currently.humidity = parseInt(data.currently.humidity * 100);
 	data.currently.imgs = ["http://images.webcamgalore.com/5943-current-webcam-New-York-City-New-York.jpg?time=" + new Date(),"http://images.intellicast.com/WxImages/RadarLoop/hfd_None_anim.gif"];
 	
 	data.daily.data = data.daily.data.slice(0, 5);
