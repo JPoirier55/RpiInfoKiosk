@@ -6,7 +6,8 @@ var redLight = "assets/redlight.png";
 var yellowLight = "assets/yellowlight.jpg";
 var greenLight = "assets/greenlight.jpg";
 
-var delays = false;
+var ACE_DELAY = false;
+var BDFM_DELAY = false;
 
 module.exports = {
   getTrainStatus: function (callback) {
@@ -39,11 +40,20 @@ function getTrainStatus(callback){
 
 				var status = result.service.subway[0].line[i].status[0];
 				if(status !== "DELAYS"){
-					result.service.subway[0].line[i].text[0] = "";					
+					result.service.subway[0].line[i].text[0] = "";
+					if(name === "ACE"){
+						ACE_DELAY = false;
+					}
+					if(name === "BDFM"){
+						BDFM_DELAY = false;
+					}
 				}else{
 					delayText = delayText + " " + subwayLineObj.text[0];
-					if(name === "ACE" || name === "BDFM"){
-						delays = true;
+					if(name === "ACE"){
+						ACE_DELAY = true;
+					}
+					if(name === "BDFM"){
+						BDFM_DELAY = true;
 					}
 				}
 
@@ -62,7 +72,7 @@ function getTrainStatus(callback){
 				
 			}
 			result.service.subway[0].status_text = delayText;
-			result.service.subway[0].delays = delays;
+			result.service.subway[0].delays = BDFM_DELAY || ACE_DELAY;
 		    callback(result.service.subway);
 		});
 	});

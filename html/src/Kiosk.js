@@ -97,7 +97,7 @@ app.controller('mtaCtrl', function($scope, $timeout, $http, $compile){
             // when the response is available
             $scope.mtaData = data;
           
-            if(data[0].delays.length === true){
+            if(data[0].delays === true){
               angular.element('body').css('background', '#F44336');
             }else{
               angular.element('body').css('background', '');  
