@@ -2,6 +2,7 @@ import RPi.GPIO as GPIO
 import time
 from datetime import datetime
 import subprocess
+import sys
 
 # Vars
 GPIO.setmode(GPIO.BCM)
@@ -13,6 +14,15 @@ LAST_MOTION_DETECTED = datetime.now()
 MONITOR_STATE = 1
 # 0 = false 1=true
 checking_motion = 0
+
+class Logger(object):
+    def __init__(self, filename="Default.log"):
+        self.terminal = sys.stdout
+        self.log = open(filename, "a")
+
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
 
 # Functions
 def MOTION(PIR_PIN):
@@ -49,6 +59,7 @@ def checkMotion():
         monitorOff()
 
 # Main
+sys.stdout = Logger("/home/pi/logs/motion.log`")
 print("PIR Module Test (CTRL+C to exit)")
 print("Ready")
 
