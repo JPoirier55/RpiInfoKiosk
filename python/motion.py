@@ -53,7 +53,7 @@ def checkMotion():
         monitorOff()
 
 # Main
-print("PIR Module Test (CTRL+C to exit)", file=log)
+print("PIR Module Test (CTRL+C to exit)")
 print("Ready")
 
 try:
