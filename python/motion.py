@@ -3,7 +3,7 @@ import time
 from datetime import datetime
 import subprocess
 import sys
-log_file = open('motion.log', 'ab+')
+log_file = open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'ab+')
 
 # Vars
 GPIO.setmode(GPIO.BCM)
