@@ -23,7 +23,7 @@ def MOTION(PIR_PIN):
     LAST_MOTION_DETECTED = datetime.now()
     print("Motion Detected! setting time.")
     print(LAST_MOTION_DETECTED)
-    log_file.write("Motion Detected! setting time at: " + LAST_MOTION_DETECTED)
+    log_file.write("Motion Detected! setting time at: " + str(LAST_MOTION_DETECTED))
     monitorOn()
 
 
