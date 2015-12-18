@@ -21,19 +21,11 @@ checking_motion = 0
 
 # Functions
 def logEvent(msg):
-    try:
-        with open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'w+') as f:
-            data = json.load(f)
-            data['msg'] = msg
-            f.seek(0)
-            json.dump(data, f, indent=4)
-    except:
-        with open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'w+') as f:
-            f.write("[]")
-            data = json.load(f)
-            data['msg'] = msg
-            f.seek(0)
-            json.dump(data, f, indent=4)
+    with open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'w+') as f:
+        data = json.loads(f, '[]')
+        data['msg'] = msg
+        f.seek(0)
+        json.dump(data, f, indent=4)
 
 
 def MOTION(PIR_PIN):
