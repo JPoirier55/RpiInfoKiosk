@@ -3,7 +3,7 @@ import time
 from datetime import datetime
 import subprocess
 import sys
-log_file = open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'ab+')
+
 
 # Vars
 GPIO.setmode(GPIO.BCM)
@@ -18,12 +18,17 @@ checking_motion = 0
 
 
 # Functions
+def logEvent(msg):
+    f = open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'ab+')    
+    f.write(msg)
+    f.close()
+
 def MOTION(PIR_PIN):
     global LAST_MOTION_DETECTED
     LAST_MOTION_DETECTED = datetime.now()
     print("Motion Detected! setting time.")
     print(LAST_MOTION_DETECTED)
-    log_file.write("Motion Detected! setting time at: " + str(LAST_MOTION_DETECTED))
+    logEvent("Motion Detected! setting time at: " + str(LAST_MOTION_DETECTED))
     monitorOn()
 
 
@@ -55,7 +60,8 @@ def checkMotion():
 # Main
 print("PIR Module Test (CTRL+C to exit)")
 print("Ready")
-log_file.write("Starting python script: " + str(LAST_MOTION_DETECTED))
+logEvent("READY!!!!")
+logEvent("Starting python script: " + str(LAST_MOTION_DETECTED))
 
 try:
     GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=MOTION, bouncetime=500)
