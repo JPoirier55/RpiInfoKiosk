@@ -55,7 +55,7 @@ def checkMotion():
 # Main
 print("PIR Module Test (CTRL+C to exit)")
 print("Ready")
-log_file.write("Starting python script: " + LAST_MOTION_DETECTED)
+log_file.write("Starting python script: " + str(LAST_MOTION_DETECTED))
 
 try:
     GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=MOTION, bouncetime=500)
