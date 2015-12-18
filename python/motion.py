@@ -21,7 +21,7 @@ checking_motion = 0
 
 # Functions
 def logEvent(msg):
-    with open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'r+') as f:
+    with open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'w+') as f:
         data = json.load(f)
         data['msg'] = msg
         f.seek(0)
