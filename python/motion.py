@@ -20,7 +20,7 @@ checking_motion = 0
 # Functions
 def logEvent(msg):
     f = open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'ab+')    
-    f.write(msg)
+    f.write(msg + "\n")
     f.close()
 
 def MOTION(PIR_PIN):
