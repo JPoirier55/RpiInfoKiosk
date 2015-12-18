@@ -3,6 +3,8 @@ import time
 from datetime import datetime
 import subprocess
 import sys
+import json
+
 
 
 # Vars
@@ -19,9 +21,12 @@ checking_motion = 0
 
 # Functions
 def logEvent(msg):
-    f = open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'ab+')    
-    f.write(msg + "\n")
-    f.close()
+    with open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'r+') as f:
+    data = json.load(f)
+    data['msg'] = msg
+    f.seek(0)
+    json.dump(data, f, indent=4)
+
 
 def MOTION(PIR_PIN):
     global LAST_MOTION_DETECTED
