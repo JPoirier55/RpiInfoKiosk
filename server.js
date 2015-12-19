@@ -57,7 +57,7 @@ app.get('/api/v1/kodi', function(req, res) {
 });
 
 app.get('/api/v1/log', function(req, res) {    
-   fs.readFile('python/motion.log', 'utf8', function(err, contents) {
+   fs.readFile('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'utf8', function(err, contents) {
        res.json(contents);
    });
 });
