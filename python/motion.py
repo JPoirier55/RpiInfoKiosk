@@ -19,7 +19,7 @@ checking_motion = 0
 
 # Functions
 def logEvent(msg):
-    f = open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'ab+')    
+    f = open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'w+')    
     f.write(msg + "\n")
     f.close()
 
