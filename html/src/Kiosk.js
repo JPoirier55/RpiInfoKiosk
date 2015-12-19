@@ -131,3 +131,18 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
     })();
 
 });
+
+
+app.controller('logCtrl', function($scope, $timeout, $http, $sce){
+    $scope.cards = [];
+    
+    (function tick() {
+        $http.get('api/v1/log').
+          success(function(data, status, headers, config) {
+            $scope.logs = data.split("\n").reverse();            
+          }).
+          error(function(data, status, headers, config) {});
+
+    })();
+
+});
