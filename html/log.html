@@ -29,7 +29,7 @@
       <!-- Content -->  
       <div class="row text-center" >
         <div class="col-md-6" ng-controller="logCtrl">
-          <div ng-repeat="log in logs" >
+          <div ng-repeat="log in logs track by $index" >
             <div class="card" ng-hide="!log" style="padding:30px">
               {{log}}
             </div>

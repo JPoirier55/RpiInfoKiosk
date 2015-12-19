@@ -139,7 +139,9 @@ app.controller('logCtrl', function($scope, $timeout, $http, $sce){
     (function tick() {
         $http.get('api/v1/log').
           success(function(data, status, headers, config) {
-            $scope.logs = data.split("\n");            
+
+            $scope.logs = data.split("\n").reverse();            
+            console.log($scope.logs);
           }).
           error(function(data, status, headers, config) {});
 
