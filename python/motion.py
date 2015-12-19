@@ -21,12 +21,9 @@ checking_motion = 0
 
 # Functions
 def logEvent(msg):
-    with open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'w+') as f:
-        data = json.loads(f, '[]')
-        data['msg'] = msg
-        f.seek(0)
-        json.dump(data, f, indent=4)
-
+    f = open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'w+')    
+    f.write(msg + "\n")
+    f.close()
 
 def MOTION(PIR_PIN):
     global LAST_MOTION_DETECTED
