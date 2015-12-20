@@ -30,7 +30,6 @@ def MOTION(PIR_PIN):
     LAST_MOTION_DETECTED = datetime.now()
     print("Motion Detected! setting time.")
     print(LAST_MOTION_DETECTED)
-    logEvent("Motion Detected! setting time at: " + str(LAST_MOTION_DETECTED))
     monitorOn()
 
 
@@ -46,6 +45,8 @@ def monitorOn():
         
         global MONITOR_STATE
         MONITOR_STATE = 1
+
+        logEvent("Motion Detected! setting time at: " + str(LAST_MOTION_DETECTED))
 
 def monitorOff():
     global MONITOR_STATE
