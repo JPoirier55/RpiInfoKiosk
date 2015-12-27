@@ -20,10 +20,28 @@ checking_motion = 0
 
 
 # Functions
-def logEvent(msg):
-    f = open('/home/pi/Github/RpiInfoKiosk/python/motion.log', 'a+')    
-    f.write(msg + "\n")
-    f.close()
+def logEventToJson(time, msg):
+    logArray = readJson()       
+    event = {                   
+      'time':  time,
+      'msg' :  msg    
+    }
+    
+    logArray.append(event)          
+    out_file = open("/home/pi/Github/RpiInfoKiosk/python/motion_log.json","w+")
+    json.dump(logArray , out_file, indent=4)                                    
+    out_file.close()
+
+def readJson():
+    try:
+        in_file = open("/home/pi/Github/RpiInfoKiosk/python/motion_log.json","r")
+        logObj = json.load(in_file)
+        in_file.close()
+        # last N items in the array
+        return logObj[-200:]
+    except:
+        return []
+
 
 def MOTION(PIR_PIN):
     global LAST_MOTION_DETECTED
@@ -45,8 +63,7 @@ def monitorOn():
         
         global MONITOR_STATE
         MONITOR_STATE = 1
-
-        logEvent("Motion Detected! setting time at: " + str(LAST_MOTION_DETECTED))
+        logEventToJson(str(LAST_MOTION_DETECTED), "Motion detected")        
 
 def monitorOff():
     global MONITOR_STATE
@@ -62,9 +79,7 @@ def checkMotion():
 
 # Main
 print("PIR Module Test (CTRL+C to exit)")
-print("Ready")
-logEvent("READY!!!!")
-logEvent("Starting python script: " + str(LAST_MOTION_DETECTED))
+logEventToJson(str(LAST_MOTION_DETECTED), "Starting python script.")
 
 try:
     GPIO.add_event_detect(PIR_PIN, GPIO.RISING, callback=MOTION, bouncetime=500)
