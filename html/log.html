@@ -20,7 +20,7 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
-    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="./src/views/night_mode.css">
     
   </head>
 
@@ -31,7 +31,8 @@
         <div class="col-md-6" ng-controller="logCtrl">
           <div ng-repeat="log in logs track by $index" >
             <div class="card" ng-hide="!log" style="padding:30px">
-              {{log}}
+              <h4>{{log.msg}}:</h4>
+              <h5>{{log.time}}</h5>
             </div>
           </div>
         </div>

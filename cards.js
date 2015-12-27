@@ -4,7 +4,6 @@ var async = require('async');
 var calendar = require('./calendar.js');
 var football = require('./football.js');
 var kodi = require('./kodi.js');
-var async = require('async');
 
 module.exports = {
   getCards: function (callback) {

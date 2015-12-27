@@ -8,6 +8,7 @@ var football = require('./football.js');
 var app = express();
 var express = require('express');
 var fs = require('fs');
+var moment = require('moment');
 var exec = require('child_process').exec;
 
 var chromeKiosk = '/usr/bin/chromium --kiosk --ignore-certificate-errors --disable-restore-session-state "http://localhost:9001"';
@@ -57,8 +58,18 @@ app.get('/api/v1/kodi', function(req, res) {
 });
 
 app.get('/api/v1/log', function(req, res) {    
-   fs.readFile('/home/pi/Github/RpiInfoKiosk/python/motion_log.json', 'utf8', function(err, contents) {
-       res.json(contents);
+   //fs.readFile('/Users/nkonecny/Desktop/test.json', 'utf8', function(err, contents) {
+   fs.readFile('/home/pi/Github/RpiInfoKiosk/python/motion_log.json', 'utf8', function(err, contents) {     
+       var logs = JSON.parse(contents)
+       console.log(logs.length);
+       for(var i=0; i<10; i++){
+         if(i > logs.length-1){
+            break; 
+         }
+
+         logs[i].time = new moment(logs[i].time).format('MMMM Do YYYY, h:mm:ss a');
+       }
+       res.json(logs);
    });
 });
 
