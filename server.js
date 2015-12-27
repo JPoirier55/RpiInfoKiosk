@@ -58,10 +58,9 @@ app.get('/api/v1/kodi', function(req, res) {
 });
 
 app.get('/api/v1/log', function(req, res) {    
-   //fs.readFile('/Users/nkonecny/Desktop/test.json', 'utf8', function(err, contents) {
+   // fs.readFile('/Users/nkonecny/Desktop/test.json', 'utf8', function(err, contents) {
    fs.readFile('/home/pi/Github/RpiInfoKiosk/python/motion_log.json', 'utf8', function(err, contents) {     
-       var logs = JSON.parse(contents)
-       console.log(logs.length);
+       var logs = JSON.parse(contents).reverse();
        for(var i=0; i<10; i++){
          if(i > logs.length-1){
             break; 
