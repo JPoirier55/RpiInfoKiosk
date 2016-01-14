@@ -103,6 +103,30 @@ body{
 	padding:30px;	
 }
 
+.calendar-card-header {
+	background: #364C88;
+	color: white;
+	height: 82px;
+	font-size: 2em;
+}
+
+.ellipsis {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.calendar-card-header-icon {
+	padding:10px;
+}
+
+.calendar-card-footer {
+	text-align: center;
+	font-size: 3em;
+	padding:10px;	
+}
+
+
 h5{
 	white-space: nowrap;
 	text-overflow: ellipsis;

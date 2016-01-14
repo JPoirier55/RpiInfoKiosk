@@ -3,21 +3,22 @@
   	<div ng-switch on="card.kind">
 		<div ng-switch-when="calendar#event">
 	        <div class="col-md-3">
-		  		<div style="color:{{card.textColor}}; padding: 15px; background:{{card.background}};" class="card-panel general-card">	
-		  			<img class="img-responsive" src="{{card.icon}}" style="margin-top:25px;margin-right:15px" width="75" height="75" align="left"/>			
-					<span>			
-						<h3>{{card.summary}} is <strong style="color:{{card.dateColor}}">{{card.start.date}}</strong></h3>						
-					</span>
-					<div class="center-card">
-						<img src="{{card.img_url}}" style="max-height:50%;max-width:65%;"/>							
-					</div>
-					<iframe
+		  		<div class="card general-card">
+		  				<div class="calendar-card-header" style="background:{{card.background}};color:{{card.textColor}}">	
+			  				<img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/calendar-128.png" height="100%" class="football-card-header-icon"/>
+			  				{{card.summary}}
+			  			</div>
+			  			<div class="col-md-12 calendar-card-footer">
+			  				{{card.start.date}}	
+							<iframe
 							  width="100%"
 							  height="200px"
 							  frameborder="0" style="border:0"
 							  ng-src="{{iframe_url}}">
 
-					</iframe>
+							</iframe>	  			
+		  				</div>
+					
 				</div>  
 		  	</div>
 	    </div>
@@ -27,7 +28,7 @@
 		  		<div class="card general-card">
 		  				<div class="football-card-header">	
 			  				<img src="https://upload.wikimedia.org/wikipedia/en/1/12/National_Football_League_2008.svg" height="100%" class="football-card-header-icon"/>
-			  				{{card.gameDate}}
+			  				<div class="ellipsis">{{card.gameDate}}</div>
 			  			</div>
 			  			<div class="col-md-12" style="padding-top:30px">
 			  				<div class="col-md-5 center-card football-card-image"><img src="{{card.homeTeamIcon}}"/></div>
