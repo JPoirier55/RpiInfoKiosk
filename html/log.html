@@ -27,7 +27,7 @@
   <body layout="column">
       <div class="container">
         <div class="row text-center" >
-          <div class="col-md-6" ng-controller="logCtrl">
+          <div class="col-md-12" ng-controller="logCtrl">
             <div ng-repeat="log in logs track by $index" >
               <div class="card" ng-hide="!log" style="padding:30px">
                 <h4>{{log.msg}}:</h4>
