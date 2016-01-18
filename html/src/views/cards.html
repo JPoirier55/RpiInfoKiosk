@@ -1,70 +1,74 @@
-<div ng-repeat="card in cards" >
+<ul class="cards-carousel" rn-carousel rn-carousel-auto-slide="6">
+<li ng-repeat="section in sections">
 
-  	<div ng-switch on="card.kind">
-		<div ng-switch-when="calendar#event">
-	        <div class="col-md-3">
-		  		<div class="card general-card">
-		  				<div class="calendar-card-header ellipsis" style="background:{{card.background}};color:{{card.textColor}}">	
-			  				<img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/calendar-128.png" height="100%" class="football-card-header-icon"/>
-			  				{{card.summary}}
-			  			</div>
-			  			<div class="col-md-12 calendar-card-footer">
-			  				{{card.start.date}}	
-							<iframe
-							  width="100%"
-							  height="200px"
-							  frameborder="0" style="border:0"
-							  ng-src="{{iframe_url}}">
+	<div ng-repeat="card in section">
 
-							</iframe>	  			
-		  				</div>
-					
-				</div>  
-		  	</div>
-	    </div>
+	  	<div ng-switch on="card.kind">
+			<div ng-switch-when="calendar#event">
+		        <div class="col-md-3">
+			  		<div class="card general-card">
+			  				<div class="calendar-card-header ellipsis" style="background:{{card.background}};color:{{card.textColor}}">	
+				  				<img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/calendar-128.png" height="100%" class="football-card-header-icon"/>
+				  				{{card.summary}}
+				  			</div>
+				  			<div class="col-md-12 calendar-card-footer">
+				  				{{card.start.date}}	
+								<iframe
+								  width="100%"
+								  height="200px"
+								  frameborder="0" style="border:0"
+								  ng-src="{{iframe_url}}">
 
-		<div ng-switch-when="football">
-	        <div class="col-md-3">
-		  		<div class="card general-card">
-		  				<div class="football-card-header">	
-			  				<img src="https://upload.wikimedia.org/wikipedia/en/1/12/National_Football_League_2008.svg" height="100%" class="football-card-header-icon"/>
-			  				<div class="ellipsis">{{card.gameDate}}</div>
-			  			</div>
-			  			<div class="col-md-12" style="padding-top:30px">
-			  				<div class="col-md-5 center-card football-card-image"><img src="{{card.homeTeamIcon}}"/></div>
-			  				<div class="col-md-2 center-card"><h3>@</h3></div>
-			  				<div class="col-md-5 center-card football-card-image"><img src="{{card.awayTeamIcon}}"/></div>		  				
-		  				
-		  				</div>
-		  				<div class="football-card-footer">
-							{{card.gameTimeET}} on {{card.tvStation}}		  			
+								</iframe>	  			
+			  				</div>
+						
+					</div>  
+			  	</div>
+		    </div>
+
+			<div ng-switch-when="football">
+		        <div class="col-md-3">
+			  		<div class="card general-card">
+			  				<div class="football-card-header">	
+				  				<img src="https://upload.wikimedia.org/wikipedia/en/1/12/National_Football_League_2008.svg" height="100%" class="football-card-header-icon"/>
+				  				<div class="ellipsis">{{card.gameDate}}</div>
+				  			</div>
+				  			<div class="col-md-12" style="padding-top:30px">
+				  				<div class="col-md-5 center-card football-card-image"><img src="{{card.homeTeamIcon}}"/></div>
+				  				<div class="col-md-2 center-card"><h3>@</h3></div>
+				  				<div class="col-md-5 center-card football-card-image"><img src="{{card.awayTeamIcon}}"/></div>		  				
+			  				
+			  				</div>
+			  				<div class="football-card-footer">
+								{{card.gameTimeET}} on {{card.tvStation}}		  			
+							</div>
+						
+					</div>  
+			  	</div>
+		    </div>
+
+
+		    <div ng-switch-default>	        
+				<div class="col-md-3">
+			  		<div class="card general-card">		
+						<div class="card-image">
+							<img src="{{card.art['tvshow.banner']}}" style="width:100%"/>
+							<div class="kodi-content">
+							<span>
+								<div class="kodi-title">{{card.label}} - S{{card.season}}E{{card.episode}}</div>
+								<div class="kodi-ts">Aired: {{card.firstaired}}</div>
+					  			<p>
+					  				<div class="kodi-plot">{{card.plot}}</div>
+				  				</p>
+							</span>		
+							</div>						
 						</div>
-					
-				</div>  
-		  	</div>
-	    </div>
+					</div>  		
+			  	</div>	        
+		    </div>
 
+	  	</div>
+	</div>
 
-	    <div ng-switch-default>	        
-			<div class="col-md-3">
-		  		<div class="card general-card">		
-					<div class="card-image">
-						<img src="{{card.art['tvshow.banner']}}" style="width:100%"/>
-						<div class="kodi-content">
-						<span>
-							<div class="kodi-title">{{card.label}} - S{{card.season}}E{{card.episode}}</div>
-							<div class="kodi-ts">Aired: {{card.firstaired}}</div>
-				  			<p>
-				  				<div class="kodi-plot">{{card.plot}}</div>
-			  				</p>
-						</span>		
-						</div>						
-					</div>
-				</div>  		
-		  	</div>	        
-	    </div>
-
-  	</div>
-
-	
-</div>
+</li>
+</ul>

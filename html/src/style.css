@@ -25,6 +25,12 @@ body{
 }
 
 
+.cards-carousel {
+	width: 1875px;
+    height: 400px;
+    margin: 0 auto;
+}
+
 /* Kodi */
 .general-card {
 	height:375px;

@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngSanitize','angular-skycons']);
+var app = angular.module('myApp', ['angular-carousel','ngSanitize','angular-skycons']);
 
 var nightMode = document.createElement('link');
 nightMode.rel = "stylesheet";
@@ -122,7 +122,7 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
             // when the response is available
             $scope.iframe_url = $sce.trustAsResourceUrl(data[data.length-1].map_src);
             
-            $scope.cards = data;
+            $scope.sections = data;
             $timeout(tick, 1000*60*60*1);
 
           }).
