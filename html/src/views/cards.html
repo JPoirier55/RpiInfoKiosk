@@ -1,9 +1,8 @@
-<ul class="cards-carousel" rn-carousel rn-carousel-auto-slide="6">
+<ul class="cards-carousel" rn-carousel rn-carousel-auto-slide="4">
 <li ng-repeat="section in sections">
-
+	Page {{$index+1}} of {{pages}}
 	<div ng-repeat="card in section">
-
-	  	<div ng-switch on="card.kind">
+		<div ng-switch on="card.kind">
 			<div ng-switch-when="calendar#event">
 		        <div class="col-md-3">
 			  		<div class="card general-card">
