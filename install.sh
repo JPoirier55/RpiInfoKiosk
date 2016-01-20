@@ -1,11 +1,9 @@
 #!/bin/bash
-	
-#sudo apt-get update
-#sudo apt-get upgrade
-#echo "Updated, installing depnecies"
+sudo apt-get update
+sudo apt-get upgrade
+echo "Updated, installing depnecies"
 
-#sudo apt-get install chromium-browser x11-xserver-utils upstart xdotool
-
+sudo apt-get install chromium-browser x11-xserver-utils upstart xdotool
 
 "Installing node..."
 
