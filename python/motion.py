@@ -9,7 +9,7 @@ import json
 
 # Vars
 GPIO.setmode(GPIO.BCM)
-PIR_PIN = 7
+PIR_PIN = 4
 GPIO.setup(PIR_PIN, GPIO.IN)
 
 # global
