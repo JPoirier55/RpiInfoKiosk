@@ -142,7 +142,9 @@ app.controller('logCtrl', function($scope, $timeout, $http, $sce){
           success(function(data, status, headers, config) {
             $scope.logs = data;
           }).
-          error(function(data, status, headers, config) {});
+          error(function(data, status, headers, config) {
+            console.log("Error getting results");
+          });
 
     })();
 
