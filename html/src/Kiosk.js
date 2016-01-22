@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['angular-carousel','ngSanitize','angular-skycons']);
+var app = angular.module('myApp', ['angular-carousel','ngSanitize']);
 
 var nightMode = document.createElement('link');
 nightMode.rel = "stylesheet";
@@ -134,7 +134,7 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
 });
 
 
-app.controller('logCtrl', function($scope, $timeout, $http, $sce){
+app.controller('logCtrl', function($scope, $timeout, $http){
     $scope.cards = [];
     
     (function tick() {
