@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['angular-carousel','ngSanitize']);
+var app = angular.module('myApp', ['ngSanitize']);
 
 var nightMode = document.createElement('link');
 nightMode.rel = "stylesheet";
