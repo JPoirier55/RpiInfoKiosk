@@ -25,7 +25,8 @@ function getForecastIOWeather(callback){
 
 function formatForecastIOData(data){
 	data.currently.humidity = parseInt(data.currently.humidity * 100);
-	data.currently.imgs = ["http://images.webcamgalore.com/5943-current-webcam-New-York-City-New-York.jpg?time=" + new Date(),"http://images.intellicast.com/WxImages/RadarLoop/hfd_None_anim.gif"];
+	//data.currently.imgs = ["http://images.webcamgalore.com/5943-current-webcam-New-York-City-New-York.jpg?time=" + new Date(),"http://images.intellicast.com/WxImages/RadarLoop/hfd_None_anim.gif"];
+	data.currently.imgs = ["http://images.webcamgalore.com/5943-current-webcam-New-York-City-New-York.jpg?time=" + new Date(),"http://sirocco.accuweather.com/nx_mosaic_640x480_public/sir/inmsirny_.gif"];
 	
 	data.daily.data = data.daily.data.slice(0, 5);
 
