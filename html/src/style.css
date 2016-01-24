@@ -134,9 +134,33 @@ body{
 	padding:10px;	
 }
 
+.forecastio {
+	position:relative;
+}
 
-h5{
-	white-space: nowrap;
-	text-overflow: ellipsis;
+.forecastio  li {
+	max-height: 360px;
+	overflow:hidden;
+}
+
+
+.forecastio-summary {
+	max-height: 150px;
 	overflow: hidden;
 }
+
+
+.forecastio {
+
+.cards-carousel {
+    position:relative;
+}
+
+.cards-carousel ul li {
+    list-style-type: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+    

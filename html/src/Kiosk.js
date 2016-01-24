@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngSanitize', 'angular-carousel']);
+var app = angular.module('myApp', ['ngSanitize']);
 
 var nightMode = document.createElement('link');
 nightMode.rel = "stylesheet";
@@ -128,10 +128,24 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
             $scope.pages = data.length;
             $timeout(tick, 1000*60*60*1);
 
+
+            //Page switching.
+            $scope.currentPage = 0;
+            (function tick() {
+                  if($scope.currentPage == $scope.pages-1){
+                    $scope.currentPage = 0;
+                  }else {
+                    $scope.currentPage = $scope.currentPage + 1;
+                  }
+                  
+                  $timeout(tick, 1000*15);
+            })();
+
+
           }).
           error(function(data, status, headers, config) {});
 
-    })();
+    })();    
 
 });
 

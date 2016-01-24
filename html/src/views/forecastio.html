@@ -1,21 +1,18 @@
-<li ng-repeat="day in data.daily.data" style="display:inline-block;margin:5px;" class="card-panel forecast-card">
-	<ul style="display:block;">
-		<h2>{{day.time}}</h2>
-	</ul>
-	
-	<hr/>
-	
-	<ul style="display:block;">
-		<h4>			
-			<strong>{{day.temperatureMax}}°</strong> <font color="#3F51B5">{{day.temperatureMin}}°</font>
-		</h4>			
-	</ul>
-
-	<ul> 
-        <skycon icon="day.icon" size="64"></skycon>   		    
-	</ul>
-
-	<ul>
-		<h5>{{day.summary}}</h5>
-	</ul>
-</li>
+<div class="forecastio">
+	<li ng-repeat="day in data.daily.data" style="display:inline-block;margin:5px;" class="card-panel forecast-card">
+		<ul style="display:block;">
+			<h2>{{day.time}}</h2>
+		</ul>
+		
+		<hr/>
+		
+		<ul style="display:block;">
+			<h4>			
+				<strong>{{day.temperatureMax}}°</strong> <font color="#3F51B5">{{day.temperatureMin}}°</font>
+			</h4>			
+		</ul>
+		<ul class="forecastio-summary">
+			<h5>{{day.summary}}</h5>
+		</ul>
+	</li>
+</div>
