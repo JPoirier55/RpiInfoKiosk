@@ -139,7 +139,7 @@ body{
 }
 
 .forecastio  li {
-	max-height: 360px;
+	height: 360px;
 	overflow:hidden;
 }
 
@@ -150,7 +150,6 @@ body{
 }
 
 
-.forecastio {
 
 .cards-carousel {
     position:relative;
