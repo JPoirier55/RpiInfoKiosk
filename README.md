@@ -21,5 +21,11 @@
 3. Link the `autostart/autostart` file to `~/.config/lxsession/LXDE-pi/autostart` to have the server automagically start when the pi boots.
 
 
+## Debug
+
+running `forever list` will give you the location of Node log.
+
+
+
 
 
