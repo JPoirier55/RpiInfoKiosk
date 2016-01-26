@@ -95,8 +95,10 @@ app.controller('mtaCtrl', function($scope, $timeout, $http, $compile){
     (function tick() {
         $http.get('api/v1/mta').
           success(function(data, status, headers, config) {
-            // this callback will be called asynchronously
-            // when the response is available
+            if(typeof variable !== 'undefined' || data.length === 0){
+              return;
+            }
+            
             $scope.mtaData = data;
           
             if(data[0].delays === true){
