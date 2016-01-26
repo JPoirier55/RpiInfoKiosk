@@ -25,6 +25,7 @@ body{
 }
 
 
+
 .cards-carousel {
 	width: 1875px;
     height: 500px;
@@ -35,7 +36,14 @@ body{
 .general-card {
 	height:375px;
 	overflow:hidden;
-	text-align: left; 
+	text-align: left;
+	
+}
+
+@media (max-width: 1080px) {
+	.general-card {
+		width: 400px;
+	}
 }
 
 .kodi-content{
