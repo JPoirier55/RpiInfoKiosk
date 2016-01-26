@@ -128,24 +128,23 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
             $scope.pages = data.length;
             $timeout(tick, 1000*60*60*1);
 
-
-            //Page switching.
-            $scope.currentPage = 0;
-            (function tick() {
-                  if($scope.currentPage == $scope.pages-1){
-                    $scope.currentPage = 0;
-                  }else {
-                    $scope.currentPage = $scope.currentPage + 1;
-                  }
-                  
-                  $timeout(tick, 1000*15);
-            })();
-
-
           }).
           error(function(data, status, headers, config) {});
 
     })();    
+
+
+    //Page switching.
+    $scope.currentPage = 0;
+    (function tick() {
+          if($scope.currentPage == $scope.pages-1){
+            $scope.currentPage = 0;
+          }else {
+            $scope.currentPage = $scope.currentPage + 1;
+          }
+          
+          $timeout(tick, 1000*10);
+    })();
 
 });
 
@@ -153,15 +152,11 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
 app.controller('logCtrl', function($scope, $timeout, $http, $sce){
     $scope.cards = [];
     
-    (function tick() {
-        $http.get('api/v1/log').
-          success(function(data, status, headers, config) {
-            $scope.logs = data;
-          }).
-          error(function(data, status, headers, config) {
-            console.log("Error getting results");
-          });
-
-    })();
-
+    $http.get('api/v1/log').
+      success(function(data, status, headers, config) {
+        $scope.logs = data;
+      }).
+      error(function(data, status, headers, config) {
+        console.log("Error getting results");
+    });
 });
