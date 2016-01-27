@@ -95,8 +95,10 @@ app.controller('mtaCtrl', function($scope, $timeout, $http, $compile){
     (function tick() {
         $http.get('api/v1/mta').
           success(function(data, status, headers, config) {
-            // this callback will be called asynchronously
-            // when the response is available
+            if(typeof variable !== 'undefined' || data.length === 0){
+              return;
+            }
+            
             $scope.mtaData = data;
           
             if(data[0].delays === true){
@@ -128,24 +130,23 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
             $scope.pages = data.length;
             $timeout(tick, 1000*60*60*1);
 
-
-            //Page switching.
-            $scope.currentPage = 0;
-            (function tick() {
-                  if($scope.currentPage == $scope.pages-1){
-                    $scope.currentPage = 0;
-                  }else {
-                    $scope.currentPage = $scope.currentPage + 1;
-                  }
-                  
-                  $timeout(tick, 1000*15);
-            })();
-
-
           }).
           error(function(data, status, headers, config) {});
 
     })();    
+
+
+    //Page switching.
+    $scope.currentPage = 0;
+    (function tick() {
+          if($scope.currentPage == $scope.pages-1){
+            $scope.currentPage = 0;
+          }else {
+            $scope.currentPage = $scope.currentPage + 1;
+          }
+          
+          $timeout(tick, 1000*10);
+    })();
 
 });
 
@@ -153,15 +154,11 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
 app.controller('logCtrl', function($scope, $timeout, $http, $sce){
     $scope.cards = [];
     
-    (function tick() {
-        $http.get('api/v1/log').
-          success(function(data, status, headers, config) {
-            $scope.logs = data;
-          }).
-          error(function(data, status, headers, config) {
-            console.log("Error getting results");
-          });
-
-    })();
-
+    $http.get('api/v1/log').
+      success(function(data, status, headers, config) {
+        $scope.logs = data;
+      }).
+      error(function(data, status, headers, config) {
+        console.log("Error getting results");
+    });
 });
