@@ -20,7 +20,7 @@ function getTrainStatus(callback){
 	var status = 'http://web.mta.info/status/serviceStatus.txt';
 	utils.downloadFile(status, function(xmlStr){
 		parseString(xmlStr, function (err, result) {
-			if(typeof service === "undefined" || typeof result.service === "undefined"){
+			if(typeof result === "undefined" || typeof result.service === "undefined"){
 				return;
 			}
 			var delayText = "";
@@ -71,6 +71,7 @@ function getTrainStatus(callback){
 				getSubwayColor(name[0], result.service.subway[0].line[i]);
 				
 			}
+
 			result.service.subway[0].status_text = delayText;
 			result.service.subway[0].delays = BDFM_DELAY || ACE_DELAY;
 		    callback(result.service.subway);
