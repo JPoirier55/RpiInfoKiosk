@@ -1,4 +1,4 @@
-<div class="cards-carousel">
+<div class="cards-carousel col-xs-12">
 <ul>
 	<li ng-repeat="section in sections">	
 	<div ng-hide="$index == currentPage">
@@ -6,7 +6,7 @@
 		<div ng-repeat="card in section">
 			<div ng-switch on="card.kind">
 				<div ng-switch-when="calendar#event">
-			        <div class="col-md-3">
+			        <div class="col-xs-12 col-md-3">
 				  		<div class="card general-card">
 				  				<div class="calendar-card-header ellipsis" style="background:{{card.background}};color:{{card.textColor}}">	
 					  				<img src="https://cdn4.iconfinder.com/data/icons/small-n-flat/24/calendar-128.png" height="100%" class="football-card-header-icon"/>
@@ -28,7 +28,7 @@
 			    </div>
 
 				<div ng-switch-when="football">
-			        <div class="col-md-3">
+			        <div class="col-xs-12 col-md-3">
 				  		<div class="card general-card">
 				  				<div class="football-card-header">	
 					  				<img src="https://upload.wikimedia.org/wikipedia/en/1/12/National_Football_League_2008.svg" height="100%" class="football-card-header-icon"/>
@@ -49,7 +49,7 @@
 			    </div>
 
 			    <div ng-switch-default>	        
-					<div class="col-md-3">
+					<div class="col-xs-12 col-md-3">
 				  		<div class="card general-card">		
 							<div class="card-image">
 								<img src="{{card.art['tvshow.banner']}}" style="width:100%"/>
