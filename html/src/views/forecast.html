@@ -1,22 +1,24 @@
-<li ng-repeat="day in data.forecast" style="display:inline-block;margin:5px;" class="card-panel forecast-card">
-	
-	<ul style="display:block;">
-		<h2>{{day.day}}</h2>
-	</ul>
-	
-	<hr/>
-	
-	<ul style="display:block;">
-		<h4>			
-			<strong>{{day.high}}°</strong> <font color="#3F51B5">{{day.low}}°</font>
-		</h4>			
-	</ul>
+<ul>
+	<li ng-repeat="day in data.forecast" style="display:inline-block;margin:5px;" class="card-panel forecast-card">
+		
+		<ul style="display:block;">
+			<h2>{{day.day}}</h2>
+		</ul>
+		
+		<hr/>
+		
+		<ul style="display:block;">
+			<h4>			
+				<strong>{{day.high}}°</strong> <font color="#3F51B5">{{day.low}}°</font>
+			</h4>			
+		</ul>
 
-	<ul>      
-		<img src="{{day.code}}"/>		    
-	</ul>
+		<ul>      
+			<img src="{{day.code}}"/>		    
+		</ul>
 
-	<ul>
-		<h5>{{day.text}}</h5>
-	</ul>
-</li>
+		<ul>
+			<h5>{{day.text}}</h5>
+		</ul>
+	</li>
+</ul>

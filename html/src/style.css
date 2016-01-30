@@ -165,7 +165,6 @@ body{
 }
 
 .forecastio  li {
-	height: 360px;
 	overflow:hidden;
 }
 
@@ -173,6 +172,11 @@ body{
 .forecastio-summary {
 	max-height: 150px;
 	overflow: hidden;
+}
+
+.forecast-container {
+	margin:5px;
+	float: left;
 }
 
 

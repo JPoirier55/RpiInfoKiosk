@@ -1,5 +1,6 @@
 <div class="forecastio">
-	<li ng-repeat="day in data.daily.data" style="display:inline-block;margin:5px;" class="card-panel forecast-card">
+	<ul>
+	<li ng-repeat="day in data.daily.data" class="card-panel forecast-card forecast-container">
 		<ul style="display:block;">
 			<h2>{{day.time}}</h2>
 		</ul>
@@ -15,4 +16,5 @@
 			<h5>{{day.summary}}</h5>
 		</ul>
 	</li>
+	</ul>
 </div>
