@@ -9,7 +9,7 @@ ul{
 
 body{
 	background: rgb(238, 238, 238);
-}	
+}
 
 .container {
 	width: 100%;
@@ -21,7 +21,7 @@ body{
 		height: 1080px;
 		background: rgb(238, 238, 238);
 		overflow: hidden;
-	}	
+	}
 }
 
 
@@ -49,7 +49,7 @@ body{
 	.cards-carousel ul li {
 	    list-style-type: block;
 	    position: relative;
-	    
+
   }
 }
 
@@ -60,7 +60,7 @@ body{
 	height:375px;
 	overflow:hidden;
 	text-align: left;
-	
+
 }
 
 
@@ -100,7 +100,7 @@ body{
 }
 
 /* Weather */
-.weather-card{		
+.weather-card{
 }
 .weather-icon{
 	height: 50px;
@@ -134,7 +134,7 @@ body{
 .football-card-footer {
 	text-align: center;
 	font-size: 4em;
-	padding:30px;	
+	padding:30px;
 }
 
 .calendar-card-header {
@@ -157,7 +157,7 @@ body{
 .calendar-card-footer {
 	text-align: center;
 	font-size: 3em;
-	padding:10px;	
+	padding:10px;
 }
 
 .forecastio {
@@ -175,15 +175,14 @@ body{
 }
 
 .forecast-container {
-	margin:5px;
-	float: left;
+  margin: 0 5px 5px 0;
+  float: left;
+  height: 350px;
 }
 
 
 
 .cards-carousel {
     position:relative;
+    margin-top: -15px;
 }
-
-
-    
