@@ -111,7 +111,9 @@ body{
 	width: 170px;
 
 }
-
+.card-panel {
+  padding: 5px;
+}
 .football-card{
 	align-items: center;
 }
