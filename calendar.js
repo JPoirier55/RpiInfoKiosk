@@ -35,13 +35,19 @@ function getCalendarJson(callback){
 		utils.downloadFileSSL(url, function(json){
 			json = JSON.parse(json);
 			if(json.items.length > 0){
-				calendarsJSON.push(json.items[0]);
+        for(var i=0; i<json.items.length; i++){
+          calendarsJSON.push(json.items[i]);
+        }
 			}
 			callback();
 		});
 
 	}, function(err){
-		addExtras(getClosestEvent(calendarsJSON), callback);
+    for (var i = 0; i < calendarsJSON.length; i++) {
+      addExtras(calendarsJSON[i], callback);
+    }
+    callback(calendarsJSON);
+
 	});
 }
 
@@ -137,35 +143,6 @@ function addExtras(calendarEvent,callback){
 			loc = loc.replace(/ /g, '+');
 			calendarEvent.map_src = util.format(mapSrc, mapsApiKey, loc);
 		}
-
-		if(isHolidayCal){
-			getGoolgeImageResult(calendarEvent, function(){
-				callback(calendarEvent);
-			});
-		}else{
-			callback(calendarEvent);
-		}
-
-	}else{
-		callback(calendarEvent);
 	}
-
-
-}
-
-function getGoolgeImageResult(calendarEvent, callback){
-	var googleImgApiUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%s%s";
-	googleImgApiUrl = util.format(googleImgApiUrl, calendarEvent.summary, " holiday image");
-	utils.downloadFileSSL(googleImgApiUrl, function(json){
-		json = JSON.parse(json);
-		if(json.responseData){
-			var randomIndex = Math.floor((Math.random() * json.responseData.results.length));
-			if(randomIndex){
-				calendarEvent.img_url = json.responseData.results[randomIndex].url;
-			}else{
-				calendarEvent.img_url = json.responseData.results[0].url;
-			}
-		}
-		callback();
-	});
+	return calendarEvent;
 }

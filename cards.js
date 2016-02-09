@@ -20,18 +20,21 @@ module.exports = {
 function getCards(serverCallback){
 	var maxCards = 8;
 	var cards = [];
-	
+
 	async.parallel([
     	function(callback) {
     		//Any cal events?
 			calendar.getHolidays(function(calEvent){
 				if(typeof calEvent !== 'undefined'){
-					cards.push(calEvent);
+          for(var i=0; i<calEvent.length; i++){
+            cards.push(calEvent[i]);  
+          }
+
 				}
 				callback();
-			});			        
+			});
     	},
-    	function(callback) { 
+    	function(callback) {
 			football.getNextPatsGame(function(patsGame){
 				if(typeof patsGame !== 'undefined'){
 					cards.push(patsGame);
@@ -41,20 +44,19 @@ function getCards(serverCallback){
     	}
 	], function(err) { //This is the final callback
 		kodi.getEpisodeCards(maxCards - cards.length, function(kodiData) {
-				
+
 			cards = kodiData.concat(cards);
 			if(carouselEnabled){
 				sections = [];
 				while (cards.length > 0){
     				sections.push(cards.splice(0, carouselCards));
 				}
-				
+
 				serverCallback(sections);
-			}else{				
+			}else{
 				serverCallback(cards);
 			}
-		});			
+		});
 	});
 
 }
-
