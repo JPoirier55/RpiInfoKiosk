@@ -4,12 +4,12 @@ var https = require('https');
 module.exports = {
   downloadFile: function (url, callback) { downloadFile(url, callback);},
   downloadFileSSL: function (url, callback) { downloadFileSSL(url, callback);},
-  downloadFileWithOptions: function (options, callback) { downloadFile(options, callback);},
+  downloadFileWithOptions: function (options, callback) { downloadFileWithOptions(options, callback);},
 };
 
 
 function downloadFile(url, callback){    
-	http.get(url, function(res) {
+    http.get(url, function(res) {
 	    var body = '';
 	    res.on('data', function(chunk) {
 	        body += chunk;
@@ -40,9 +40,9 @@ function downloadFileSSL(url, callback){
 }
 
 function downloadFileWithOptions(options, callback){
- 	var prot = options.port == 443 ? https : http;
- 	var req = prot.request(options, function(res)
-    {
+    var port = options.port == 443 ? https : http;
+    
+ 	var req = port.request(options, function(res){
         var body = '';
         res.setEncoding('utf8');
 
