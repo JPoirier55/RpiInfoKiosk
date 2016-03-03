@@ -39,22 +39,22 @@ app.controller('ClockController', ['$scope', '$interval',
           });
         };
 }]);
-              
+
 app.controller('weatherCtrl', function($scope, $timeout, $http){
     $scope.data = [];
     $scope.nightMode = "";
-    
+
     $scope.CurrentWeather = {
         forecast: {
-            icon: "snow",            
+            icon: "snow",
         }
     };
-    
+
     var radarImages = [];
     (function tick() {
         $http.get('api/v1/weather').
           success(function(data, status, headers, config) {
-            $scope.data = data;            
+            $scope.data = data;
             radarImages = data.currently.imgs;
             //15 Mins
             $timeout(tick, 1000*60*15);
@@ -62,25 +62,25 @@ app.controller('weatherCtrl', function($scope, $timeout, $http){
 
             //This enables night mode!
             var today = new Date();
-            
-            var minsRegex = /:(\d+)\s/;           
+
+            var minsRegex = /:(\d+)\s/;
             var sunset = new Date();
-            sunset.setHours(parseInt(data.currently.sunsetTime.charAt(1)) + 12);                        
-            sunset.setMinutes(data.currently.sunsetTime.match(minsRegex)[1]);            
-            
-            
-            if(sunset < today || today.getHours() < 7) {            
+            sunset.setHours(parseInt(data.currently.sunsetTime.charAt(1)) + 12);
+            sunset.setMinutes(data.currently.sunsetTime.match(minsRegex)[1]);
+
+
+            if(sunset < today || today.getHours() < 7) {
               var head = angular.element(document.querySelector('head'));
-              head.append(nightMode);  
+              head.append(nightMode);
             } else {
-              var head = angular.element(document.querySelector('head'));              
+              var head = angular.element(document.querySelector('head'));
               $('link[rel=stylesheet][href~="./src/views/night_mode.css"]').remove();
-            }                      
+            }
           }).
           error(function(data, status, headers, config) {});
 
     })();
-            
+
     var radarImageIndex = 0;
     (function tick() {
           $scope.radar_image = radarImages[radarImageIndex];
@@ -98,18 +98,18 @@ app.controller('mtaCtrl', function($scope, $timeout, $http, $compile){
             if(typeof variable !== 'undefined' || data.length === 0){
               return;
             }
-            
+
             $scope.mtaData = data;
-          
+
             if(data[0].delays === true){
               angular.element('body').css('background', '#F44336');
             }else{
-              angular.element('body').css('background', '');  
+              angular.element('body').css('background', '');
             }
-                        
+
             //5mins
             $timeout(tick, 1000*60*5);
-            
+
 
           }).
           error(function(data, status, headers, config) {});
@@ -118,14 +118,14 @@ app.controller('mtaCtrl', function($scope, $timeout, $http, $compile){
 
 app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
     $scope.cards = [];
-    
+
     (function tick() {
         $http.get('api/v1/cards').
           success(function(data, status, headers, config) {
             // this callback will be called asynchronously
             // when the response is available
             $scope.iframe_url = $sce.trustAsResourceUrl(data[data.length-1].map_src);
-            
+
             $scope.sections = data;
             $scope.pages = data.length;
             $timeout(tick, 1000*60*60*1);
@@ -133,7 +133,7 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
           }).
           error(function(data, status, headers, config) {});
 
-    })();    
+    })();
 
 
     //Page switching.
@@ -144,16 +144,36 @@ app.controller('cardsCtrl', function($scope, $timeout, $http, $sce){
           }else {
             $scope.currentPage = $scope.currentPage + 1;
           }
-          
           $timeout(tick, 1000*10);
     })();
 
 });
 
+app.controller('traktCtrl', function($scope, $timeout, $http, $sce){
+    $scope.update = function(pin) {
+      console.log(pin);
+      $http.get('api/v1/trakt?pin='+pin).
+        success(function(data, status, headers, config) {
+          $scope.url = data;
+        }).
+        error(function(data, status, headers, config) {
+          console.log("Error getting results");
+      });
+    };
+
+    $http.get('api/v1/trakt?setup=true').
+      success(function(data, status, headers, config) {
+        console.log(data);
+        $scope.setup_url = data.setup_url;
+      }).
+      error(function(data, status, headers, config) {
+        console.log("Error getting results");
+    });
+});
 
 app.controller('logCtrl', function($scope, $timeout, $http, $sce){
     $scope.cards = [];
-    
+
     $http.get('api/v1/log').
       success(function(data, status, headers, config) {
         $scope.logs = data;

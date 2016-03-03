@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <title>Home Automation</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.0-rc.2/angular-sanitize.js"></script>
+    <script src="./src/Kiosk.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+
+    <link rel="stylesheet" href="./src/style.css">
+  </head>
+
+  <body layout="column">
+
+      <!-- Content -->
+      <div class="row" style="margin:0px" ng-controller="traktCtrl">
+        <div class="col-md-12">
+          <a href="{{setup_url}}" target="_blank">SETUP</a>
+          <br/>
+
+          <form name="pinForm">
+            <label>Enter Pin:
+              <input type="number" name="input" ng-model="pin" required ng-trim="false">
+            </label>
+            <input type="submit" ng-click="update(pin)" value="Submit" />
+           </form>
+
+        </div>
+      </div>
+
+
+      <div class="row" style="margin:0px">
+        <div ng-controller="cardsCtrl" class="col-md-12">
+          <div ng-include="'src/views/cards.html'"></div>
+        </div>
+      </div>
+
+  </body>
+</html>

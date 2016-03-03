@@ -8,7 +8,7 @@ module.exports = {
 };
 
 
-function downloadFile(url, callback){    
+function downloadFile(url, callback){
     http.get(url, function(res) {
 	    var body = '';
 	    res.on('data', function(chunk) {
@@ -41,7 +41,7 @@ function downloadFileSSL(url, callback){
 
 function downloadFileWithOptions(options, callback){
     var port = options.port == 443 ? https : http;
-    
+
  	var req = port.request(options, function(res){
         var body = '';
         res.setEncoding('utf8');
@@ -50,13 +50,13 @@ function downloadFileWithOptions(options, callback){
             body += chunk;
         });
 
-        res.on('end', function() {           
+        res.on('end', function() {
             callback(body);
         });
     });
 
     req.on('error', function(err) {
-        res.send('error: ' + err.message);
+        console.log("Got error: ", err);
         callback("");
     });
 

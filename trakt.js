@@ -13,46 +13,41 @@ var trakt = new Trakt({
   client_id: client_id,
   client_secret: client_secret,
 });
-							
+
 module.exports = {
   getRecentTvShows: function (callback) {
     getRecentTvShows(callback);
+  },
+  getSetupData: function(callback) {
+    getSetupData(callback);
+  },
+  setAuth: function(callback) {
+    setAuth(callback, code);
   }
 };
 
+function getSetupData(callback) {
+  callback({
+    setup_url : trakt.get_url(),
+
+  });
+}
+
+function setAuth(callback, code) {
+
+  	trakt.exchange_code(code)
+      .then(function(result) {
+          // contains tokens & session information
+          // API can now be used with authorized requests
+          callback(result);
+      })
+      .catch(function(err) {
+          // Handles errors
+          console.log(err);
+      });
+}
 
 
 function getRecentTvShows(callback){
-	var url = trakt.get_url();
-	//console.log(url);
 
-	trakt.exchange_code('6569A350', 'csrf token (state)')
-    .then(function(result) {
-        // contains tokens & session information 
-        // API can now be used with authorized requests
-        callback(result);
-    })
-    .catch(function(err) { 
-        // Handles errors
-        console.log(err);  
-    });
-
-	// var options = {
-	//     host: trakt_host_url,
-	//     path: trakt_recent_tv_url,
-	//     port: 443,
-	//     method: 'GET',
-	//     timeout: 5000,
-	//     headers: {
- //          	'trakt-api-key'     : client_id,
- //  			'trakt-api-version' : '2',
- //      		'content-type'      : 'application/json',
- //      		'Authorization'     :  'Bearer ' + client_secret 
-	//     }
-	// };
-
-	// utils.downloadFileWithOptions(options, function(jsonStr){
-	// 	callback(jsonStr);
-	// 	//callback(JSON.parse(jsonStr));
-	// });
 }
