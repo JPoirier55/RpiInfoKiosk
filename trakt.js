@@ -15,7 +15,7 @@ var trakt = new Trakt({
     client_secret: client_secret,
 });
 
-var token_file = 'trakt_token.json';
+var token_file = '/home/pi/Github/RpiInfoKiosk/trakt_token.json';
 
 module.exports = {
     getRecentTvShows: function(callback, numberOfShows) {
