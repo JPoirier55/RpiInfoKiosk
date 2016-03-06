@@ -4,6 +4,7 @@ var async = require('async');
 var calendar = require('./calendar.js');
 var football = require('./football.js');
 var kodi = require('./kodi.js');
+var trakt = require('./trakt.js');
 
 var carouselEnabled = true;
 var carouselCards = 4;
@@ -43,20 +44,42 @@ function getCards(serverCallback){
 			});
     	}
 	], function(err) { //This is the final callback
-		kodi.getEpisodeCards(maxCards - cards.length, function(kodiData) {
-
-			cards = kodiData.concat(cards);
-			if(carouselEnabled){
-				sections = [];
-				while (cards.length > 0){
-    				sections.push(cards.splice(0, carouselCards));
-				}
-
-				serverCallback(sections);
-			}else{
-				serverCallback(cards);
-			}
-		});
+		traktTvShows(maxCards - cards.length, cards, serverCallback);
+		//kodiTvShows(maxCards, cards, serverCallback);
 	});
 
+}
+
+
+function kodiTvShows(maxCards, cards, serverCallback){
+	kodi.getEpisodeCards(maxCards - cards.length, function(kodiData) {
+
+		cards = kodiData.concat(cards);
+		if(carouselEnabled){
+			sections = [];
+			while (cards.length > 0){
+				sections.push(cards.splice(0, carouselCards));
+			}
+
+			serverCallback(sections);
+		}else{
+			serverCallback(cards);
+		}
+	});
+}
+
+function traktTvShows(maxCards, cards, serverCallback){
+	trakt.getRecentTvShows(function(shows){
+		cards = shows.concat(cards);
+		if(carouselEnabled){
+			sections = [];
+			while (cards.length > 0){
+				sections.push(cards.splice(0, carouselCards));
+			}
+
+			serverCallback(sections);
+		}else{
+			serverCallback(cards);
+		}
+	}, maxCards);
 }

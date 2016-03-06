@@ -1,10 +1,14 @@
 var http = require('http');
 var https = require('https');
+var fs = require('fs');
+
 
 module.exports = {
   downloadFile: function (url, callback) { downloadFile(url, callback);},
   downloadFileSSL: function (url, callback) { downloadFileSSL(url, callback);},
   downloadFileWithOptions: function (options, callback) { downloadFileWithOptions(options, callback);},
+  writeFile: function (filename, data) { writeFile(filename, data);},
+  readJSONFile: function (filename, callback) { readJSONFile(filename, callback);},
 };
 
 
@@ -61,4 +65,25 @@ function downloadFileWithOptions(options, callback){
     });
 
     req.end();
+}
+
+
+function writeFile(filename, data){
+    console.log(data);
+    console.log(filename);
+    fs.writeFile(filename, data, function(err) {
+        if(err) {
+            return console.log(err);
+        }
+        console.log("The file was saved!");
+    });     
+}
+
+function readJSONFile(filename, callback){
+    fs.readFile(filename, 'utf8', function (err,data) {
+      if (err) {
+        return console.log(err);
+      }
+      callback(JSON.parse(data));
+    });
 }

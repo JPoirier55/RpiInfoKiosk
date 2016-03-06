@@ -2,52 +2,111 @@ var http = require('http');
 var util = require('util');
 var moment = require('moment');
 var utils = require('./utils.js');
+var moment = require('moment');
 var client_id = "cf59ef8a408dedfd2077dc131802a18b0fb0c9b2e6f005629f704e4cb0967286";
 var client_secret = "c14a8701d229eaec0a9c623bc5992a24f5df56c817be1681c6389ffdae2e0e02";
 
-var trakt_host_url = "api-v2launch.trakt.tv"
-var trakt_recent_tv_url = "calendars/my/shows/new/2016-2-25/14";
+var NUMBER_OF_DAYS = 14;
+var START_DATE = moment().subtract(NUMBER_OF_DAYS, 'day').format('YYYY-MM-DD');
 
 var Trakt = require('trakt.tv');
 var trakt = new Trakt({
-  client_id: client_id,
-  client_secret: client_secret,
+    client_id: client_id,
+    client_secret: client_secret,
 });
 
+var token_file = 'trakt_token.json';
+
 module.exports = {
-  getRecentTvShows: function (callback) {
-    getRecentTvShows(callback);
-  },
-  getSetupData: function(callback) {
-    getSetupData(callback);
-  },
-  setAuth: function(callback) {
-    setAuth(callback, code);
-  }
+    getRecentTvShows: function(callback, numberOfShows) {
+        getRecentTvShows(callback, numberOfShows);
+    },
+    getSetupData: function(callback) {
+        getSetupData(callback);
+    },
+    setAuth: function(callback, code) {
+        setAuth(callback, code);
+    }
 };
 
 function getSetupData(callback) {
-  callback({
-    setup_url : trakt.get_url(),
-
-  });
+    callback({
+        setup_url: trakt.get_url(),
+    });
 }
 
 function setAuth(callback, code) {
-
-  	trakt.exchange_code(code)
-      .then(function(result) {
-          // contains tokens & session information
-          // API can now be used with authorized requests
-          callback(result);
-      })
-      .catch(function(err) {
-          // Handles errors
-          console.log(err);
-      });
+    console.log(code);
+    trakt.exchange_code(code)
+        .then(function(result) {
+            var token = trakt.export_token();
+            utils.writeFile(token_file, JSON.stringify(token));
+            callback(result);
+        })
+        .catch(function(err) {
+            callback(err);
+        });
 }
 
 
-function getRecentTvShows(callback){
+function getRecentTvShows(callback, numberOfShows) {
+  console.log(START_DATE);
+
+  utils.readJSONFile(token_file, function(token){
+    trakt.import_token(token)
+        .then(function(data) {
+            trakt.calendars.my.shows({
+              start_date: START_DATE,
+              days: NUMBER_OF_DAYS,
+              extended: 'images,full'
+            })
+            .then(function(shows) {                            
+                convertedShows = convertTraktShows(shows);                
+                callback(convertedShows.splice(0, numberOfShows));
+            })
+            .catch(function(err) {
+              console.log(err);
+                callback([]);
+            });
+        })
+        .catch(function(err) {
+            console.log(err);
+            callback([]);
+        });
+  });
+
+
+
+
+
+  function convertTraktShows(shows) {
+    var kioskShows = [];
+    for(var i=0; i<shows.length; i++){      
+      var currentShow = shows[i];
+      var art = {};
+      art['tvshow.banner'] = currentShow.show.images.banner.full;
+
+      var plot = currentShow.episode.overview;
+      if(plot.length > 125){
+        plot = plot.substring(0,125) + "...";  
+      }
+      
+     
+      kioskShows.push({
+        art: art,
+        firstaired: new moment(currentShow.first_aired).format("ddd, MMM Do"),
+        label: currentShow.episode.title,
+        plot: plot,
+        showtitle: currentShow.show.title,
+        season: currentShow.episode.season,
+        episode: currentShow.episode.number,
+        kind: "kodi"
+      });
+
+    }
+
+    //Newest shows first.
+    return kioskShows.reverse();
+  }  
 
 }

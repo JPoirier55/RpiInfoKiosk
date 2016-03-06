@@ -29,20 +29,12 @@
 
           <form name="pinForm">
             <label>Enter Pin:
-              <input type="number" name="input" ng-model="pin" required ng-trim="false">
+              <input name="input" ng-model="pin" required ng-trim="false">
             </label>
             <input type="submit" ng-click="update(pin)" value="Submit" />
            </form>
 
         </div>
       </div>
-
-
-      <div class="row" style="margin:0px">
-        <div ng-controller="cardsCtrl" class="col-md-12">
-          <div ng-include="'src/views/cards.html'"></div>
-        </div>
-      </div>
-
   </body>
 </html>

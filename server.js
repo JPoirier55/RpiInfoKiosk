@@ -66,8 +66,7 @@ app.get('/api/v1/trakt', function(req, res) {
   }else if(req.query.pin){
     trakt.setAuth(function(callback){
       res.json(callback);
-    }, req.query.pin);
-    setAuth
+    }, req.query.pin);    
   }else{
     trakt.getRecentTvShows(function(callback){
        res.json(callback);
