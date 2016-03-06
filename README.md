@@ -20,6 +20,7 @@
 
 3. Link the `autostart/autostart` file to `~/.config/lxsession/LXDE-pi/autostart` to have the server automagically start when the pi boots.
 
+4. Once program is started you need to get a Trakt.tv token. Visit localhost:9001/trakt.html and follow instructions.
 
 ## Debug
 
