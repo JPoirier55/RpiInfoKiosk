@@ -69,13 +69,12 @@ function downloadFileWithOptions(options, callback){
 
 
 function writeFile(filename, data){
-    console.log(data);
-    console.log(filename);
+    
     fs.writeFile(filename, data, function(err) {
         if(err) {
             return console.log(err);
         }
-        console.log("The file was saved!");
+        console.log("The file was saved : " + __dirname + "/" + filename);        
     });     
 }
 
