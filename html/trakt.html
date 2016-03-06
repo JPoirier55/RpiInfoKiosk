@@ -25,34 +25,32 @@
 
 <body layout="column">
     <div class="container">
-          <div class="row" ng-controller="traktCtrl">
-              <div class="col-xs-12">
-              <div class="card">
-                  <div class="calendar-card-header">
-                    <img src="https://trakt.tv/assets/logos/header@2x-4d604ad76f87e156c5ad2fa7358fcf17.png" height="96px"class="football-card-header-icon"/>                    
-                  </div>
-                  <div class="col-md-12 calendar-card-footer">
+        <div class="row" ng-controller="traktCtrl">
+            <div class="col-xs-12">
+                <div class="card">
+                    <div class="calendar-card-header">
+                        <img src="https://trakt.tv/assets/logos/header@2x-4d604ad76f87e156c5ad2fa7358fcf17.png" height="96px" class="football-card-header-icon" />
+                    </div>
+                    <div class="col-md-12 calendar-card-footer">
+                        Connect to Trakt.tv so the app can get your recently recorded tv shows.
+                        <br/>
 
-                   <a href="{{setup_url}}" target="_blank">Click here to get pin</a>
+                        <a href="{{setup_url}}" target="_blank">Click here to get pin</a>
 
-                  <br/>
+                        <br/>
 
-                  <form name="pinForm">
-                      <label>Enter Pin:
-             <input name="input" ng-model="pin" required ng-trim="false">
-             </label>
-                      <input type="submit" ng-click="update(pin)" value="Submit" />
-                  </form>
-                    
-                  </div>
+                        <form name="pinForm">
+                            <label>Enter Pin:
+                                <input name="input" ng-model="pin" required ng-trim="false">
+                            </label>
+                            <input type="submit" ng-click="update(pin)" value="Submit" />
+                        </form>
 
+                    </div>
+
+                </div>
             </div>
-            </div>
-
-              <div class="col-md-6">
-                 
-              </div>
-          </div>
+        </div>
     </div>
 </body>
 
