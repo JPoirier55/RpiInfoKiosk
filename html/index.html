@@ -34,8 +34,8 @@
 </head>
 
 <body layout="column">
-
-    <!-- Content -->
+    <div class="kiosk-wrapper">
+    
     <div class="row" style="margin:0px">
         <div class="col-md-6">
             <div ng-include="'src/views/weather.html'"></div>
@@ -43,11 +43,7 @@
 
         <div class="col-md-6">
             <div ng-include="'src/views/mta.html'" ng-controller="mtaCtrl" class="text-center"> </div>
-
-        </div>
-        <div class="col-md-6">
             <div ng-include="'src/views/forecastio.html'" ng-controller="weatherCtrl" class="text-center"></div>
-
         </div>
     </div>
 
@@ -56,6 +52,8 @@
         <div ng-controller="cardsCtrl" class="col-md-12">
             <div ng-include="'src/views/cards.html'"></div>
         </div>
+    </div>
+
     </div>
 
 </body>

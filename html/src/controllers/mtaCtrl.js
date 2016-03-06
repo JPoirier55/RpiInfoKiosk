@@ -10,9 +10,9 @@ app.controller('mtaCtrl', function($scope, $timeout, $http, $compile){
             $scope.mtaData = data;
 
             if(data[0].delays === true){
-              angular.element('body').css('background', '#F44336');
+              angular.element('kiosk-wrapper').css('background', '#F44336');
             }else{
-              angular.element('body').css('background', '');
+              angular.element('kiosk-wrapper').css('background', '');
             }
 
             //5mins

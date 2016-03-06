@@ -16,9 +16,8 @@ body{
 }
 
 @media(min-width:1080px){
-	body{
+	.kiosk-wrapper {
 		width: 1920px;
-		height: 1080px;
 		background: rgb(238, 238, 238);
 		overflow: hidden;
 	}
