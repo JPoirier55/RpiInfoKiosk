@@ -36,7 +36,6 @@ function getSetupData(callback) {
 }
 
 function setAuth(callback, code) {
-    console.log(code);
     trakt.exchange_code(code)
         .then(function(result) {
             var token = trakt.export_token();
@@ -50,19 +49,20 @@ function setAuth(callback, code) {
 
 
 function getRecentTvShows(callback, numberOfShows) {
-  console.log(START_DATE);
-
+  
   utils.readJSONFile(token_file, function(token){
     trakt.import_token(token)
         .then(function(data) {
+
             trakt.calendars.my.shows({
               start_date: START_DATE,
               days: NUMBER_OF_DAYS,
               extended: 'images,full'
             })
-            .then(function(shows) {                            
-                convertedShows = convertTraktShows(shows);                
-                callback(convertedShows.splice(0, numberOfShows));
+            .then(function(shows) {   
+                var convertedShows = shows.reverse();
+                convertedShows = convertedShows.splice(0, numberOfShows);
+                callback(convertTraktShows(convertedShows));
             })
             .catch(function(err) {
               console.log(err);
@@ -81,14 +81,17 @@ function getRecentTvShows(callback, numberOfShows) {
 
   function convertTraktShows(shows) {
     var kioskShows = [];
+    
     for(var i=0; i<shows.length; i++){      
       var currentShow = shows[i];
       var art = {};
       art['tvshow.banner'] = currentShow.show.images.banner.full;
 
       var plot = currentShow.episode.overview;
-      if(plot.length > 125){
-        plot = plot.substring(0,125) + "...";  
+      if(plot && plot.length > 125){
+         plot = plot.substring(0,125) + "...";  
+      }else if(!plot){
+        plot = "No information availible...";
       }
       
      
@@ -106,7 +109,7 @@ function getRecentTvShows(callback, numberOfShows) {
     }
 
     //Newest shows first.
-    return kioskShows.reverse();
+    return kioskShows;
   }  
 
 }
