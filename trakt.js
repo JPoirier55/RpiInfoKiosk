@@ -40,10 +40,14 @@ function setAuth(callback, code) {
         .then(function(result) {
             var token = trakt.export_token();
             utils.writeFile(token_file, JSON.stringify(token));
-            callback(result);
+            callback({
+              status: "success"
+            });
         })
         .catch(function(err) {
-            callback(err);
+            callback({
+              status: "bad request"
+            });
         });
 }
 

@@ -60,11 +60,12 @@ app.get('/api/v1/kodi', function(req, res) {
 
 app.get('/api/v1/trakt', function(req, res) {
   if(req.query.setup){
-    trakt.getSetupData(function(callback){
+    trakt.getSetupData(function(callback){    
       res.json(callback);
     });
   }else if(req.query.pin){
     trakt.setAuth(function(callback){
+      console.log(callback);
       res.json(callback);
     }, req.query.pin);    
   }else{

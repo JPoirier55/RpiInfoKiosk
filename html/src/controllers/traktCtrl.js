@@ -3,7 +3,13 @@ app.controller('traktCtrl', function($scope, $timeout, $http, $sce){
       console.log(pin);
       $http.get('api/v1/trakt?pin='+pin).
         success(function(data, status, headers, config) {
-          $scope.url = data;
+          console.log(data);
+          if(data.status){
+            $scope.status = "Status: " + data.status;            
+          }else {
+            alert("Something went wrong.");
+          }
+          
         }).
         error(function(data, status, headers, config) {
           console.log("Error getting results");
@@ -12,7 +18,6 @@ app.controller('traktCtrl', function($scope, $timeout, $http, $sce){
 
     $http.get('api/v1/trakt?setup=true').
       success(function(data, status, headers, config) {
-        console.log(data);
         $scope.setup_url = data.setup_url;
       }).
       error(function(data, status, headers, config) {
