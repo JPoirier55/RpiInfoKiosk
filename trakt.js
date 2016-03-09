@@ -7,7 +7,7 @@ var client_id = "cf59ef8a408dedfd2077dc131802a18b0fb0c9b2e6f005629f704e4cb096728
 var client_secret = "c14a8701d229eaec0a9c623bc5992a24f5df56c817be1681c6389ffdae2e0e02";
 
 var NUMBER_OF_DAYS = 14;
-var START_DATE = moment().subtract(NUMBER_OF_DAYS, 'day').format('YYYY-MM-DD');
+var START_DATE = moment().subtract(NUMBER_OF_DAYS-1, 'day').format('YYYY-MM-DD');
 
 var Trakt = require('trakt.tv');
 var trakt = new Trakt({
@@ -53,6 +53,7 @@ function setAuth(callback, code) {
 
 
 function getRecentTvShows(callback, numberOfShows) {
+  console.log(START_DATE);
   
   utils.readJSONFile(token_file, function(token){
     trakt.import_token(token)
@@ -63,13 +64,13 @@ function getRecentTvShows(callback, numberOfShows) {
               days: NUMBER_OF_DAYS,
               extended: 'images,full'
             })
-            .then(function(shows) {   
+            .then(function(shows) {
                 var convertedShows = shows.reverse();
                 convertedShows = convertedShows.splice(0, numberOfShows);
                 callback(convertTraktShows(convertedShows));
             })
             .catch(function(err) {
-              console.log(err);
+               console.log(err);
                 callback([]);
             });
         })
@@ -78,9 +79,6 @@ function getRecentTvShows(callback, numberOfShows) {
             callback([]);
         });
   });
-
-
-
 
 
   function convertTraktShows(shows) {
@@ -112,7 +110,6 @@ function getRecentTvShows(callback, numberOfShows) {
 
     }
 
-    //Newest shows first.
     return kioskShows;
   }  
 
